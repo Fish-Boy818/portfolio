@@ -13,6 +13,7 @@ https://fish-boy818.github.io/portfolio/
 - 核心能力：后端接口、数据库设计、集成对接、自动化数据处理。
 - 项目经历：Java/Spring Boot 业务系统、Python 自动化采集与数据分析工具。
 - 技术架构：Client / Admin / API / Service / Data 分层说明。
+- 源码片段：展示脱敏后的 Controller、Service、Python 自动化流程和 SQL 表结构示例。
 - 页面素材：所有业务截图与报表图均已脱敏处理。
 
 ## 技术栈

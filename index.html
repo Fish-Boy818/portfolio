@@ -1459,7 +1459,7 @@
           <a href="#architecture">技术架构</a>
           <a href="#capabilities">能力</a>
           <a href="#demo">交互 Demo</a>
-          <a href="#runbook">源码说明</a>
+          <a href="#source">源码片段</a>
         </div>
       </div>
     </nav>
@@ -2003,45 +2003,86 @@
         </div>
       </section>
 
-      <section id="runbook">
+      <section id="source">
         <div class="shell">
           <div class="section-head">
             <div>
-              <p class="section-kicker">Source Notes</p>
-              <h2>源码运行说明（无需 HR 执行）</h2>
+              <p class="section-kicker">Source Samples</p>
+              <h2>脱敏源码片段</h2>
             </div>
-            <p class="section-note">以下内容用于说明项目具备可运行源码和本地启动方式。投递查看作品集时，HR 只需打开本页，不需要执行这些命令。</p>
+            <p class="section-note">以下片段保留工程结构和实现思路，已替换业务字段、路径和敏感配置，展示代码组织与问题处理方式。</p>
           </div>
 
           <div class="code-grid">
             <div class="code-card">
-              <div class="code-title">Python 自动化项目（本地源码说明）</div>
-              <pre><code># Python 自动化报表
-Set-Location -LiteralPath '&lt;Python 自动化项目路径&gt;'
+              <div class="code-title">Java Controller：统一响应与参数校验</div>
+              <pre><code>@RestController
+@RequestMapping("/api/orders")
+public class OrderController {
+    private final OrderService orderService;
 
-# 查看账号
-python account_manager.py list
+    @PostMapping
+    public ApiResponse&lt;OrderResponse&gt; create(@Valid @RequestBody OrderCreateRequest request) {
+        OrderResponse order = orderService.createOrder(request);
+        return ApiResponse.ok(order);
+    }
 
-# 增加账号
-python account_manager.py add ************* "账号名称"
-
-# 执行现有批处理
-.\run_scripts.bat</code></pre>
+    @GetMapping("/{id}")
+    public ApiResponse&lt;OrderResponse&gt; detail(@PathVariable Long id) {
+        return ApiResponse.ok(orderService.getOrderDetail(id));
+    }
+}</code></pre>
             </div>
 
             <div class="code-card">
-              <div class="code-title">Java 业务系统项目（本地源码说明）</div>
-              <pre><code># Spring Boot + 小程序项目
-Set-Location -LiteralPath '&lt;Java 业务系统项目路径&gt;'
+              <div class="code-title">Java Service：订单状态流转</div>
+              <pre><code>@Service
+public class OrderService {
+    @Transactional
+    public OrderResponse markPaid(Long orderId, PayNotify notify) {
+        Order order = orderMapper.selectById(orderId);
+        validatePayNotify(order, notify);
 
-# 后端，本地需准备 MySQL 和环境变量
-mvn spring-boot:run
+        order.setStatus(OrderStatus.PAID);
+        order.setPaidAt(LocalDateTime.now());
+        orderMapper.update(order);
 
-# 管理端
-http://localhost:8080/admin
+        commissionService.createPendingRecords(order);
+        return OrderResponse.from(order);
+    }
+}</code></pre>
+            </div>
 
-# 小程序
-用微信开发者工具导入 miniprogram 目录</code></pre>
+            <div class="code-card">
+              <div class="code-title">Python 自动化：采集、清洗、输出</div>
+              <pre><code>def collect_and_export(accounts):
+    rows = []
+    for account in accounts:
+        try:
+            raw = crawler.collect(account)
+            rows.append(normalize_record(raw))
+        except Exception as exc:
+            rows.append(build_error_record(account, exc))
+
+    df = pandas.DataFrame(rows)
+    export_excel(df, "masked_report.xlsx")
+    export_chart(df, "masked_report.png")
+    notify_group_robot("report generated")</code></pre>
+            </div>
+
+            <div class="code-card">
+              <div class="code-title">SQL：脱敏后的业务表结构示例</div>
+              <pre><code>create table orders (
+    id bigint primary key auto_increment,
+    order_no varchar(64) not null unique,
+    user_id bigint not null,
+    item_id bigint not null,
+    status varchar(32) not null,
+    pay_amount decimal(10,2) not null,
+    paid_at datetime,
+    created_at datetime not null,
+    index idx_user_status (user_id, status)
+);</code></pre>
             </div>
           </div>
         </div>
