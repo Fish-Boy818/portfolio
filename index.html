@@ -791,6 +791,112 @@
         line-height: 1.65;
       }
 
+      .overview-grid {
+        display: grid;
+        grid-template-columns: minmax(360px, 0.9fr) minmax(0, 1.1fr);
+        gap: 24px;
+        align-items: stretch;
+      }
+
+      .overview-card,
+      .timeline-card {
+        padding: clamp(22px, 2.4vw, 30px);
+        border: 1px solid rgba(37, 99, 235, 0.14);
+        border-radius: var(--radius-lg);
+        background:
+          radial-gradient(circle at 92% 8%, rgba(37, 99, 235, 0.09), transparent 180px),
+          rgba(255, 255, 255, 0.88);
+        box-shadow: 0 18px 48px rgba(15, 45, 92, 0.1);
+      }
+
+      .overview-card h3,
+      .timeline-card h3 {
+        margin: 0 0 14px;
+        font-size: 24px;
+        letter-spacing: -0.025em;
+      }
+
+      .overview-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.75;
+      }
+
+      .overview-list {
+        display: grid;
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .overview-item {
+        display: grid;
+        grid-template-columns: 108px 1fr;
+        gap: 12px;
+        padding: 13px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(248, 251, 255, 0.74);
+      }
+
+      .overview-item strong {
+        color: #1d4ed8;
+      }
+
+      .overview-item span {
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 14px;
+      }
+
+      .timeline-item {
+        position: relative;
+        padding-left: 24px;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 7px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--reef);
+        box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.12);
+      }
+
+      .timeline-item strong {
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .timeline-item span {
+        display: block;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .skill-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 18px;
+      }
+
+      .skill-cloud span {
+        padding: 8px 10px;
+        border: 1px solid rgba(37, 99, 235, 0.13);
+        border-radius: 999px;
+        color: #1e3a8a;
+        font-size: 13px;
+        font-weight: 900;
+        background: #eff6ff;
+      }
+
       .ability-showcase {
         display: grid;
         grid-template-columns: minmax(360px, 0.9fr) minmax(0, 1.1fr);
@@ -1288,9 +1394,45 @@
       }
 
       .footer {
-        padding: 34px 0 54px;
+        padding: 44px 0 58px;
         color: var(--muted);
-        text-align: center;
+      }
+
+      .footer-panel {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 22px;
+        border: 1px solid rgba(37, 99, 235, 0.14);
+        border-radius: var(--radius-lg);
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: 0 18px 48px rgba(15, 45, 92, 0.08);
+      }
+
+      .footer-panel strong {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--ink);
+        font-size: 20px;
+      }
+
+      .footer-panel p {
+        margin: 0;
+        line-height: 1.6;
+      }
+
+      .footer-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        padding: 0 16px;
+        border-radius: 999px;
+        color: #fff;
+        font-weight: 900;
+        text-decoration: none;
+        background: linear-gradient(135deg, var(--reef), var(--reef-dark));
       }
 
       .reveal {
@@ -1318,6 +1460,7 @@
 
       @media (max-width: 920px) {
         .hero-grid,
+        .overview-grid,
         .project-grid,
         .ability-showcase,
         .architecture-grid,
@@ -1370,6 +1513,7 @@
         }
 
         .metric-grid,
+        .overview-item,
         .capability-grid,
         .ability-grid,
         .module-grid,
@@ -1424,6 +1568,11 @@
           margin-bottom: 0;
         }
 
+        .footer-panel {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
         .tech-ribbon {
           gap: 7px;
         }
@@ -1453,6 +1602,7 @@
           <span>王月 · 系统开发工程师作品集</span>
         </div>
         <div class="nav-links">
+          <a href="#overview">概览</a>
           <a href="#fit">岗位能力</a>
           <a href="#ability">核心能力</a>
           <a href="#projects">代表项目</a>
@@ -1530,6 +1680,72 @@
     </header>
 
     <main>
+      <section id="overview">
+        <div class="shell">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Overview</p>
+              <h2>个人概览</h2>
+            </div>
+            <p class="section-note">
+              面向系统开发岗位，聚焦后端业务系统、管理后台、数据库设计、第三方集成和自动化工具开发。
+            </p>
+          </div>
+
+          <div class="overview-grid">
+            <div class="overview-card reveal">
+              <h3>系统开发方向</h3>
+              <p>
+                具备 Java 后端、后台业务系统、Python 自动化工具和前后端联调经验。项目覆盖需求拆解、
+                接口设计、表结构设计、支付回调、数据报表、部署脚本和交付维护。
+              </p>
+              <div class="overview-list">
+                <div class="overview-item">
+                  <strong>学历</strong>
+                  <span>2026 届计算机科学与技术本科</span>
+                </div>
+                <div class="overview-item">
+                  <strong>方向</strong>
+                  <span>系统开发工程师 / Java 后端开发 / 信息系统工程师</span>
+                </div>
+                <div class="overview-item">
+                  <strong>优势</strong>
+                  <span>能把业务需求拆成接口、数据表、后台页面和联调问题清单</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-card reveal delay-1">
+              <h3>经历脉络</h3>
+              <div class="timeline">
+                <div class="timeline-item">
+                  <strong>企业后台系统实习</strong>
+                  <span>参与接口开发、SQL 优化、Redis 缓存、统一异常处理和版本交付支持。</span>
+                </div>
+                <div class="timeline-item">
+                  <strong>业务系统全栈项目</strong>
+                  <span>完成活动、订单、佣金、分类、上传、后台管理和支付回调相关模块。</span>
+                </div>
+                <div class="timeline-item">
+                  <strong>Python 自动化工具</strong>
+                  <span>完成平台数据采集、清洗统计、图表生成、Excel 导出和内部群机器人推送。</span>
+                </div>
+              </div>
+              <div class="skill-cloud">
+                <span>Java</span>
+                <span>Spring Boot</span>
+                <span>MyBatis</span>
+                <span>MySQL</span>
+                <span>Vue 3</span>
+                <span>Python</span>
+                <span>Selenium</span>
+                <span>Pandas</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="fit">
         <div class="shell">
           <div class="section-head">
@@ -2090,7 +2306,13 @@ public class OrderService {
 
     <footer class="footer">
       <div class="shell">
-        <p>Static portfolio site · GitHub Pages</p>
+        <div class="footer-panel">
+          <div>
+            <strong>王月 · 系统开发工程师作品集</strong>
+            <p>已交付项目采用脱敏展示，聚焦系统设计、接口开发、数据库建模、集成对接和自动化工具能力。</p>
+          </div>
+          <a class="footer-link" href="#overview">返回顶部</a>
+        </div>
       </div>
     </footer>
 

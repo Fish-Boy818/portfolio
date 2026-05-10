@@ -10,6 +10,7 @@ https://fish-boy818.github.io/portfolio/
 
 ## 内容概览
 
+- 个人概览：系统开发方向、经历脉络和核心技术栈。
 - 核心能力：后端接口、数据库设计、集成对接、自动化数据处理。
 - 项目经历：Java/Spring Boot 业务系统、Python 自动化采集与数据分析工具。
 - 技术架构：Client / Admin / API / Service / Data 分层说明。
