@@ -1268,6 +1268,39 @@
         background: rgba(219, 234, 254, 0.88);
       }
 
+      .dashboard-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .toolbar-chips,
+      .toolbar-actions,
+      .inline-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .toolbar-chips span,
+      .toolbar-actions button,
+      .inline-tags span {
+        padding: 7px 10px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 800;
+        background: rgba(255, 255, 255, 0.88);
+      }
+
+      .toolbar-actions button {
+        color: #1e3a8a;
+        cursor: default;
+      }
+
       .dashboard-metrics {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1301,6 +1334,10 @@
         margin-top: 12px;
       }
 
+      .dashboard-grid.bottom {
+        grid-template-columns: 1fr 1fr;
+      }
+
       .dashboard-card {
         padding: 14px;
         border: 1px solid var(--line);
@@ -1314,6 +1351,12 @@
       }
 
       .table {
+        display: grid;
+        gap: 8px;
+      }
+
+      .queue-list,
+      .sync-list {
         display: grid;
         gap: 8px;
       }
@@ -1336,6 +1379,25 @@
 
       .row small {
         display: block;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .sync-item {
+        display: grid;
+        grid-template-columns: 88px 1fr;
+        gap: 10px;
+        padding: 10px 12px;
+        border: 1px solid rgba(37, 99, 235, 0.08);
+        border-radius: 16px;
+        background: rgba(248, 251, 255, 0.92);
+      }
+
+      .sync-item strong {
+        font-size: 13px;
+      }
+
+      .sync-item span {
         color: var(--muted);
         line-height: 1.5;
       }
@@ -1439,6 +1501,19 @@
       .pipe-step h3 {
         margin: 0 0 6px;
         font-size: 18px;
+      }
+
+      .pipeline-points {
+        display: grid;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .pipeline-points li {
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.64);
       }
 
       .source-grid {
@@ -2155,7 +2230,7 @@
               <h2>核心能力</h2>
             </div>
             <p class="section-note">
-              以“需求进入系统后如何落地”为主线，展示接口、数据、流程和工具链的工程实现。
+              接口、数据、集成、自动化四条主线，直接对应后端开发与系统交付能力。
             </p>
           </div>
 
@@ -2164,7 +2239,7 @@
               <h3>从需求拆解到上线支持</h3>
               <p>
                 业务需求进入后，我会先划分业务对象、状态字段和接口边界，再把流程落到 Controller / Service / Mapper /
-                后台页面和数据输出上。页面展示的是这个过程中的核心产物。
+                后台页面和数据输出上。
               </p>
               <div class="ability-tags">
                 <span>接口设计</span>
@@ -2226,7 +2301,7 @@
             <div class="story-card reveal">
               <h3>完整交付主线</h3>
               <p class="hero-lead">
-                这套作品不是分散的功能截图，而是围绕一个业务系统和一个自动化工具，把开发、联调和交付过程串成完整主线。
+                业务系统、后台运营、自动化工具和数据输出放在同一条交付链路内组织。
               </p>
               <div class="story-flow">
                 <div class="story-step">
@@ -2263,15 +2338,15 @@
             <div class="story-side">
               <div class="story-metric reveal delay-1">
                 <strong>151</strong>
-                <span>Java 文件，覆盖后端接口、业务服务、Mapper、配置和管理模块。</span>
+                <span>Java 文件，落在接口层、服务层、数据层和管理模块。</span>
               </div>
               <div class="story-metric reveal delay-2">
                 <strong>2</strong>
-                <span>主要作品主线：业务系统交付 + 自动化数据工具，覆盖岗位核心能力。</span>
+                <span>项目主线：业务系统交付 + 自动化数据工具。</span>
               </div>
               <div class="story-metric reveal delay-2">
                 <strong>4</strong>
-                <span>展示维度：结构、界面、交互、源码片段，构成完整作品集而不是截图集合。</span>
+                <span>展示维度：结构、界面、交互、源码。</span>
               </div>
             </div>
           </div>
@@ -2286,7 +2361,7 @@
               <h2>代表项目</h2>
             </div>
             <p class="section-note">
-              覆盖业务系统交付、后台运营支撑以及自动化采集与数据处理两类工程实践。
+              业务系统项目与自动化工具项目两条主线。
             </p>
           </div>
 
@@ -2311,7 +2386,7 @@
               <ul class="feature">
                 <li>后端覆盖支付、退款、邀请、佣金、提现、上传清理和后台账号等模块。</li>
                 <li>管理端按运营内容、交易履约、用户增长、系统设置分组，支持筛选、导入导出和缺图检查。</li>
-                <li>整理初始化脚本、部署说明和维护链路，支撑联调、发布和后续迭代。</li>
+                <li>整理初始化脚本、部署链路和维护入口，支撑联调、发布和后续迭代。</li>
               </ul>
 
               <div class="project-facts">
@@ -2483,7 +2558,7 @@
               <h2>技术架构</h2>
             </div>
             <p class="section-note">
-              从业务入口、管理后台、接口层、服务层到数据层，呈现系统设计与模块边界。
+              业务入口、后台界面、接口层、服务层、数据层。
             </p>
           </div>
 
@@ -2595,7 +2670,7 @@ Python Crawler     / Pandas Pipeline / Chart Export / Robot Notify</code></pre>
               <h2>交互 Demo</h2>
             </div>
             <p class="section-note">
-              用静态交互模拟后台运营界面，展示活动管理、订单履约、用户增长和系统配置四类主要场景。
+              后台管理、交易履约、用户增长、系统配置。
             </p>
           </div>
 
@@ -2620,9 +2695,7 @@ Python Crawler     / Pandas Pipeline / Chart Export / Robot Notify</code></pre>
             <div class="pipeline-grid">
               <div class="pipeline-copy reveal delay-1">
                 <h3>业务流程</h3>
-                <p>
-                  系统前台、后台、后端接口和数据工具并不是分开的四段工作，而是沿着一条业务链路依次衔接。
-                </p>
+                <p>配置、下单、结算、复盘四段主流程。</p>
                 <div class="pipeline">
                   <div class="pipe-step">
                     <div class="pipe-no">1</div>
@@ -2656,10 +2729,8 @@ Python Crawler     / Pandas Pipeline / Chart Export / Robot Notify</code></pre>
               </div>
 
               <div class="pipeline-copy reveal delay-2">
-                <h3>工程能力</h3>
-                <p>
-                  Demo 展示的是界面，但真正要解决的是规则和维护成本：状态一致性、后台可操作性、数据可追踪性。
-                </p>
+                <h3>交付要点</h3>
+                <p>围绕状态一致性、后台操作性、数据联动和发布维护组织。</p>
                 <div class="stack-tags">
                   <span>状态管理</span>
                   <span>后台分组</span>
@@ -2668,6 +2739,11 @@ Python Crawler     / Pandas Pipeline / Chart Export / Robot Notify</code></pre>
                   <span>异常处理</span>
                   <span>维护入口</span>
                 </div>
+                <ul class="pipeline-points">
+                  <li>小程序、后台、接口、自动化工具使用同一套业务对象和状态字段。</li>
+                  <li>支付、退款、佣金、提现、核销围绕服务层和回调处理收口。</li>
+                  <li>日报图、Excel、消息通知直接连接运营复盘和日常维护。</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -2682,16 +2758,16 @@ Python Crawler     / Pandas Pipeline / Chart Export / Robot Notify</code></pre>
               <h2>脱敏源码片段</h2>
             </div>
             <p class="section-note">
-              保留工程结构与实现思路，字段、路径和配置均已替换为通用示例。
+              保留结构与实现路径，字段和配置替换为通用示例。
             </p>
           </div>
 
           <div class="source-grid">
             <div class="source-copy reveal">
               <div>
-                <strong>可展示的工程实现</strong>
+                <strong>工程实现片段</strong>
                 <p>
-                  展示接口层、状态流转、自动化处理链路和表结构设计这四类实现。
+                  接口层、状态流转、自动化链路、表结构设计。
                 </p>
               </div>
 
@@ -2808,8 +2884,10 @@ public class OrderService {
       const adminData = {
         activities: {
           title: "活动管理",
-          summary: "面向运营配置，负责活动、图集、库存、俱乐部关联和内容素材维护。",
+          summary: "活动、图集、库存、俱乐部关联与内容素材维护。",
           badge: "内容配置",
+          filters: ["分类", "上架状态", "时段", "俱乐部"],
+          actions: ["新建活动", "批量上架", "导出配置"],
           metrics: [
             ["36", "活动条目"],
             ["12", "当前上架"],
@@ -2826,6 +2904,15 @@ public class OrderService {
             ["上架准备度", 74],
             ["库存配置率", 92]
           ],
+          tasks: [
+            ["图片补齐", "4 项待补图集", "待处理", "warn"],
+            ["活动复核", "2 个价格模板待确认", "处理中", ""],
+            ["素材发布", "轮播图与分类排序同步", "已发布", "success"]
+          ],
+          sync: [
+            ["小程序", "活动卡片、价格、时段和库存展示同步更新。"],
+            ["后端", "活动状态、库存字段、图集地址与筛选接口同步。"]
+          ],
           timeline: [
             ["09:30", "更新轮播图与分类排序"],
             ["11:10", "补充活动图集和时段价格"],
@@ -2834,8 +2921,10 @@ public class OrderService {
         },
         orders: {
           title: "订单履约",
-          summary: "面向交易履约，覆盖订单筛选、支付状态、核销、退款与订单导出。",
+          summary: "订单筛选、支付状态、核销、退款与订单导出。",
           badge: "交易履约",
+          filters: ["支付状态", "预约日期", "核销状态", "渠道"],
+          actions: ["导出订单", "批量核销", "处理退款"],
           metrics: [
             ["126", "订单总数"],
             ["18", "待核销"],
@@ -2852,6 +2941,15 @@ public class OrderService {
             ["已核销", 68],
             ["退款完成", 82]
           ],
+          tasks: [
+            ["退款复核", "6 笔订单等待财务确认", "待处理", "warn"],
+            ["核销检查", "当日预约订单核销中", "处理中", ""],
+            ["对账导出", "平台对账单已生成", "已完成", "success"]
+          ],
+          sync: [
+            ["小程序", "订单详情、退款状态、核销记录实时回写。"],
+            ["后端", "支付回调、退款规则、佣金回收与订单导出联动。"]
+          ],
           timeline: [
             ["10:20", "处理支付回调并更新订单状态"],
             ["13:00", "运营核销当日预约订单"],
@@ -2860,8 +2958,10 @@ public class OrderService {
         },
         commission: {
           title: "用户增长",
-          summary: "围绕邀请关系、佣金账户、提现申请和悬赏任务设计增长与结算流程。",
+          summary: "邀请关系、佣金账户、提现申请与悬赏任务。",
           badge: "增长与结算",
+          filters: ["邀请渠道", "提现状态", "任务状态", "时间范围"],
+          actions: ["生成二维码", "审核提现", "导出佣金"],
           metrics: [
             ["52", "邀请绑定"],
             ["31", "待结算"],
@@ -2878,6 +2978,15 @@ public class OrderService {
             ["佣金结算率", 74],
             ["提现处理率", 81]
           ],
+          tasks: [
+            ["提现审核", "8 条提现申请待复核", "待处理", "warn"],
+            ["佣金结算", "31 条记录等待批次结算", "处理中", ""],
+            ["任务发放", "悬赏奖励已按规则生成", "已完成", "success"]
+          ],
+          sync: [
+            ["用户端", "邀请二维码、佣金余额、提现记录直接展示。"],
+            ["后端", "绑定关系、佣金台账、提现状态和任务奖励统一处理。"]
+          ],
           timeline: [
             ["09:50", "生成邀请二维码并绑定关系"],
             ["14:30", "审核提现申请并更新状态"],
@@ -2886,8 +2995,10 @@ public class OrderService {
         },
         system: {
           title: "系统设置",
-          summary: "聚焦后台账号、文件上传、运行环境和发布维护链路。",
+          summary: "后台账号、文件上传、运行环境与发布维护链路。",
           badge: "配置维护",
+          filters: ["环境", "角色", "脚本", "文件状态"],
+          actions: ["新增角色", "执行清理", "发布检查"],
           metrics: [
             ["9", "后台角色"],
             ["3", "环境配置"],
@@ -2903,6 +3014,15 @@ public class OrderService {
             ["配置完整度", 89],
             ["环境稳定度", 85],
             ["维护自动化", 68]
+          ],
+          tasks: [
+            ["证书核验", "HTTPS 与回调域名检查", "已完成", "success"],
+            ["清理任务", "执行上传清理和缺图扫描", "处理中", ""],
+            ["发布回归", "登录、上传、访问链路待复核", "待处理", "warn"]
+          ],
+          sync: [
+            ["后台", "账号、权限、上传入口和脚本任务集中管理。"],
+            ["运维", "环境变量、证书、部署脚本和回归清单统一维护。"]
           ],
           timeline: [
             ["08:40", "核对环境变量与证书配置"],
@@ -2926,6 +3046,14 @@ public class OrderService {
               <p>${item.summary}</p>
             </div>
             <span class="dashboard-badge">${item.badge}</span>
+          </div>
+          <div class="dashboard-toolbar">
+            <div class="toolbar-chips">
+              ${item.filters.map((label) => `<span>${label}</span>`).join("")}
+            </div>
+            <div class="toolbar-actions">
+              ${item.actions.map((label) => `<button type="button">${label}</button>`).join("")}
+            </div>
           </div>
           <div class="dashboard-metrics">
             ${item.metrics.map(([value, label]) => `
@@ -2962,13 +3090,40 @@ public class OrderService {
                 `).join("")}
               </div>
             </div>
+            <div class="dashboard-card">
+              <h4>执行队列</h4>
+              <div class="queue-list">
+                ${item.tasks.map((row) => `
+                  <div class="row">
+                    <div>
+                      <strong>${row[0]}</strong>
+                      <small>${row[1]}</small>
+                    </div>
+                    <span class="status ${row[3]}">${row[2]}</span>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
           </div>
-          <div class="dashboard-card" style="margin-top:14px;">
-            <h4>当日流程</h4>
-            <div class="dashboard-timeline">
-              ${item.timeline.map(([time, text]) => `
-                <li><b>${time}</b><span>${text}</span></li>
-              `).join("")}
+          <div class="dashboard-grid bottom">
+            <div class="dashboard-card" style="margin-top:12px;">
+              <h4>当日流程</h4>
+              <div class="dashboard-timeline">
+                ${item.timeline.map(([time, text]) => `
+                  <li><b>${time}</b><span>${text}</span></li>
+                `).join("")}
+              </div>
+            </div>
+            <div class="dashboard-card" style="margin-top:12px;">
+              <h4>数据联动</h4>
+              <div class="sync-list">
+                ${item.sync.map(([name, text]) => `
+                  <div class="sync-item">
+                    <strong>${name}</strong>
+                    <span>${text}</span>
+                  </div>
+                `).join("")}
+              </div>
             </div>
           </div>
         `;
