@@ -549,6 +549,13 @@
         align-items: start;
       }
 
+      .project-grid,
+      .architecture-grid,
+      .demo-grid,
+      .source-grid {
+        grid-template-columns: 1fr;
+      }
+
       .overview-card,
       .timeline-card,
       .blueprint,
@@ -927,9 +934,9 @@
 
       .phone-stage {
         display: grid;
-        grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-        gap: 16px;
-        align-items: start;
+        grid-template-columns: 320px minmax(0, 1fr);
+        gap: 20px;
+        align-items: stretch;
       }
 
       .phone {
@@ -1034,7 +1041,12 @@
       }
 
       .mini-journal {
+        display: grid;
+        grid-template-rows: auto auto 1fr;
         padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.58);
       }
 
       .mini-journal h4,
@@ -1045,6 +1057,8 @@
 
       .mini-journal ul {
         display: grid;
+        align-content: start;
+        grid-template-rows: repeat(3, 1fr);
         gap: 10px;
         margin: 14px 0 0;
         padding: 0;
@@ -1052,6 +1066,8 @@
       }
 
       .mini-journal li {
+        display: flex;
+        align-items: center;
         padding: 12px 14px;
         border: 1px solid var(--line);
         border-radius: 16px;
@@ -1426,12 +1442,13 @@
       }
 
       .source-grid {
-        grid-template-columns: minmax(0, 0.66fr) minmax(0, 1.34fr);
         align-items: start;
       }
 
       .source-copy {
         display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        align-items: start;
         gap: 18px;
       }
 
@@ -1440,7 +1457,7 @@
       }
 
       .source-switch {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .source-switch button {
@@ -1552,6 +1569,8 @@
         }
 
         .phone-stage,
+        .pipeline-grid,
+        .source-copy,
         .dashboard-grid {
           grid-template-columns: 1fr;
         }
@@ -1714,6 +1733,10 @@
         .stack-matrix,
         .tech-proof {
           grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .source-switch {
+          grid-template-columns: 1fr;
         }
 
         .hero-strip,
@@ -2263,7 +2286,7 @@
               <h2>代表项目</h2>
             </div>
             <p class="section-note">
-              第一类项目体现系统开发与后台交付能力，第二类项目体现自动化采集与数据处理能力。
+              覆盖业务系统交付、后台运营支撑以及自动化采集与数据处理两类工程实践。
             </p>
           </div>
 
@@ -2668,7 +2691,7 @@ Python Crawler     / Pandas Pipeline / Chart Export / Robot Notify</code></pre>
               <div>
                 <strong>可展示的工程实现</strong>
                 <p>
-                  这里选取的是最能体现系统开发能力的几类代码：接口层、状态流转、自动化处理流程和表结构设计。
+                  展示接口层、状态流转、自动化处理链路和表结构设计这四类实现。
                 </p>
               </div>
 
