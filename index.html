@@ -2130,7 +2130,7 @@
               <h2>个人概览</h2>
             </div>
             <p class="section-note">
-              作品集围绕系统开发与技术项目协同岗位重组，重点展示开发实现、联调推进、发布支持和交付维护。
+              作品集围绕系统开发与技术项目协同岗位重组，重点展示开发实现、联调推进、发布支持、交付维护和模型推理落地。
             </p>
           </div>
 
@@ -2172,6 +2172,10 @@
                   <strong>Python 自动化工具</strong>
                   <span>完成平台数据采集、清洗统计、图表生成、Excel 导出和内部机器人推送。</span>
                 </div>
+                <div class="timeline-item">
+                  <strong>PyTorch 文本分类 Demo</strong>
+                  <span>实现中文情感分类训练、模型保存、命令行推理和 FastAPI HTTP 接口封装。</span>
+                </div>
               </div>
               <div class="skill-cloud">
                 <span>Java</span>
@@ -2180,6 +2184,8 @@
                 <span>MySQL</span>
                 <span>Vue 3</span>
                 <span>Python</span>
+                <span>PyTorch</span>
+                <span>FastAPI</span>
                 <span>Selenium</span>
                 <span>OpenPyXL</span>
               </div>
@@ -2233,7 +2239,7 @@
               <h2>核心能力</h2>
             </div>
             <p class="section-note">
-              接口、数据、集成、自动化、推进五类能力，直接对应后端开发与技术项目协同岗位。
+              接口、数据、集成、自动化、模型推理、推进六类能力，直接对应后端开发与技术项目协同岗位。
             </p>
           </div>
 
@@ -2249,6 +2255,7 @@
                 <span>业务建模</span>
                 <span>状态流转</span>
                 <span>联调排错</span>
+                <span>模型推理</span>
                 <span>任务推进</span>
                 <span>交付维护</span>
               </div>
@@ -2375,7 +2382,7 @@
               <h2>代表项目</h2>
             </div>
             <p class="section-note">
-              业务系统开发、自动化工具开发、联调推进与发布支持。
+              业务系统开发、自动化工具开发、模型训练 Demo、联调推进与发布支持。
             </p>
           </div>
 
@@ -2557,6 +2564,89 @@
                 </div>
                 <div class="report-frame">
                   <img src="assets/python/promotion-report.png" alt="推广报表截图" />
+                </div>
+              </div>
+            </article>
+
+            <article class="project reveal delay-2">
+              <div class="eyebrow"><span class="dot"></span>PyTorch / FastAPI / NLP Demo</div>
+              <h3>中文情感分类与推理接口 Demo</h3>
+              <p>
+                基于 PyTorch 实现中文短文本情感分类 demo，覆盖字符级分词、词表构建、Dataset / DataLoader、TextCNN / MLP 模型、
+                训练保存、命令行推理和 FastAPI HTTP 接口，补充了模型训练与服务封装方向的工程实现。
+              </p>
+
+              <div class="tags">
+                <span class="tag">PyTorch</span>
+                <span class="tag">TextCNN</span>
+                <span class="tag">MLP</span>
+                <span class="tag">FastAPI</span>
+                <span class="tag">DataLoader</span>
+                <span class="tag">Torch Save / Load</span>
+              </div>
+
+              <ul class="feature">
+                <li>使用字符级分词和自定义词表构建中文文本输入，支持 CSV 样本读取、长度截断和 PAD / UNK 编码。</li>
+                <li>封装 TextCNN 与 MLP 两类分类模型，训练阶段保存最优 checkpoint，同时记录词表、最大长度、类别和模型配置。</li>
+                <li>提供命令行预测和 FastAPI `/predict` 接口，支持单条文本推理和前端页面演示。</li>
+              </ul>
+
+              <div class="project-facts">
+                <div class="project-fact">
+                  <strong>2</strong>
+                  <span>分类模型</span>
+                </div>
+                <div class="project-fact">
+                  <strong>351</strong>
+                  <span>词表规模</span>
+                </div>
+                <div class="project-fact">
+                  <strong>1.0</strong>
+                  <span>Demo 最佳测试准确率</span>
+                </div>
+                <div class="project-fact">
+                  <strong>API</strong>
+                  <span>HTTP 推理接口</span>
+                </div>
+              </div>
+
+              <div class="project-tech">
+                <div class="project-tech-item">
+                  <strong>数据层</strong>
+                  <span>读取训练 / 测试 CSV，构建字符级词表，统一文本长度并输出 Tensor。</span>
+                </div>
+                <div class="project-tech-item">
+                  <strong>模型层</strong>
+                  <span>实现 Embedding + MLP 与 TextCNN 两种短文本分类结构，支持切换训练。</span>
+                </div>
+                <div class="project-tech-item">
+                  <strong>训练层</strong>
+                  <span>标准训练循环包含 loss、accuracy、最优模型保存、词表与配置归档。</span>
+                </div>
+                <div class="project-tech-item">
+                  <strong>推理层</strong>
+                  <span>提供 CLI 预测结果与 FastAPI `/predict` 接口，适合本地演示和接口封装练习。</span>
+                </div>
+              </div>
+
+              <div class="report-stack">
+                <div class="mini-journal">
+                  <h4>工程实现</h4>
+                  <p>数据预处理、模型训练、checkpoint 管理和推理入口拆分为独立模块，便于本地调试和服务封装。</p>
+                  <ul>
+                    <li>text_dataset.py：分词、词表、编码、Dataset</li>
+                    <li>train.py：训练、评估、最优模型保存</li>
+                    <li>infer.py / api.py：命令行与 HTTP 推理</li>
+                  </ul>
+                </div>
+                <div class="mini-journal">
+                  <h4>推理结果</h4>
+                  <p>本机实际加载 `artifacts/sentiment_model.pt` 后，示例文本可输出类别与置信度。</p>
+                  <ul>
+                    <li>`这个产品很好用` → positive / 0.9997</li>
+                    <li>`物流太慢了` → negative / 1.0000</li>
+                    <li>checkpoint：cnn / max_len=32 / class_names=2</li>
+                  </ul>
                 </div>
               </div>
             </article>
@@ -2802,6 +2892,10 @@ Python Crawler     / Pandas Pipeline / Chart Export / Robot Notify</code></pre>
                   <strong>SQL Schema</strong>
                   <small>业务表结构和索引设计示例</small>
                 </button>
+                <button data-source="pytorch">
+                  <strong>PyTorch Demo</strong>
+                  <small>字符级编码、TextCNN 推理与模型封装</small>
+                </button>
               </div>
             </div>
 
@@ -2875,6 +2969,23 @@ public class OrderService {
     created_at datetime not null,
     index idx_user_status (user_id, status)
 );</code></pre>
+              </div>
+
+              <div class="code-card" data-code="pytorch" hidden>
+                <div class="code-title">PyTorch：字符级编码与情感推理</div>
+                <pre><code>def encode_text(text: str, vocab: dict[str, int], max_len: int) -&gt; list[int]:
+    ids = [vocab.get(token, UNK_ID) for token in tokenize(text)]
+    ids = ids[:max_len]
+    return ids + [PAD_ID] * (max_len - len(ids))
+
+
+def predict(text: str, model, checkpoint: dict, device: torch.device) -&gt; dict:
+    input_ids = encode_text(text, checkpoint["vocab"], checkpoint["max_len"])
+    tensor = torch.tensor([input_ids], dtype=torch.long, device=device)
+    with torch.no_grad():
+        probabilities = torch.softmax(model(tensor), dim=1).squeeze(0)
+    class_id = int(probabilities.argmax().item())
+    return {"text": text, "label": checkpoint["class_names"][class_id]}</code></pre>
               </div>
             </div>
           </div>
