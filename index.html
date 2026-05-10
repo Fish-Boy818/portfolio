@@ -8,18 +8,25 @@
       :root {
         --ink: #0f172a;
         --muted: #5b6b82;
-        --paper: #eef6ff;
-        --paper-strong: #ffffff;
+        --muted-soft: #7f8ea3;
+        --paper: #f7fbff;
+        --paper-deep: #eef5ff;
+        --card: rgba(255, 255, 255, 0.82);
         --line: rgba(37, 99, 235, 0.14);
-        --reef: #2563eb;
-        --reef-dark: #0f2d5c;
-        --coral: #38bdf8;
-        --sun: #bfdbfe;
-        --sea: #dbeafe;
-        --white: #ffffff;
-        --shadow: 0 24px 70px rgba(15, 45, 92, 0.14);
-        --radius-lg: 34px;
-        --radius-md: 24px;
+        --line-strong: rgba(37, 99, 235, 0.22);
+        --primary: #2563eb;
+        --primary-deep: #0f2d5c;
+        --accent: #38bdf8;
+        --accent-soft: #dbeafe;
+        --success: #0f766e;
+        --success-soft: rgba(15, 118, 110, 0.12);
+        --warning: #c2410c;
+        --warning-soft: rgba(194, 65, 12, 0.12);
+        --shadow-lg: 0 30px 80px rgba(15, 45, 92, 0.14);
+        --shadow-md: 0 18px 42px rgba(15, 45, 92, 0.1);
+        --radius-xl: 34px;
+        --radius-lg: 26px;
+        --radius-md: 20px;
       }
 
       * {
@@ -31,15 +38,13 @@
       }
 
       body {
-        position: relative;
         margin: 0;
         color: var(--ink);
         font-family: "Microsoft YaHei", "Noto Sans SC", "PingFang SC", sans-serif;
         background:
-          radial-gradient(circle at 9% 7%, rgba(56, 189, 248, 0.22), transparent 24rem),
-          radial-gradient(circle at 82% 2%, rgba(37, 99, 235, 0.23), transparent 28rem),
-          radial-gradient(circle at 78% 78%, rgba(191, 219, 254, 0.36), transparent 22rem),
-          linear-gradient(135deg, #f8fbff 0%, #eef6ff 48%, #ffffff 100%);
+          radial-gradient(circle at 8% 10%, rgba(56, 189, 248, 0.22), transparent 24rem),
+          radial-gradient(circle at 88% 4%, rgba(37, 99, 235, 0.18), transparent 30rem),
+          linear-gradient(180deg, #fbfdff 0%, #f1f7ff 52%, #ffffff 100%);
         overflow-x: hidden;
       }
 
@@ -50,10 +55,10 @@
         z-index: -2;
         pointer-events: none;
         background-image:
-          linear-gradient(rgba(37, 99, 235, 0.055) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(37, 99, 235, 0.045) 1px, transparent 1px);
-        background-size: 42px 42px;
-        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent 72%);
+          linear-gradient(rgba(37, 99, 235, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
+        background-size: 40px 40px;
+        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent 76%);
       }
 
       body::after {
@@ -63,9 +68,9 @@
         z-index: -1;
         pointer-events: none;
         background:
-          conic-gradient(from 110deg at 24% 28%, transparent, rgba(255, 255, 255, 0.56), transparent 26%),
-          radial-gradient(circle at 65% 28%, rgba(147, 197, 253, 0.22), transparent 24rem);
-        opacity: 0.55;
+          conic-gradient(from 90deg at 20% 24%, transparent, rgba(255, 255, 255, 0.64), transparent 26%),
+          radial-gradient(circle at 70% 32%, rgba(147, 197, 253, 0.16), transparent 26rem);
+        opacity: 0.9;
       }
 
       img {
@@ -79,16 +84,16 @@
       }
 
       .shell {
-        width: min(1200px, calc(100% - 48px));
+        width: min(1240px, calc(100% - 48px));
         margin: 0 auto;
       }
 
       .nav {
         position: sticky;
         top: 0;
-        z-index: 20;
-        border-bottom: 1px solid rgba(37, 99, 235, 0.1);
-        background: rgba(248, 251, 255, 0.82);
+        z-index: 30;
+        border-bottom: 1px solid rgba(37, 99, 235, 0.09);
+        background: rgba(248, 251, 255, 0.84);
         backdrop-filter: blur(22px) saturate(1.2);
       }
 
@@ -105,21 +110,21 @@
         align-items: center;
         gap: 12px;
         font-weight: 900;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.03em;
       }
 
       .brand-mark {
         display: grid;
-        width: 38px;
-        height: 38px;
+        width: 40px;
+        height: 40px;
         place-items: center;
         border: 1px solid rgba(37, 99, 235, 0.18);
-        border-radius: 15px;
-        color: var(--white);
+        border-radius: 16px;
+        color: #fff;
         background:
-          radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.32), transparent 24px),
-          linear-gradient(135deg, var(--reef), var(--reef-dark));
-        box-shadow: 0 10px 26px rgba(37, 99, 235, 0.24);
+          radial-gradient(circle at 72% 16%, rgba(255, 255, 255, 0.34), transparent 24px),
+          linear-gradient(135deg, var(--primary), var(--primary-deep));
+        box-shadow: 0 14px 28px rgba(37, 99, 235, 0.24);
       }
 
       .nav-links {
@@ -129,7 +134,8 @@
         gap: 8px;
       }
 
-      .nav-links a {
+      .nav-links a,
+      .footer-link {
         padding: 10px 13px;
         border: 1px solid transparent;
         border-radius: 999px;
@@ -138,15 +144,16 @@
         transition: 0.2s ease;
       }
 
-      .nav-links a:hover {
+      .nav-links a:hover,
+      .footer-link:hover {
         border-color: var(--line);
         color: var(--ink);
-        background: rgba(255, 255, 255, 0.84);
+        background: rgba(255, 255, 255, 0.82);
       }
 
       .hero {
         position: relative;
-        padding: 76px 0 44px;
+        padding: 78px 0 44px;
         overflow: hidden;
       }
 
@@ -154,33 +161,33 @@
         content: "";
         position: absolute;
         right: min(8vw, 110px);
-        top: 88px;
-        width: 170px;
-        height: 170px;
-        border: 1px solid rgba(37, 99, 235, 0.12);
-        border-radius: 46px;
-        background: rgba(255, 255, 255, 0.34);
+        top: 92px;
+        width: 180px;
+        height: 180px;
+        border: 1px solid rgba(37, 99, 235, 0.1);
+        border-radius: 48px;
+        background: rgba(255, 255, 255, 0.36);
         transform: rotate(18deg);
       }
 
       .hero::after {
         content: "";
         position: absolute;
-        left: -90px;
-        bottom: 40px;
-        width: 240px;
-        height: 240px;
+        left: -80px;
+        bottom: 28px;
+        width: 220px;
+        height: 220px;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(56, 189, 248, 0.22), transparent 68%);
+        background: radial-gradient(circle, rgba(56, 189, 248, 0.18), transparent 72%);
       }
 
       .hero-grid {
         position: relative;
         z-index: 1;
         display: grid;
-        grid-template-columns: minmax(0, 1.08fr) minmax(330px, 0.68fr);
-        gap: clamp(28px, 5vw, 58px);
-        align-items: center;
+        grid-template-columns: minmax(0, 1.1fr) minmax(340px, 0.72fr);
+        gap: clamp(28px, 5vw, 60px);
+        align-items: start;
       }
 
       .eyebrow {
@@ -188,9 +195,9 @@
         align-items: center;
         gap: 9px;
         padding: 8px 13px;
-        border: 1px solid rgba(37, 99, 235, 0.2);
+        border: 1px solid rgba(37, 99, 235, 0.18);
         border-radius: 999px;
-        color: var(--reef-dark);
+        color: var(--primary-deep);
         font-weight: 800;
         background: rgba(255, 255, 255, 0.78);
         box-shadow: 0 10px 30px rgba(15, 45, 92, 0.08);
@@ -200,28 +207,46 @@
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        background: var(--coral);
+        background: var(--accent);
         box-shadow: 0 0 0 6px rgba(56, 189, 248, 0.16);
       }
 
       h1 {
-        max-width: 820px;
+        max-width: 850px;
         margin: 20px 0 18px;
-        font-size: clamp(44px, 7vw, 92px);
+        font-size: clamp(46px, 7vw, 96px);
         line-height: 0.94;
         letter-spacing: -0.065em;
         color: transparent;
-        background: linear-gradient(110deg, #0f172a 4%, #2563eb 52%, #38bdf8 100%);
+        background: linear-gradient(112deg, #0f172a 4%, #2563eb 52%, #38bdf8 100%);
         background-clip: text;
         -webkit-background-clip: text;
       }
 
-      .hero-lead {
-        max-width: 740px;
-        margin: 0;
+      .hero-lead,
+      .section-note,
+      .panel-note,
+      .card p,
+      .project p,
+      .overview-card p,
+      .timeline-item span,
+      .stack-card p,
+      .proof-card p,
+      .ability-card p,
+      .ability-column p,
+      .source-copy p,
+      .project-copy p,
+      .pipeline-copy p,
+      .mini-journal p,
+      .footer-panel p {
         color: var(--muted);
+        line-height: 1.75;
+      }
+
+      .hero-lead {
+        max-width: 760px;
+        margin: 0;
         font-size: clamp(16px, 1.7vw, 20px);
-        line-height: 1.78;
       }
 
       .hero-actions {
@@ -229,34 +254,6 @@
         flex-wrap: wrap;
         gap: 12px;
         margin-top: 24px;
-      }
-
-      .notice {
-        margin-top: 18px;
-        padding: 14px 16px;
-        border: 1px solid rgba(37, 99, 235, 0.16);
-        border-radius: 20px;
-        color: #1e3a8a;
-        line-height: 1.65;
-        background: rgba(219, 234, 254, 0.56);
-      }
-
-      .tech-ribbon {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 22px;
-      }
-
-      .tech-ribbon span {
-        padding: 8px 11px;
-        border: 1px solid rgba(37, 99, 235, 0.13);
-        border-radius: 999px;
-        color: #1e3a8a;
-        font-size: 13px;
-        font-weight: 900;
-        background: rgba(255, 255, 255, 0.66);
-        box-shadow: 0 10px 26px rgba(15, 45, 92, 0.07);
       }
 
       .btn {
@@ -270,8 +267,8 @@
         color: var(--ink);
         font-weight: 800;
         text-decoration: none;
-        background: rgba(255, 255, 255, 0.78);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.82);
         transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
       }
 
@@ -282,100 +279,143 @@
 
       .btn.primary {
         border-color: transparent;
-        color: var(--white);
+        color: #fff;
         background:
           radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.28), transparent 28px),
-          linear-gradient(135deg, var(--reef), var(--reef-dark));
+          linear-gradient(135deg, var(--primary), var(--primary-deep));
       }
 
-      .hero-card {
-        position: relative;
-        padding: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.68);
-        border-radius: var(--radius-lg);
-        background:
-          linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(239, 246, 255, 0.72)),
-          rgba(255, 255, 255, 0.72);
-        box-shadow: var(--shadow);
-        overflow: hidden;
-        backdrop-filter: blur(18px);
-      }
-
-      .hero-card::before {
-        content: "";
-        position: absolute;
-        inset: -1px -1px auto auto;
-        width: 170px;
-        height: 170px;
-        border-bottom-left-radius: 999px;
-        background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.18), transparent 70%);
-      }
-
-      .metric-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+      .tech-ribbon,
+      .skill-cloud,
+      .ability-tags,
+      .tags,
+      .stack-tags,
+      .experience-tags {
+        display: flex;
+        flex-wrap: wrap;
         gap: 10px;
       }
 
-      .metric {
+      .tech-ribbon {
+        margin-top: 22px;
+      }
+
+      .tech-ribbon span,
+      .skill-cloud span,
+      .ability-tags span,
+      .tag,
+      .stack-tags span,
+      .experience-tags span {
+        padding: 8px 11px;
+        border: 1px solid rgba(37, 99, 235, 0.12);
+        border-radius: 999px;
+        color: #1e3a8a;
+        font-size: 13px;
+        font-weight: 900;
+        background: rgba(255, 255, 255, 0.68);
+      }
+
+      .hero-meta {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 26px;
+      }
+
+      .hero-meta-card,
+      .metric,
+      .capability,
+      .ability-card,
+      .stack-card,
+      .proof-card,
+      .code-card,
+      .mini-journal,
+      .source-copy,
+      .overview-card,
+      .timeline-card,
+      .blueprint,
+      .tech-panel,
+      .panel,
+      .card {
         position: relative;
-        min-height: 104px;
-        padding: 15px;
-        border: 1px solid var(--line);
-        border-radius: var(--radius-md);
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(239, 246, 255, 0.72));
-        box-shadow: 0 12px 30px rgba(15, 45, 92, 0.08);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border: 1px solid rgba(255, 255, 255, 0.72);
+        border-radius: var(--radius-lg);
+        background:
+          radial-gradient(circle at 100% 0%, rgba(37, 99, 235, 0.08), transparent 20rem),
+          var(--card);
+        box-shadow: var(--shadow-md);
+        backdrop-filter: blur(18px);
       }
 
-      .metric:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 18px 40px rgba(15, 45, 92, 0.12);
+      .hero-meta-card {
+        padding: 18px 18px 16px;
       }
 
-      .metric strong {
+      .hero-meta-card strong,
+      .metric strong,
+      .ability-card strong,
+      .project-fact strong,
+      .story-metric strong,
+      .source-copy strong {
         display: block;
-        font-size: 30px;
         letter-spacing: -0.04em;
       }
 
-      .metric span {
+      .hero-meta-card strong {
+        font-size: 26px;
+      }
+
+      .hero-meta-card span,
+      .metric span,
+      .story-metric span,
+      .project-fact span,
+      .ability-card small,
+      .source-copy small {
         display: block;
         margin-top: 6px;
         color: var(--muted);
         line-height: 1.5;
       }
 
-      .hero-strip {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 14px;
-        margin-top: 14px;
-        padding: 14px;
-        border-radius: var(--radius-md);
-        color: var(--white);
+      .hero-card {
+        position: relative;
+        overflow: hidden;
+        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.68);
+        border-radius: var(--radius-xl);
         background:
-          radial-gradient(circle at 90% 10%, rgba(191, 219, 254, 0.28), transparent 70px),
-          linear-gradient(135deg, #0f172a, #1d4ed8);
+          linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(239, 246, 255, 0.74)),
+          rgba(255, 255, 255, 0.76);
+        box-shadow: var(--shadow-lg);
+        backdrop-filter: blur(20px);
+      }
+
+      .hero-card::before {
+        content: "";
+        position: absolute;
+        inset: -1px -1px auto auto;
+        width: 190px;
+        height: 190px;
+        border-bottom-left-radius: 999px;
+        background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.18), transparent 72%);
       }
 
       .profile-card {
         display: grid;
-        grid-template-columns: 58px 1fr;
+        grid-template-columns: 60px 1fr;
         gap: 14px;
         align-items: center;
-        margin-bottom: 14px;
+        margin-bottom: 16px;
         padding: 14px;
         border: 1px solid var(--line);
-        border-radius: 26px;
-        background: rgba(255, 255, 255, 0.78);
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.82);
       }
 
       .avatar {
         display: grid;
-        width: 58px;
-        height: 58px;
+        width: 60px;
+        height: 60px;
         place-items: center;
         border-radius: 20px;
         color: #fff;
@@ -384,7 +424,6 @@
         background:
           radial-gradient(circle at 72% 16%, rgba(255, 255, 255, 0.32), transparent 20px),
           linear-gradient(135deg, #38bdf8, #1d4ed8);
-        box-shadow: 0 14px 28px rgba(37, 99, 235, 0.22);
       }
 
       .profile-card strong {
@@ -396,16 +435,59 @@
         display: block;
         margin-top: 4px;
         color: var(--muted);
-        line-height: 1.45;
       }
 
-      .hero-strip small {
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .metric {
+        min-height: 110px;
+        padding: 15px;
+        border-radius: 22px;
+      }
+
+      .metric strong {
+        font-size: 28px;
+      }
+
+      .hero-strip {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 12px;
+        margin-top: 14px;
+      }
+
+      .hero-strip-card {
+        padding: 14px 16px;
+        border-radius: 22px;
+        color: #fff;
+        background:
+          radial-gradient(circle at 90% 10%, rgba(191, 219, 254, 0.28), transparent 70px),
+          linear-gradient(135deg, #0f172a, #1d4ed8);
+      }
+
+      .hero-strip-card small {
         color: rgba(255, 255, 255, 0.72);
+      }
+
+      .hero-strip-card.alt {
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 100% 0%, rgba(56, 189, 248, 0.16), transparent 12rem),
+          rgba(255, 255, 255, 0.84);
+        border: 1px solid var(--line);
+      }
+
+      .hero-strip-card.alt small {
+        color: var(--muted);
       }
 
       section {
         position: relative;
-        padding: 66px 0;
+        padding: 72px 0;
       }
 
       .section-head {
@@ -413,12 +495,12 @@
         align-items: end;
         justify-content: space-between;
         gap: 24px;
-        margin-bottom: 28px;
+        margin-bottom: 30px;
       }
 
       .section-kicker {
         margin: 0 0 9px;
-        color: var(--coral);
+        color: var(--accent);
         font-size: 13px;
         font-weight: 900;
         letter-spacing: 0.14em;
@@ -427,107 +509,329 @@
 
       h2 {
         margin: 0;
-        font-size: clamp(30px, 3.7vw, 50px);
+        font-size: clamp(32px, 3.8vw, 52px);
         line-height: 1.04;
-        letter-spacing: -0.04em;
+        letter-spacing: -0.045em;
       }
 
       .section-note {
-        max-width: 460px;
+        max-width: 480px;
         margin: 0;
-        color: var(--muted);
-        line-height: 1.75;
       }
 
-      .project-grid {
+      .overview-grid,
+      .project-grid,
+      .architecture-grid,
+      .demo-grid,
+      .source-grid,
+      .story-grid {
         display: grid;
+        gap: 24px;
+      }
+
+      .overview-grid,
+      .project-grid,
+      .architecture-grid,
+      .demo-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+      }
+
+      .overview-card,
+      .timeline-card,
+      .blueprint,
+      .tech-panel,
+      .panel,
+      .source-copy {
+        padding: 28px;
+      }
+
+      .overview-card h3,
+      .timeline-card h3,
+      .blueprint h3,
+      .tech-panel h3,
+      .panel-title,
+      .project h3,
+      .source-copy h3,
+      .ability-column h3 {
+        margin: 0;
+        letter-spacing: -0.03em;
+      }
+
+      .overview-card h3,
+      .timeline-card h3,
+      .blueprint h3,
+      .tech-panel h3,
+      .source-copy h3,
+      .ability-column h3 {
+        font-size: 30px;
+      }
+
+      .overview-list {
+        display: grid;
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      .overview-item {
+        display: grid;
+        grid-template-columns: 92px 1fr;
+        gap: 14px;
+        padding: 13px 14px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.62);
+      }
+
+      .overview-item strong,
+      .timeline-item strong,
+      .layer strong,
+      .module strong,
+      .project-tech-item strong,
+      .source-switch button strong {
+        display: block;
+      }
+
+      .overview-item span,
+      .project-tech-item span,
+      .module span,
+      .layer span {
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 16px;
+        margin-top: 18px;
+      }
+
+      .timeline-item {
+        position: relative;
+        padding-left: 22px;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 8px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 0 5px rgba(56, 189, 248, 0.14);
+      }
+
+      .timeline-item::after {
+        content: "";
+        position: absolute;
+        left: 4px;
+        top: 18px;
+        bottom: -14px;
+        width: 2px;
+        background: linear-gradient(to bottom, rgba(56, 189, 248, 0.3), transparent);
+      }
+
+      .timeline-item:last-child::after {
+        display: none;
+      }
+
+      .skill-cloud {
+        margin-top: 22px;
+      }
+
+      .story-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+      }
+
+      .story-card {
+        padding: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.74);
+        border-radius: var(--radius-xl);
+        background:
+          radial-gradient(circle at 100% 0%, rgba(37, 99, 235, 0.08), transparent 20rem),
+          rgba(255, 255, 255, 0.84);
+        box-shadow: var(--shadow-md);
+      }
+
+      .story-card h3 {
+        margin: 0;
+        font-size: 34px;
+        letter-spacing: -0.04em;
+      }
+
+      .story-flow {
+        display: grid;
+        gap: 14px;
+        margin-top: 22px;
+      }
+
+      .story-step {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        gap: 16px;
+        align-items: start;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.66);
+      }
+
+      .story-step b,
+      .pipe-no {
+        display: grid;
+        width: 48px;
+        height: 48px;
+        place-items: center;
+        border-radius: 16px;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 900;
+        background: linear-gradient(135deg, var(--primary), var(--primary-deep));
+      }
+
+      .story-step strong {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 18px;
+      }
+
+      .story-side {
+        display: grid;
+        gap: 16px;
+      }
+
+      .story-metric {
+        padding: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.74);
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: var(--shadow-md);
+      }
+
+      .story-metric strong {
+        font-size: 32px;
+      }
+
+      .capability-grid,
+      .ability-grid,
+      .stack-matrix,
+      .tech-proof,
+      .module-grid,
+      .project-tech,
+      .project-facts,
+      .source-switch,
+      .journey-grid {
+        display: grid;
+        gap: 14px;
+      }
+
+      .capability-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .capability,
+      .ability-card,
+      .stack-card,
+      .proof-card {
+        padding: 22px;
+      }
+
+      .capability img {
+        width: 42px;
+        height: 42px;
+        margin-bottom: 14px;
+      }
+
+      .capability h3,
+      .ability-card strong,
+      .stack-card h3,
+      .proof-card strong,
+      .module strong {
+        font-size: 20px;
+      }
+
+      .ability-showcase {
+        display: grid;
+        grid-template-columns: minmax(0, 0.76fr) minmax(0, 1.24fr);
         gap: 24px;
         align-items: start;
+      }
+
+      .ability-column {
+        padding: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.74);
+        border-radius: var(--radius-xl);
+        background:
+          radial-gradient(circle at 100% 0%, rgba(56, 189, 248, 0.14), transparent 17rem),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(239, 246, 255, 0.74));
+        box-shadow: var(--shadow-md);
+      }
+
+      .ability-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .ability-card {
+        min-height: 180px;
+      }
+
+      .ability-card strong {
+        margin-bottom: 8px;
+      }
+
+      .journey-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 18px;
+      }
+
+      .journey-card {
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.62);
+      }
+
+      .journey-card strong {
+        display: block;
+        margin-bottom: 8px;
       }
 
       .project {
         position: relative;
         overflow: hidden;
-        min-height: 0;
-        padding: clamp(22px, 2.4vw, 30px);
+        padding: clamp(24px, 2.5vw, 30px);
         border: 1px solid rgba(255, 255, 255, 0.7);
-        border-radius: var(--radius-lg);
+        border-radius: var(--radius-xl);
         background:
           radial-gradient(circle at 100% 0%, rgba(37, 99, 235, 0.1), transparent 19rem),
-          rgba(255, 255, 255, 0.86);
-        box-shadow: 0 18px 48px rgba(15, 45, 92, 0.1);
-        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-      }
-
-      .project::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        background:
-          linear-gradient(135deg, rgba(255, 255, 255, 0.58), transparent 28%),
-          linear-gradient(to bottom, transparent 70%, rgba(37, 99, 235, 0.045));
-      }
-
-      .project > * {
-        position: relative;
-        z-index: 1;
-      }
-
-      .project:hover {
-        transform: translateY(-6px);
-        border-color: rgba(37, 99, 235, 0.26);
-        box-shadow: 0 30px 80px rgba(15, 45, 92, 0.16);
+          rgba(255, 255, 255, 0.88);
+        box-shadow: 0 22px 56px rgba(15, 45, 92, 0.11);
       }
 
       .project.dark {
-        color: var(--white);
+        color: #fff;
         background:
-          radial-gradient(circle at 80% 0%, rgba(96, 165, 250, 0.3), transparent 22rem),
+          radial-gradient(circle at 78% 0%, rgba(96, 165, 250, 0.28), transparent 22rem),
           radial-gradient(circle at 14% 88%, rgba(56, 189, 248, 0.16), transparent 18rem),
           linear-gradient(145deg, #0f172a, #1d4ed8);
       }
 
       .project h3 {
-        margin: 10px 0 12px;
-        font-size: clamp(26px, 2.7vw, 38px);
+        margin: 12px 0 14px;
+        font-size: clamp(28px, 2.8vw, 40px);
         line-height: 1.08;
-        letter-spacing: -0.035em;
-      }
-
-      .project p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.75;
       }
 
       .project.dark p,
       .project.dark .tag,
-      .project.dark .feature li {
-        color: rgba(255, 255, 255, 0.78);
-      }
-
-      .tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin: 18px 0 20px;
-      }
-
-      .tag {
-        padding: 7px 10px;
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        color: var(--muted);
-        font-size: 13px;
-        font-weight: 800;
-        background: rgba(255, 255, 255, 0.42);
-      }
-
-      .project.dark .tag {
-        border-color: rgba(255, 255, 255, 0.18);
-        background: rgba(255, 255, 255, 0.08);
+      .project.dark .feature li,
+      .project.dark .project-tech-item span,
+      .project.dark .project-fact span,
+      .project.dark .price,
+      .project.dark .mini-card span {
+        color: rgba(255, 255, 255, 0.8);
       }
 
       .feature {
@@ -552,654 +856,280 @@
         height: 9px;
         margin-top: 9px;
         border-radius: 50%;
-        background: var(--coral);
+        background: var(--accent);
         box-shadow: 0 0 0 5px rgba(56, 189, 248, 0.14);
       }
 
-      .evidence-strip {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 10px;
-        margin: 18px 0 0;
+      .project-facts {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin-top: 18px;
       }
 
-      .evidence {
-        padding: 13px 14px;
+      .project-fact {
+        padding: 14px;
         border: 1px solid var(--line);
         border-radius: 18px;
         background: rgba(255, 255, 255, 0.58);
       }
 
-      .evidence strong {
-        display: block;
-        font-size: 22px;
-        letter-spacing: -0.04em;
+      .project-fact strong {
+        font-size: 24px;
       }
 
-      .evidence span {
+      .project-tech {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 18px;
+      }
+
+      .project-tech-item {
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.56);
+      }
+
+      .project.dark .project-tech-item,
+      .project.dark .project-fact {
+        border-color: rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .phone-stage,
+      .report-stack {
+        margin-top: 22px;
+      }
+
+      .phone-stage {
+        display: grid;
+        grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+        gap: 16px;
+        align-items: start;
+      }
+
+      .phone {
+        width: min(286px, 100%);
+        margin: 0 auto;
+        padding: 14px;
+        border: 1px solid rgba(15, 23, 42, 0.1);
+        border-radius: 38px;
+        background: #0f172a;
+        box-shadow: 0 26px 54px rgba(15, 23, 42, 0.24);
+      }
+
+      .phone-screen {
+        overflow: hidden;
+        border-radius: 28px;
+        background: linear-gradient(180deg, #f8fbff, #eef5ff);
+      }
+
+      .phone-top {
+        padding: 18px 18px 10px;
+      }
+
+      .phone-top strong {
         display: block;
-        margin-top: 3px;
+        font-size: 18px;
+      }
+
+      .phone-top span,
+      .mini-card span,
+      .mini-journal p,
+      .tabbar span {
         color: var(--muted);
-        font-size: 12px;
-        line-height: 1.45;
+      }
+
+      .phone-body {
+        padding: 0 14px 16px;
+      }
+
+      .search {
+        padding: 10px 14px;
+        border-radius: 16px;
+        color: var(--muted);
+        background: #fff;
+      }
+
+      .mini-banner {
+        overflow: hidden;
+        margin-top: 12px;
+        border-radius: 22px;
+        box-shadow: 0 18px 32px rgba(37, 99, 235, 0.16);
+      }
+
+      .mini-banner img {
+        width: 100%;
+        height: 142px;
+        object-fit: cover;
+      }
+
+      .mini-list {
+        display: grid;
+        gap: 12px;
+        margin-top: 12px;
+      }
+
+      .mini-card {
+        display: grid;
+        grid-template-columns: 82px 1fr;
+        gap: 12px;
+        padding: 12px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.88);
+      }
+
+      .mini-card img {
+        width: 82px;
+        height: 82px;
+        border-radius: 18px;
+        object-fit: cover;
+      }
+
+      .mini-card strong {
+        display: block;
+        font-size: 15px;
+      }
+
+      .price {
+        margin-top: 8px;
+        color: var(--primary);
+        font-weight: 900;
+      }
+
+      .tabbar {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        padding: 10px 14px 14px;
+        text-align: center;
+        border-top: 1px solid rgba(37, 99, 235, 0.1);
+      }
+
+      .tabbar b {
+        color: var(--primary);
+      }
+
+      .mini-journal {
+        padding: 18px;
+      }
+
+      .mini-journal h4,
+      .pipeline-copy h3 {
+        margin: 0 0 10px;
+        font-size: 20px;
+      }
+
+      .mini-journal ul {
+        display: grid;
+        gap: 10px;
+        margin: 14px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .mini-journal li {
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.62);
       }
 
       .report-stack {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 12px;
-        margin-top: 20px;
       }
 
       .report-frame {
         overflow: hidden;
         border: 1px solid var(--line);
-        border-radius: 22px;
+        border-radius: 24px;
         background: #fff;
-        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16);
       }
 
       .report-frame img {
         width: 100%;
-        height: 260px;
+        height: 240px;
         object-fit: cover;
         object-position: center;
       }
 
-      .phone-stage {
-        position: relative;
-        min-height: 0;
-        margin-top: 20px;
-      }
-
-      .phone {
-        position: relative;
-        width: min(292px, 100%);
-        margin: 0 auto;
-        padding: 14px;
-        border: 1px solid rgba(255, 255, 255, 0.28);
-        border-radius: 38px;
-        background: #0f172a;
-        box-shadow: 0 24px 70px rgba(15, 23, 42, 0.28);
-      }
-
-      .phone::before {
-        content: "";
-        position: absolute;
-        top: 9px;
-        left: 50%;
-        width: 72px;
-        height: 5px;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.18);
-        transform: translateX(-50%);
-      }
-
-      .phone-screen {
-        overflow: hidden;
-        min-height: 455px;
-        border-radius: 28px;
-        color: var(--ink);
-        background: #f5f8ff;
-      }
-
-      .phone-top {
-        padding: 18px 16px 12px;
-        color: #fff;
-        background: linear-gradient(135deg, #2563eb, #38bdf8);
-      }
-
-      .phone-top strong {
-        display: block;
-        font-size: 22px;
-      }
-
-      .phone-top span {
-        display: block;
-        margin-top: 5px;
-        color: rgba(255, 255, 255, 0.78);
-        font-size: 13px;
-      }
-
-      .phone-body {
-        padding: 14px;
-      }
-
-      .search {
-        margin-bottom: 12px;
-        padding: 12px 14px;
-        border-radius: 999px;
-        color: #7b8190;
-        background: #fff;
-      }
-
-      .mini-banner {
-        overflow: hidden;
-        border-radius: 20px;
-      }
-
-      .mini-banner img {
-        width: 100%;
-        height: 118px;
-        object-fit: cover;
-      }
-
-      .mini-list {
-        display: grid;
-        gap: 10px;
-        margin-top: 12px;
-      }
-
-      .mini-card {
-        display: grid;
-        grid-template-columns: 76px 1fr;
-        gap: 12px;
-        padding: 10px;
-        border-radius: 18px;
-        background: #fff;
-        box-shadow: 0 10px 24px rgba(28, 45, 70, 0.08);
-      }
-
-      .mini-card img {
-        width: 76px;
-        height: 76px;
-        border-radius: 14px;
-        object-fit: cover;
-      }
-
-      .mini-card strong {
-        display: block;
-        margin-bottom: 6px;
-      }
-
-      .mini-card span {
-        display: block;
-        color: #6b6b6f;
-        font-size: 12px;
-      }
-
-      .price {
-        margin-top: 8px;
-        color: #2563eb;
-        font-weight: 900;
-      }
-
-      .tabbar {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 4px;
-        padding: 10px 8px 12px;
-        color: #6b6b6f;
-        font-size: 12px;
-        text-align: center;
-        background: #fff;
-      }
-
-      .tabbar b {
-        color: #2f6bff;
-      }
-
-      .capability-grid {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 16px;
-      }
-
-      .capability {
-        position: relative;
-        overflow: hidden;
-        min-height: 190px;
-        padding: 20px;
-        border: 1px solid var(--line);
-        border-radius: 26px;
-        background: rgba(255, 255, 255, 0.84);
-        box-shadow: 0 16px 38px rgba(15, 45, 92, 0.08);
-        transition: transform 0.22s ease, box-shadow 0.22s ease;
-      }
-
-      .capability::after {
-        content: "";
-        position: absolute;
-        right: -34px;
-        top: -34px;
-        width: 86px;
-        height: 86px;
-        border-radius: 50%;
-        background: rgba(37, 99, 235, 0.1);
-      }
-
-      .capability:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 24px 56px rgba(15, 45, 92, 0.13);
-      }
-
-      .capability img {
-        width: 36px;
-        height: 36px;
-        margin-bottom: 14px;
-        image-rendering: auto;
-      }
-
-      .capability h3 {
-        margin: 0 0 10px;
-        font-size: 18px;
-      }
-
-      .capability p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.65;
-      }
-
-      .overview-grid {
-        display: grid;
-        grid-template-columns: minmax(360px, 0.9fr) minmax(0, 1.1fr);
-        gap: 24px;
-        align-items: stretch;
-      }
-
-      .overview-card,
-      .timeline-card {
-        padding: clamp(22px, 2.4vw, 30px);
-        border: 1px solid rgba(37, 99, 235, 0.14);
-        border-radius: var(--radius-lg);
-        background:
-          radial-gradient(circle at 92% 8%, rgba(37, 99, 235, 0.09), transparent 180px),
-          rgba(255, 255, 255, 0.88);
-        box-shadow: 0 18px 48px rgba(15, 45, 92, 0.1);
-      }
-
-      .overview-card h3,
-      .timeline-card h3 {
-        margin: 0 0 14px;
-        font-size: 24px;
-        letter-spacing: -0.025em;
-      }
-
-      .overview-card p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.75;
-      }
-
-      .overview-list {
-        display: grid;
-        gap: 12px;
-        margin-top: 18px;
-      }
-
-      .overview-item {
-        display: grid;
-        grid-template-columns: 108px 1fr;
-        gap: 12px;
-        padding: 13px;
-        border: 1px solid var(--line);
-        border-radius: 18px;
-        background: rgba(248, 251, 255, 0.74);
-      }
-
-      .overview-item strong {
-        color: #1d4ed8;
-      }
-
-      .overview-item span {
-        color: var(--muted);
-        line-height: 1.55;
-      }
-
-      .timeline {
-        display: grid;
-        gap: 14px;
-      }
-
-      .timeline-item {
-        position: relative;
-        padding-left: 24px;
-      }
-
-      .timeline-item::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 7px;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: var(--reef);
-        box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.12);
-      }
-
-      .timeline-item strong {
-        display: block;
-        margin-bottom: 4px;
-      }
-
-      .timeline-item span {
-        display: block;
-        color: var(--muted);
-        line-height: 1.6;
-      }
-
-      .skill-cloud {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 18px;
-      }
-
-      .skill-cloud span {
-        padding: 8px 10px;
-        border: 1px solid rgba(37, 99, 235, 0.13);
-        border-radius: 999px;
-        color: #1e3a8a;
-        font-size: 13px;
-        font-weight: 900;
-        background: #eff6ff;
-      }
-
-      .ability-showcase {
-        display: grid;
-        grid-template-columns: minmax(360px, 0.9fr) minmax(0, 1.1fr);
-        gap: 24px;
-        align-items: stretch;
-      }
-
-      .ability-lead {
-        padding: clamp(22px, 2.4vw, 30px);
-        border: 1px solid rgba(37, 99, 235, 0.16);
-        border-radius: var(--radius-lg);
-        color: #eaf3ff;
-        background:
-          radial-gradient(circle at 88% 10%, rgba(56, 189, 248, 0.24), transparent 150px),
-          linear-gradient(145deg, #0f172a, #1d4ed8);
-        box-shadow: 0 24px 70px rgba(15, 23, 42, 0.18);
-      }
-
-      .ability-lead h3 {
-        margin: 0 0 14px;
-        font-size: clamp(28px, 3vw, 40px);
-        line-height: 1.08;
-        letter-spacing: -0.035em;
-      }
-
-      .ability-lead p {
-        margin: 0;
-        color: rgba(234, 243, 255, 0.78);
-        line-height: 1.75;
-      }
-
-      .ability-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 20px;
-      }
-
-      .ability-tags span {
-        padding: 8px 10px;
-        border: 1px solid rgba(255, 255, 255, 0.14);
-        border-radius: 999px;
-        color: #bfdbfe;
-        font-size: 13px;
-        font-weight: 900;
-        background: rgba(255, 255, 255, 0.06);
-      }
-
-      .ability-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 14px;
-      }
-
-      .ability-card {
-        padding: 18px;
-        border: 1px solid var(--line);
-        border-radius: 24px;
-        background: rgba(255, 255, 255, 0.88);
-        box-shadow: 0 16px 38px rgba(15, 45, 92, 0.08);
-      }
-
-      .ability-card strong {
-        display: block;
-        margin-bottom: 8px;
-        color: #1d4ed8;
-        font-size: 18px;
-      }
-
-      .ability-card p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.6;
-      }
-
-      .ability-card small {
-        display: inline-flex;
-        margin-top: 12px;
-        padding: 6px 9px;
-        border-radius: 999px;
-        color: #1e3a8a;
-        font-weight: 900;
-        background: #dbeafe;
-      }
-
-      .project-tech {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-        margin-top: 18px;
-      }
-
-      .project-tech-item {
-        padding: 12px;
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        background: rgba(248, 251, 255, 0.76);
-      }
-
-      .project.dark .project-tech-item {
-        border-color: rgba(255, 255, 255, 0.16);
-        background: rgba(255, 255, 255, 0.08);
-      }
-
-      .project-tech-item strong {
-        display: block;
-        margin-bottom: 5px;
-        color: #1d4ed8;
-        font-size: 14px;
-      }
-
-      .project.dark .project-tech-item strong {
-        color: #bfdbfe;
-      }
-
-      .project-tech-item span {
-        color: var(--muted);
-        font-size: 13px;
-        line-height: 1.45;
-      }
-
-      .project.dark .project-tech-item span {
-        color: rgba(255, 255, 255, 0.76);
-      }
-
       .architecture-grid {
+        margin-bottom: 18px;
+      }
+
+      .layer-stack,
+      .pipeline {
         display: grid;
-        grid-template-columns: minmax(420px, 0.96fr) minmax(0, 1.04fr);
-        gap: 24px;
-        align-items: stretch;
+        gap: 12px;
+        margin-top: 18px;
       }
 
-      .blueprint {
-        position: relative;
-        overflow: hidden;
-        padding: clamp(20px, 2.2vw, 28px);
-        border: 1px solid rgba(37, 99, 235, 0.16);
-        border-radius: var(--radius-lg);
-        color: #eaf3ff;
-        background:
-          linear-gradient(rgba(147, 197, 253, 0.08) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(147, 197, 253, 0.08) 1px, transparent 1px),
-          radial-gradient(circle at 90% 8%, rgba(56, 189, 248, 0.22), transparent 160px),
-          #0f172a;
-        background-size: 24px 24px, 24px 24px, auto, auto;
-        box-shadow: 0 24px 70px rgba(15, 23, 42, 0.18);
-      }
-
-      .blueprint h3,
-      .tech-panel h3 {
-        margin: 0 0 16px;
-        font-size: 22px;
-      }
-
-      .layer-stack {
-        display: grid;
-        gap: 10px;
+      .layer,
+      .module {
+        padding: 15px 16px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.62);
       }
 
       .layer {
         display: grid;
         grid-template-columns: 96px 1fr;
         gap: 12px;
-        align-items: start;
-        padding: 13px;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        border-radius: 18px;
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(8px);
-      }
-
-      .layer strong {
-        color: #93c5fd;
-      }
-
-      .layer span {
-        color: rgba(234, 243, 255, 0.78);
-        line-height: 1.6;
-      }
-
-      .tech-panel {
-        padding: clamp(20px, 2.2vw, 28px);
-        border: 1px solid rgba(255, 255, 255, 0.72);
-        border-radius: var(--radius-lg);
-        background:
-          radial-gradient(circle at 92% 8%, rgba(37, 99, 235, 0.1), transparent 180px),
-          rgba(255, 255, 255, 0.88);
-        box-shadow: 0 18px 48px rgba(15, 45, 92, 0.1);
       }
 
       .module-grid {
-        display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 14px;
+        margin-top: 18px;
       }
 
-      .module {
-        min-height: 118px;
-        padding: 16px;
-        border: 1px solid var(--line);
-        border-radius: 18px;
-        background: rgba(248, 251, 255, 0.82);
-      }
-
-      .module strong {
-        display: block;
-        margin-bottom: 6px;
-        color: #1d4ed8;
-      }
-
-      .module span {
-        color: var(--muted);
-        font-size: 13px;
-        line-height: 1.55;
-      }
-
-      .stack-matrix {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 16px;
-        margin-top: 24px;
-      }
-
-      .stack-card {
-        min-height: 178px;
-        padding: 20px;
-        border: 1px solid var(--line);
-        border-radius: 24px;
-        background: rgba(255, 255, 255, 0.86);
-        box-shadow: 0 16px 38px rgba(15, 45, 92, 0.08);
-      }
-
-      .stack-card h3 {
-        margin: 0 0 12px;
-        color: #1d4ed8;
-        font-size: 18px;
-      }
-
-      .stack-card p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.65;
-      }
-
+      .stack-matrix,
       .tech-proof {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
-        margin-top: 24px;
-      }
-
-      .proof-card {
-        padding: 20px;
-        border: 1px solid rgba(37, 99, 235, 0.14);
-        border-radius: 24px;
-        background:
-          linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(239, 246, 255, 0.76));
-      }
-
-      .proof-card strong {
-        display: block;
-        margin-bottom: 8px;
-        font-size: 18px;
-      }
-
-      .proof-card p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.65;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin-top: 18px;
       }
 
       .code-sample {
-        margin-top: 24px;
-      }
-
-      .demo-grid {
-        display: grid;
-        grid-template-columns: minmax(420px, 0.96fr) minmax(0, 1.04fr);
-        gap: 24px;
-        align-items: stretch;
-      }
-
-      .panel {
+        margin-top: 22px;
         overflow: hidden;
-        border: 1px solid rgba(255, 255, 255, 0.72);
-        border-radius: var(--radius-lg);
-        background:
-          linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(239, 246, 255, 0.76));
-        box-shadow: 0 18px 48px rgba(15, 45, 92, 0.1);
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        border-radius: 26px;
+        background: linear-gradient(145deg, #0f172a, #1d4ed8);
+        box-shadow: 0 22px 46px rgba(15, 23, 42, 0.18);
+      }
+
+      .code-sample pre,
+      .code-card pre {
+        margin: 0;
+        overflow-x: auto;
+      }
+
+      .code-sample code,
+      .code-card code {
+        display: block;
+        padding: 24px;
+        color: #dbeafe;
+        font-family: "Consolas", "SFMono-Regular", monospace;
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .demo-shell {
+        overflow: hidden;
+        padding: 0;
       }
 
       .panel-head {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 16px;
-        padding: 16px 20px;
-        border-bottom: 1px solid var(--line);
+        gap: 12px;
+        padding: 18px 22px;
+        border-bottom: 1px solid rgba(37, 99, 235, 0.08);
       }
 
       .panel-title {
-        margin: 0;
-        font-size: 18px;
+        font-size: 20px;
         font-weight: 900;
       }
 
@@ -1209,68 +1139,136 @@
       }
 
       .lights span {
-        width: 11px;
-        height: 11px;
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
-        background: var(--sun);
+        background: rgba(37, 99, 235, 0.2);
+      }
+
+      .lights span:first-child {
+        background: rgba(194, 65, 12, 0.5);
       }
 
       .lights span:nth-child(2) {
-        background: var(--coral);
+        background: rgba(245, 158, 11, 0.5);
       }
 
-      .lights span:nth-child(3) {
-        background: var(--reef);
-      }
-
-      .panel-body {
-        padding: 22px;
+      .lights span:last-child {
+        background: rgba(15, 118, 110, 0.5);
       }
 
       .admin-shell {
         display: grid;
-        grid-template-columns: 156px 1fr;
-        min-height: 410px;
+        grid-template-columns: 220px 1fr;
+        min-height: 600px;
       }
 
       .admin-side {
-        padding: 18px 12px;
-        color: rgba(255, 255, 255, 0.72);
-        background:
-          radial-gradient(circle at top right, rgba(96, 165, 250, 0.22), transparent 130px),
-          #0f172a;
+        padding: 20px;
+        border-right: 1px solid rgba(37, 99, 235, 0.08);
+        background: rgba(239, 246, 255, 0.58);
       }
 
       .admin-side strong {
         display: block;
-        margin-bottom: 18px;
-        color: #fff;
+        margin-bottom: 14px;
+        font-size: 18px;
       }
 
       .admin-side button {
         width: 100%;
         margin-bottom: 8px;
-        padding: 10px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        color: inherit;
+        padding: 12px 14px;
+        border: 1px solid transparent;
+        border-radius: 16px;
+        color: var(--muted);
         text-align: left;
-        background: rgba(255, 255, 255, 0.05);
         cursor: pointer;
+        background: transparent;
+        transition: 0.18s ease;
       }
 
+      .admin-side button:hover,
       .admin-side button.active {
-        color: #0f172a;
-        background: var(--sun);
+        border-color: var(--line);
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.88);
+        box-shadow: 0 12px 24px rgba(15, 45, 92, 0.08);
       }
 
       .admin-main {
-        padding: 20px;
-        background: #f8fbff;
+        padding: 22px;
       }
 
-      .admin-main h3 {
+      .dashboard-head {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .dashboard-head h3 {
+        margin: 0;
+        font-size: 28px;
+      }
+
+      .dashboard-head p {
+        margin: 6px 0 0;
+        color: var(--muted);
+      }
+
+      .dashboard-badge {
+        padding: 9px 12px;
+        border-radius: 999px;
+        color: #1e3a8a;
+        font-size: 12px;
+        font-weight: 900;
+        background: rgba(219, 234, 254, 0.88);
+      }
+
+      .dashboard-metrics {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .dashboard-metric {
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.86);
+      }
+
+      .dashboard-metric strong {
+        display: block;
+        font-size: 24px;
+        letter-spacing: -0.04em;
+      }
+
+      .dashboard-metric span {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+      }
+
+      .dashboard-grid {
+        display: grid;
+        grid-template-columns: 1.12fr 0.88fr;
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .dashboard-card {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.86);
+      }
+
+      .dashboard-card h4 {
         margin: 0 0 12px;
+        font-size: 18px;
       }
 
       .table {
@@ -1279,230 +1277,253 @@
       }
 
       .row {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 12px;
-        padding: 13px;
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        background: #fff;
-      }
-
-      .row small {
-        display: block;
-        margin-top: 4px;
-        color: var(--muted);
-      }
-
-      .status {
-        align-self: start;
-        padding: 4px 8px;
-        border-radius: 999px;
-        color: #1d4ed8;
-        font-size: 12px;
-        font-weight: 900;
-        background: #dbeafe;
-      }
-
-      .pipeline {
-        display: grid;
-        gap: 14px;
-      }
-
-      .pipe-step {
-        display: grid;
-        grid-template-columns: 38px 1fr;
-        gap: 12px;
-        padding: 16px;
-        border: 1px solid var(--line);
-        border-radius: 20px;
-        background: rgba(255, 255, 255, 0.68);
-        transition: transform 0.2s ease, background 0.2s ease;
-      }
-
-      .pipe-step:hover {
-        transform: translateX(4px);
-        background: rgba(255, 255, 255, 0.88);
-      }
-
-      .pipe-no {
-        display: grid;
-        width: 38px;
-        height: 38px;
-        place-items: center;
-        border-radius: 14px;
-        color: #fff;
-        font-weight: 900;
-        background: var(--reef);
-      }
-
-      .pipe-step h3 {
-        margin: 0 0 4px;
-        font-size: 17px;
-      }
-
-      .pipe-step p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.6;
-      }
-
-      .code-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 18px;
-      }
-
-      .code-card {
-        overflow: hidden;
-        border: 1px solid rgba(37, 99, 235, 0.14);
-        border-radius: var(--radius-md);
-        background: #0f172a;
-        box-shadow: 0 18px 48px rgba(15, 23, 42, 0.16);
-      }
-
-      .code-title {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 12px;
-        padding: 12px 16px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        color: #bfdbfe;
-        font-size: 13px;
+        padding: 14px;
+        border: 1px solid rgba(37, 99, 235, 0.08);
+        border-radius: 16px;
+        background: rgba(248, 251, 255, 0.94);
+      }
+
+      .row strong {
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .row small {
+        display: block;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .status {
+        padding: 8px 10px;
+        border-radius: 999px;
+        font-size: 12px;
         font-weight: 900;
-        letter-spacing: 0.04em;
+        white-space: nowrap;
+        background: rgba(219, 234, 254, 0.9);
+        color: #1e3a8a;
       }
 
-      pre {
-        overflow: auto;
-        min-height: 230px;
-        margin: 0;
-        padding: 20px;
-        border: 0;
-        border-radius: 0;
-        color: #eaf3ff;
-        line-height: 1.65;
+      .status.success {
+        background: var(--success-soft);
+        color: var(--success);
+      }
+
+      .status.warn {
+        background: var(--warning-soft);
+        color: var(--warning);
+      }
+
+      .chart {
+        display: grid;
+        gap: 10px;
+      }
+
+      .bar-line {
+        display: grid;
+        grid-template-columns: 80px 1fr 48px;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .bar-line span,
+      .bar-line small {
+        color: var(--muted);
+      }
+
+      .bar-track {
+        overflow: hidden;
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(37, 99, 235, 0.08);
+      }
+
+      .bar {
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--accent), var(--primary));
+      }
+
+      .dashboard-timeline {
+        display: grid;
+        gap: 10px;
+      }
+
+      .dashboard-timeline li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 14px;
+        border: 1px solid rgba(37, 99, 235, 0.08);
+        border-radius: 16px;
+        background: rgba(248, 251, 255, 0.92);
+      }
+
+      .dashboard-timeline b {
+        font-size: 13px;
+      }
+
+      .pipeline-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .pipeline-copy {
+        padding: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.72);
+        border-radius: var(--radius-lg);
         background:
-          radial-gradient(circle at 100% 0%, rgba(37, 99, 235, 0.24), transparent 150px),
-          #0f172a;
-        box-shadow: none;
+          radial-gradient(circle at 100% 0%, rgba(56, 189, 248, 0.14), transparent 16rem),
+          rgba(255, 255, 255, 0.84);
+        box-shadow: var(--shadow-md);
       }
 
-      code {
-        font-family: Consolas, "Cascadia Mono", monospace;
+      .pipe-step {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        gap: 14px;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.64);
+      }
+
+      .pipe-step h3 {
+        margin: 0 0 6px;
+        font-size: 18px;
+      }
+
+      .source-grid {
+        grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+        align-items: start;
+      }
+
+      .source-copy {
+        display: grid;
+        gap: 18px;
+      }
+
+      .source-copy strong {
+        font-size: 26px;
+      }
+
+      .source-switch {
+        grid-template-columns: 1fr;
+      }
+
+      .source-switch button {
+        display: grid;
+        gap: 4px;
+        width: 100%;
+        padding: 14px 16px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        color: var(--muted);
+        text-align: left;
+        cursor: pointer;
+        background: rgba(255, 255, 255, 0.62);
+        transition: 0.18s ease;
+      }
+
+      .source-switch button.active,
+      .source-switch button:hover {
+        border-color: var(--line-strong);
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 16px 28px rgba(15, 45, 92, 0.08);
+      }
+
+      .source-switch button small {
+        color: var(--muted);
+      }
+
+      .code-grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      .code-card {
+        overflow: hidden;
+      }
+
+      .code-title {
+        padding: 16px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        color: #dbeafe;
+        font-weight: 900;
+        background: linear-gradient(135deg, #14213d, #1d4ed8);
+      }
+
+      .code-card pre {
+        background: linear-gradient(180deg, #0f172a, #132446);
       }
 
       .footer {
-        padding: 44px 0 58px;
-        color: var(--muted);
+        padding: 0 0 38px;
       }
 
       .footer-panel {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 18px;
-        padding: 22px;
-        border: 1px solid rgba(37, 99, 235, 0.14);
-        border-radius: var(--radius-lg);
-        background: rgba(255, 255, 255, 0.82);
-        box-shadow: 0 18px 48px rgba(15, 45, 92, 0.08);
-      }
-
-      .footer-panel strong {
-        display: block;
-        margin-bottom: 6px;
-        color: var(--ink);
-        font-size: 20px;
-      }
-
-      .footer-panel p {
-        margin: 0;
-        line-height: 1.6;
-      }
-
-      .footer-link {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 42px;
-        padding: 0 16px;
-        border-radius: 999px;
-        color: #fff;
-        font-weight: 900;
-        text-decoration: none;
-        background: linear-gradient(135deg, var(--reef), var(--reef-dark));
+        gap: 24px;
+        padding: 22px 24px;
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        border-radius: 28px;
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: var(--shadow-md);
       }
 
       .reveal {
-        animation: rise 0.72s ease both;
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      .reveal.in {
+        opacity: 1;
+        transform: translateY(0);
       }
 
       .delay-1 {
-        animation-delay: 0.08s;
+        transition-delay: 0.08s;
       }
 
       .delay-2 {
-        animation-delay: 0.16s;
+        transition-delay: 0.16s;
       }
 
-      @keyframes rise {
-        from {
-          opacity: 0;
-          transform: translateY(18px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      @media (max-width: 920px) {
+      @media (max-width: 1080px) {
         .hero-grid,
-        .overview-grid,
-        .project-grid,
+        .story-grid,
         .ability-showcase,
-        .architecture-grid,
+        .source-grid,
         .demo-grid,
-        .code-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .capability-grid,
-        .ability-grid,
-        .stack-matrix,
-        .tech-proof {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-
-        .demo-grid {
-          grid-template-columns: 1fr;
-        }
-
+        .project-grid,
+        .overview-grid,
         .architecture-grid {
           grid-template-columns: 1fr;
         }
 
-        .evidence-strip {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
+        .phone-stage,
+        .dashboard-grid {
+          grid-template-columns: 1fr;
         }
 
-        .section-head {
-          align-items: start;
-          flex-direction: column;
-        }
-
-        .hero {
-          padding-top: 48px;
+        .capability-grid,
+        .stack-matrix,
+        .tech-proof {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
 
-      @media (max-width: 620px) {
-        .shell {
-          width: min(100% - 24px, 1200px);
-        }
-
+      @media (max-width: 920px) {
         .nav-inner {
           align-items: flex-start;
           flex-direction: column;
@@ -1512,45 +1533,86 @@
           justify-content: flex-start;
         }
 
+        .hero-meta,
         .metric-grid,
-        .overview-item,
         .capability-grid,
         .ability-grid,
         .module-grid,
         .project-tech,
+        .project-facts,
         .stack-matrix,
         .tech-proof,
-        .evidence-strip,
+        .dashboard-metrics {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
         .admin-shell {
           grid-template-columns: 1fr;
         }
 
-        .layer {
+        .admin-side {
+          border-right: 0;
+          border-bottom: 1px solid rgba(37, 99, 235, 0.08);
+        }
+
+        .admin-side strong {
+          margin-bottom: 12px;
+        }
+
+        .layer,
+        .overview-item,
+        .bar-line {
           grid-template-columns: 1fr;
         }
 
-        .project,
-        .hero-card,
-        .panel,
-        .blueprint,
-        .tech-panel {
-          border-radius: 26px;
+        .section-head {
+          align-items: start;
+          flex-direction: column;
         }
+      }
 
-        h1 {
-          letter-spacing: -0.06em;
+      @media (max-width: 620px) {
+        .shell {
+          width: min(100% - 24px, 1240px);
         }
 
         .hero {
-          padding-top: 42px;
+          padding-top: 44px;
         }
 
         section {
-          padding: 48px 0;
+          padding: 50px 0;
         }
 
-        .section-head {
-          margin-bottom: 20px;
+        .hero-meta,
+        .metric-grid,
+        .capability-grid,
+        .ability-grid,
+        .module-grid,
+        .project-tech,
+        .project-facts,
+        .stack-matrix,
+        .tech-proof,
+        .dashboard-metrics,
+        .report-stack,
+        .journey-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-strip,
+        .phone-stage {
+          grid-template-columns: 1fr;
+        }
+
+        .overview-card,
+        .timeline-card,
+        .blueprint,
+        .tech-panel,
+        .panel,
+        .source-copy,
+        .story-card {
+          padding: 22px;
+          border-radius: 24px;
         }
 
         .admin-side {
@@ -1561,7 +1623,6 @@
 
         .admin-side strong {
           grid-column: 1 / -1;
-          margin-bottom: 4px;
         }
 
         .admin-side button {
@@ -1573,23 +1634,8 @@
           flex-direction: column;
         }
 
-        .tech-ribbon {
-          gap: 7px;
-        }
-
-        .tech-ribbon span {
-          font-size: 12px;
-          padding: 7px 9px;
-        }
-
-        .profile-card {
-          grid-template-columns: 50px 1fr;
-        }
-
-        .avatar {
-          width: 50px;
-          height: 50px;
-          border-radius: 17px;
+        h1 {
+          letter-spacing: -0.06em;
         }
       }
     </style>
@@ -1607,7 +1653,6 @@
           <a href="#ability">核心能力</a>
           <a href="#projects">代表项目</a>
           <a href="#architecture">技术架构</a>
-          <a href="#capabilities">工程能力</a>
           <a href="#demo">交互 Demo</a>
           <a href="#source">源码片段</a>
         </div>
@@ -1618,12 +1663,13 @@
       <div class="shell hero-grid">
         <div class="reveal">
           <div class="eyebrow"><span class="dot"></span>系统开发 / Java 后端 / 信息系统工程师</div>
-          <h1>王月的工程作品集</h1>
+          <h1>把业务需求落成可交付系统。</h1>
           <p class="hero-lead">
-            2026 届计算机科学与技术本科，方向为系统开发与 Java 后端开发：
-            Spring Boot / MyBatis / MySQL 后端业务系统、Vue 3 管理后台、微信登录与支付集成、
-            Python 自动化采集报表，以及从需求沟通、方案设计、联调测试到交付支持的主要流程。
+            2026 届计算机科学与技术本科，聚焦系统开发与 Java 后端开发。作品覆盖
+            Spring Boot / MyBatis / MySQL 业务系统、Vue 3 管理后台、微信登录与支付集成、
+            Python 自动化采集与数据处理，以及从需求拆解、接口设计、联调排错到交付支持的主要流程。
           </p>
+
           <div class="tech-ribbon" aria-label="核心技术栈">
             <span>Java 8</span>
             <span>Spring Boot</span>
@@ -1632,13 +1678,27 @@
             <span>Vue 3</span>
             <span>Python</span>
             <span>Selenium</span>
+            <span>Pandas</span>
           </div>
+
           <div class="hero-actions">
-            <a class="btn primary" href="#ability">查看核心能力</a>
-            <a class="btn" href="#architecture">查看技术架构</a>
+            <a class="btn primary" href="#projects">查看代表项目</a>
+            <a class="btn" href="#demo">查看交互 Demo</a>
           </div>
-          <div class="notice">
-            已交付业务系统项目，公开版本仅保留脱敏后的项目结构、技术架构、核心能力与运行效果。
+
+          <div class="hero-meta">
+            <div class="hero-meta-card">
+              <strong>后端</strong>
+              <span>接口设计、状态流转、统一返回、异常处理、分页查询</span>
+            </div>
+            <div class="hero-meta-card">
+              <strong>数据</strong>
+              <span>表结构设计、初始化脚本、报表输出、Excel 导出、字段清洗</span>
+            </div>
+            <div class="hero-meta-card">
+              <strong>交付</strong>
+              <span>需求对接、联调排错、部署说明、版本支持、维护闭环</span>
+            </div>
           </div>
         </div>
 
@@ -1650,6 +1710,7 @@
               <span>2026 届本科 · 系统开发工程师方向</span>
             </div>
           </div>
+
           <div class="metric-grid">
             <div class="metric">
               <strong>API</strong>
@@ -1661,19 +1722,23 @@
             </div>
             <div class="metric">
               <strong>Pay</strong>
-              <span>微信登录、支付参数、回调处理和提现场景对接</span>
+              <span>微信登录、支付参数、支付回调和提现场景对接</span>
             </div>
             <div class="metric">
               <strong>Auto</strong>
-              <span>Python 自动化采集、清洗、出图、导出和推送</span>
+              <span>自动采集、清洗统计、图片报表、Excel 导出和推送</span>
             </div>
           </div>
+
           <div class="hero-strip">
-            <div>
-              <strong>交付形态</strong><br />
-              <small>简历匹配作品集 + 可复用素材 + 原项目运行入口</small>
+            <div class="hero-strip-card">
+              <strong>项目边界</strong><br />
+              <small>已交付业务系统采用脱敏展示，公开内容聚焦结构、流程、实现方式和交付能力。</small>
             </div>
-            <span>2026</span>
+            <div class="hero-strip-card alt">
+              <strong>交付形态</strong><br />
+              <small>小程序前台、运营后台、后端服务、自动化工具和数据报表。</small>
+            </div>
           </div>
         </aside>
       </div>
@@ -1688,7 +1753,7 @@
               <h2>个人概览</h2>
             </div>
             <p class="section-note">
-              面向系统开发岗位，聚焦后端业务系统、管理后台、数据库设计、第三方集成和自动化工具开发。
+              作品集围绕系统开发岗位重组，重点展示后端系统、管理后台、数据库设计、第三方集成和自动化工具开发。
             </p>
           </div>
 
@@ -1696,8 +1761,8 @@
             <div class="overview-card reveal">
               <h3>系统开发方向</h3>
               <p>
-                具备 Java 后端、后台业务系统、Python 自动化工具和前后端联调经验。项目覆盖需求拆解、
-                接口设计、表结构设计、支付回调、数据报表、部署脚本和交付维护。
+                具备 Java 后端、后台业务系统、Python 自动化工具和前后端联调经验。项目覆盖需求拆解、接口设计、
+                表结构设计、支付回调、数据报表、部署脚本和交付维护。
               </p>
               <div class="overview-list">
                 <div class="overview-item">
@@ -1710,7 +1775,7 @@
                 </div>
                 <div class="overview-item">
                   <strong>优势</strong>
-                  <span>能把业务需求拆成接口、数据表、后台页面和联调问题清单</span>
+                  <span>能把业务需求拆成接口、数据表、后台页面、状态规则和联调问题清单</span>
                 </div>
               </div>
             </div>
@@ -1728,7 +1793,7 @@
                 </div>
                 <div class="timeline-item">
                   <strong>Python 自动化工具</strong>
-                  <span>完成平台数据采集、清洗统计、图表生成、Excel 导出和内部群机器人推送。</span>
+                  <span>完成平台数据采集、清洗统计、图表生成、Excel 导出和内部机器人推送。</span>
                 </div>
               </div>
               <div class="skill-cloud">
@@ -1739,7 +1804,7 @@
                 <span>Vue 3</span>
                 <span>Python</span>
                 <span>Selenium</span>
-                <span>Pandas</span>
+                <span>OpenPyXL</span>
               </div>
             </div>
           </div>
@@ -1760,20 +1825,24 @@
 
           <div class="capability-grid">
             <div class="capability reveal">
+              <img src="assets/miniapp/icons/surf.png" alt="" />
               <h3>后端业务开发</h3>
               <p>Spring Boot、Spring MVC、MyBatis、Maven、RESTful API、接口鉴权、统一异常处理。</p>
             </div>
             <div class="capability reveal delay-1">
+              <img src="assets/miniapp/icons/jetski.png" alt="" />
               <h3>数据库与性能</h3>
               <p>MySQL 表设计、SQL 编写、分页查询、索引优化、事务管理，并在实习中参与 Redis 缓存优化。</p>
             </div>
             <div class="capability reveal delay-2">
+              <img src="assets/miniapp/icons/banana.png" alt="" />
               <h3>前后端集成</h3>
-              <p>Vue 3 管理后台、微信小程序、微信登录、微信支付、支付回调、文件上传与 Excel 导入导出。</p>
+              <p>Vue 3 管理后台、微信小程序、微信登录、微信支付、支付回调、文件上传与导入导出。</p>
             </div>
             <div class="capability reveal delay-2">
+              <img src="assets/miniapp/icons/surf.png" alt="" />
               <h3>交付协作</h3>
-              <p>业务方需求对接、功能拆解、接口文档、schema/data 初始化脚本、部署说明、问题记录与版本支持。</p>
+              <p>业务需求拆解、接口文档、初始化脚本、部署说明、问题记录和版本支持。</p>
             </div>
           </div>
         </div>
@@ -1784,19 +1853,19 @@
           <div class="section-head">
             <div>
               <p class="section-kicker">Core Skills</p>
-              <h2>核心能力与项目产物</h2>
+              <h2>核心能力</h2>
             </div>
             <p class="section-note">
-              能力点与项目产物一一对应，突出工程落地与模块实现。
+              以“需求进入系统后如何落地”为主线，展示接口、数据、流程和工具链的工程实现。
             </p>
           </div>
 
           <div class="ability-showcase">
-            <div class="ability-lead reveal">
-              <h3>能把业务需求落到接口、数据表和后台流程</h3>
+            <div class="ability-column reveal">
+              <h3>从需求拆解到上线支持</h3>
               <p>
-                系统开发岗位核心能力：后端接口设计、业务状态流转、数据库建模、第三方集成、
-                前后端联调、自动化工具开发和交付文档沉淀。
+                业务需求进入后，我会先划分业务对象、状态字段和接口边界，再把流程落到 Controller / Service / Mapper /
+                后台页面和数据输出上。页面展示的是这个过程中的核心产物。
               </p>
               <div class="ability-tags">
                 <span>接口设计</span>
@@ -1805,28 +1874,105 @@
                 <span>联调排错</span>
                 <span>交付维护</span>
               </div>
+
+              <div class="journey-grid">
+                <div class="journey-card">
+                  <strong>前端入口</strong>
+                  <p>小程序承接活动浏览、预约下单、订单查询、佣金中心和个人中心。</p>
+                </div>
+                <div class="journey-card">
+                  <strong>后台入口</strong>
+                  <p>运营后台负责内容配置、履约处理、用户增长和系统配置维护。</p>
+                </div>
+                <div class="journey-card">
+                  <strong>后端入口</strong>
+                  <p>接口层统一接收请求，业务层完成状态判断、规则校验和事务处理。</p>
+                </div>
+                <div class="journey-card">
+                  <strong>数据入口</strong>
+                  <p>自动化工具从采集、清洗、统计到图表导出形成稳定的输出链路。</p>
+                </div>
+              </div>
             </div>
 
             <div class="ability-grid">
               <div class="ability-card reveal">
                 <strong>后端接口能力</strong>
                 <p>使用 Spring Boot + MyBatis 实现活动、订单、佣金、提现、上传等模块接口。</p>
-                <small>对应产物：28 Controller / 22 Service</small>
+                <small>28 Controller / 22 Service</small>
               </div>
               <div class="ability-card reveal delay-1">
                 <strong>数据库设计能力</strong>
-                <p>围绕用户、活动、订单、佣金、提现、悬赏等业务对象设计表结构和初始化脚本。</p>
-                <small>对应产物：schema.sql / data.sql</small>
+                <p>围绕用户、活动、订单、佣金、提现、悬赏等对象设计表结构和初始化脚本。</p>
+                <small>schema.sql / data.sql</small>
               </div>
               <div class="ability-card reveal delay-2">
                 <strong>集成对接能力</strong>
                 <p>覆盖微信登录、支付参数、支付回调、提现回调、二维码生成、文件上传等场景。</p>
-                <small>对应产物：支付与回调服务</small>
+                <small>支付与回调服务</small>
               </div>
               <div class="ability-card reveal delay-2">
                 <strong>自动化与数据能力</strong>
                 <p>使用 Selenium、Pandas、Matplotlib、OpenPyXL、Requests 完成采集、分析、导出和推送。</p>
-                <small>对应产物：脱敏报表截图</small>
+                <small>图片报表 / Excel 导出 / 群通知</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="shell">
+          <div class="story-grid">
+            <div class="story-card reveal">
+              <h3>完整交付主线</h3>
+              <p class="hero-lead">
+                这套作品不是分散的功能截图，而是围绕一个业务系统和一个自动化工具，把开发、联调和交付过程串成完整主线。
+              </p>
+              <div class="story-flow">
+                <div class="story-step">
+                  <b>1</b>
+                  <div>
+                    <strong>业务拆解</strong>
+                    <span>梳理活动、订单、佣金、退款、提现、上传等业务对象与状态规则。</span>
+                  </div>
+                </div>
+                <div class="story-step">
+                  <b>2</b>
+                  <div>
+                    <strong>系统落地</strong>
+                    <span>按前台、小程序、后台、后端接口和数据层分工实现功能，并完成联调。</span>
+                  </div>
+                </div>
+                <div class="story-step">
+                  <b>3</b>
+                  <div>
+                    <strong>数据闭环</strong>
+                    <span>将运营数据与外部平台数据汇总清洗，沉淀成日报图和表格导出能力。</span>
+                  </div>
+                </div>
+                <div class="story-step">
+                  <b>4</b>
+                  <div>
+                    <strong>交付维护</strong>
+                    <span>保留初始化脚本、部署链路、问题记录和维护入口，支撑后续迭代和运营使用。</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="story-side">
+              <div class="story-metric reveal delay-1">
+                <strong>151</strong>
+                <span>Java 文件，覆盖后端接口、业务服务、Mapper、配置和管理模块。</span>
+              </div>
+              <div class="story-metric reveal delay-2">
+                <strong>2</strong>
+                <span>主要作品主线：业务系统交付 + 自动化数据工具，覆盖岗位核心能力。</span>
+              </div>
+              <div class="story-metric reveal delay-2">
+                <strong>4</strong>
+                <span>展示维度：结构、界面、交互、源码片段，构成完整作品集而不是截图集合。</span>
               </div>
             </div>
           </div>
@@ -1841,7 +1987,7 @@
               <h2>代表项目</h2>
             </div>
             <p class="section-note">
-              覆盖业务系统开发与自动化工具开发，呈现后端、数据、集成和交付能力。
+              第一类项目体现系统开发与后台交付能力，第二类项目体现自动化采集与数据处理能力。
             </p>
           </div>
 
@@ -1850,9 +1996,10 @@
               <div class="eyebrow"><span class="dot"></span>Java / Spring Boot / Vue 3</div>
               <h3>某活动推广与后台运营系统</h3>
               <p>
-                面向活动推广和后台运营场景，覆盖活动、用户、订单、佣金、分类、轮播图、俱乐部、
-                福利任务等模块，并基于 Spring Boot、MyBatis、MySQL 和 Vue 3 完成系统开发。
+                面向活动推广和后台运营场景，覆盖活动、用户、订单、佣金、分类、轮播图、俱乐部、福利任务等模块，
+                并基于 Spring Boot、MyBatis、MySQL 和 Vue 3 完成系统开发。
               </p>
+
               <div class="tags">
                 <span class="tag">Spring Boot 2.7</span>
                 <span class="tag">Java 8</span>
@@ -1861,23 +2008,29 @@
                 <span class="tag">Vue 3</span>
                 <span class="tag">微信支付</span>
               </div>
+
               <ul class="feature">
-                <li>后端包含 28 个 controller、22 个 service，覆盖支付、退款、邀请、佣金、上传清理和后台账号。</li>
-                <li>管理端按运营内容、交易履约、用户增长、系统设置分组，支持导入导出、筛选、密度切换和缺图检查。</li>
-                <li>整理 schema.sql、data.sql 初始化脚本和部署说明，支持本地联调、发布和后续维护。</li>
+                <li>后端覆盖支付、退款、邀请、佣金、提现、上传清理和后台账号等模块。</li>
+                <li>管理端按运营内容、交易履约、用户增长、系统设置分组，支持筛选、导入导出和缺图检查。</li>
+                <li>整理初始化脚本、部署说明和维护链路，支撑联调、发布和后续迭代。</li>
               </ul>
-              <div class="evidence-strip">
-                <div class="evidence">
+
+              <div class="project-facts">
+                <div class="project-fact">
                   <strong>28</strong>
                   <span>Controller</span>
                 </div>
-                <div class="evidence">
+                <div class="project-fact">
                   <strong>22</strong>
                   <span>Service</span>
                 </div>
-                <div class="evidence">
+                <div class="project-fact">
                   <strong>151</strong>
                   <span>Java 文件</span>
+                </div>
+                <div class="project-fact">
+                  <strong>Vue</strong>
+                  <span>管理后台</span>
                 </div>
               </div>
 
@@ -1908,7 +2061,7 @@
                       <span>活动预订 · 订单履约 · 邀请返佣</span>
                     </div>
                     <div class="phone-body">
-                      <div class="search">搜索活动/项目</div>
+                      <div class="search">搜索活动 / 项目 / 俱乐部</div>
                       <div class="mini-banner">
                         <img src="assets/miniapp/activities/activity-1.png" alt="海上活动图" />
                       </div>
@@ -1936,6 +2089,16 @@
                     </div>
                   </div>
                 </div>
+
+                <div class="mini-journal">
+                  <h4>项目交付看点</h4>
+                  <p>前台、小程序、后台和后端接口围绕同一套业务对象协同工作，重点在于状态一致性和后台可维护性。</p>
+                  <ul>
+                    <li>活动域：分类、时段、图集、库存、上下架、俱乐部绑定。</li>
+                    <li>交易域：下单、支付参数、支付回调、核销、退款和订单导出。</li>
+                    <li>增长域：邀请二维码、佣金账户、提现申请、福利任务、悬赏提交。</li>
+                  </ul>
+                </div>
               </div>
             </article>
 
@@ -1943,34 +2106,41 @@
               <div class="eyebrow"><span class="dot"></span>Python / Selenium / 数据处理</div>
               <h3>自动化采集与数据分析工具</h3>
               <p>
-                使用 Selenium 完成自动登录、页面跳转、元素定位和数据抓取，
-                并通过 Pandas、Matplotlib、OpenPyXL 与 Requests 完成清洗、统计、图表、Excel 导出和内部群机器人推送。
+                使用 Selenium 完成自动登录、页面跳转、元素定位和数据抓取，并通过 Pandas、Matplotlib、
+                OpenPyXL 与 Requests 完成清洗、统计、图表、Excel 导出和内部消息推送。
               </p>
+
               <div class="tags">
                 <span class="tag">Selenium</span>
                 <span class="tag">Pandas</span>
                 <span class="tag">NumPy</span>
-                <span class="tag">Matplotlib/PIL</span>
+                <span class="tag">Matplotlib / PIL</span>
                 <span class="tag">OpenPyXL</span>
                 <span class="tag">Requests</span>
               </div>
+
               <ul class="feature">
-                <li>账号 ID 与名称独立维护，支持 list/add/remove/rename，降低后续维护成本。</li>
-                <li>针对登录失败、字段缺失、元素过期、点击失败、请求失败等场景做基础异常处理。</li>
+                <li>账号 ID 与名称独立维护，支持 list / add / remove / rename，降低日常维护成本。</li>
+                <li>对登录失败、字段缺失、元素过期、点击失败和请求失败等场景做基础异常处理。</li>
                 <li>输出数据概览图片、推广报表图片和 Excel 文件，并支持内部群机器人推送。</li>
               </ul>
-              <div class="evidence-strip">
-                <div class="evidence">
+
+              <div class="project-facts">
+                <div class="project-fact">
                   <strong>32</strong>
                   <span>默认账号映射</span>
                 </div>
-                <div class="evidence">
+                <div class="project-fact">
                   <strong>PNG</strong>
                   <span>日报图片</span>
                 </div>
-                <div class="evidence">
+                <div class="project-fact">
                   <strong>XLSX</strong>
                   <span>数据导出</span>
+                </div>
+                <div class="project-fact">
+                  <strong>Bot</strong>
+                  <span>消息推送</span>
                 </div>
               </div>
 
@@ -1989,9 +2159,10 @@
                 </div>
                 <div class="project-tech-item">
                   <strong>推送</strong>
-                  <span>Requests 对接内部群机器人，减少手工同步成本。</span>
+                  <span>Requests 对接内部机器人，减少手工同步成本。</span>
                 </div>
               </div>
+
               <div class="report-stack">
                 <div class="report-frame">
                   <img src="assets/python/data-overview.png" alt="数据概览报表截图" />
@@ -2010,7 +2181,7 @@
           <div class="section-head">
             <div>
               <p class="section-kicker">Architecture</p>
-              <h2>技术架构与工程拆解</h2>
+              <h2>技术架构</h2>
             </div>
             <p class="section-note">
               从业务入口、管理后台、接口层、服务层到数据层，呈现系统设计与模块边界。
@@ -2082,68 +2253,37 @@
             </div>
             <div class="stack-card reveal delay-2">
               <h3>工具栈</h3>
-              <p>Python、Selenium、Pandas、Matplotlib、OpenPyXL、Requests、内部群机器人推送。</p>
+              <p>Python、Selenium、Pandas、Matplotlib、OpenPyXL、Requests、内部消息推送。</p>
             </div>
           </div>
 
           <div class="tech-proof">
             <div class="proof-card reveal">
               <strong>可维护性</strong>
-              <p>按 controller/service/mapper/model 分层，业务模块边界清晰，方便新增活动、订单、佣金等需求。</p>
+              <p>按 controller / service / mapper / model 分层，业务模块边界清晰，方便后续新增和维护。</p>
             </div>
             <div class="proof-card reveal delay-1">
               <strong>业务一致性</strong>
-              <p>订单、退款、佣金和提现围绕状态流转设计，明确管理端退款与用户端退款的佣金处理差异。</p>
+              <p>订单、退款、佣金和提现围绕状态流转设计，明确后台与用户端的规则差异。</p>
             </div>
             <div class="proof-card reveal delay-2">
               <strong>交付闭环</strong>
-              <p>包含 schema.sql、data.sql、部署脚本、上传清理脚本和运行入口，支撑联调、发布与维护。</p>
+              <p>包含初始化脚本、部署链路、上传清理脚本和运行入口，支撑联调、发布与维护。</p>
+            </div>
+            <div class="proof-card reveal delay-2">
+              <strong>数据输出</strong>
+              <p>自动化工具从抓取、清洗、图表到通知形成完整输出链路，适合日常运营复盘。</p>
             </div>
           </div>
 
-          <div class="code-sample">
+          <div class="code-sample reveal">
             <pre><code>Controller -> Service -> Mapper -> MySQL
 
-活动管理: ActivityController / ActivityService / ActivityMapper
-订单履约: OrderController / OrderService / OrderMapper
-佣金结算: CommissionController / CommissionService / CommissionRecordMapper
-支付集成: PayController / WechatPayService / WechatTransferService
-上传清理: AdminUploadController / UploadCleanupService / StorageService</code></pre>
-          </div>
-        </div>
-      </section>
-
-      <section id="capabilities">
-        <div class="shell">
-          <div class="section-head">
-            <div>
-              <p class="section-kicker">Capabilities</p>
-              <h2>工程能力</h2>
-            </div>
-            <p class="section-note">简历技能与具体项目产物对应，覆盖接口、状态流转、后台工程化与自动化工具链。</p>
-          </div>
-
-          <div class="capability-grid">
-            <div class="capability reveal">
-              <img src="assets/miniapp/icons/surf.png" alt="" />
-              <h3>接口与业务状态</h3>
-              <p>围绕活动、订单、佣金、悬赏、提现、上传等模块建立 RESTful API，并通过 Service 层承接业务状态流转。</p>
-            </div>
-            <div class="capability reveal delay-1">
-              <img src="assets/miniapp/icons/jetski.png" alt="" />
-              <h3>交易一致性</h3>
-              <p>订单支付、核销、退款、佣金回收和提现围绕状态字段处理，覆盖事务边界和异常场景。</p>
-            </div>
-            <div class="capability reveal delay-2">
-              <img src="assets/miniapp/icons/banana.png" alt="" />
-              <h3>后台工程化</h3>
-              <p>Vue 管理端支持模块分组、URL 深链、筛选持久化、导入导出、缺图检查、密度切换和高频操作入口。</p>
-            </div>
-            <div class="capability reveal delay-2">
-              <img src="assets/miniapp/icons/surf.png" alt="" />
-              <h3>自动化工具链</h3>
-              <p>Selenium 采集、Pandas 清洗、Matplotlib 出图、OpenPyXL 导出、Requests 推送，形成端到端工具链。</p>
-            </div>
+ActivityController / ActivityService / ActivityMapper
+OrderController    / OrderService    / OrderMapper
+CommissionController / CommissionService / CommissionRecordMapper
+PayController      / WechatPayService / WechatTransferService
+Python Crawler     / Pandas Pipeline / Chart Export / Robot Notify</code></pre>
           </div>
         </div>
       </section>
@@ -2153,13 +2293,15 @@
           <div class="section-head">
             <div>
               <p class="section-kicker">Demo</p>
-              <h2>交互式业务缩略 demo</h2>
+              <h2>交互 Demo</h2>
             </div>
-            <p class="section-note">静态业务模拟，展示后台运营、订单履约、用户增长和数据复盘主流程。</p>
+            <p class="section-note">
+              用静态交互模拟后台运营界面，展示活动管理、订单履约、用户增长和系统配置四类主要场景。
+            </p>
           </div>
 
           <div class="demo-grid">
-            <div class="panel reveal">
+            <div class="panel demo-shell reveal">
               <div class="panel-head">
                 <p class="panel-title">后台运营控制台</p>
                 <div class="lights"><span></span><span></span><span></span></div>
@@ -2176,41 +2318,56 @@
               </div>
             </div>
 
-            <div class="panel reveal delay-1">
-              <div class="panel-head">
-                <p class="panel-title">业务流程</p>
-                <div class="lights"><span></span><span></span><span></span></div>
-              </div>
-              <div class="panel-body">
+            <div class="pipeline-grid">
+              <div class="pipeline-copy reveal delay-1">
+                <h3>业务流程</h3>
+                <p>
+                  系统前台、后台、后端接口和数据工具并不是分开的四段工作，而是沿着一条业务链路依次衔接。
+                </p>
                 <div class="pipeline">
                   <div class="pipe-step">
                     <div class="pipe-no">1</div>
                     <div>
-                      <h3>数据源接入</h3>
-                      <p>外部平台账号、活动后台数据、用户下单与支付数据进入系统。</p>
+                      <h3>内容与活动配置</h3>
+                      <p>运营在后台维护分类、活动、时段、价格、轮播图和图集素材。</p>
                     </div>
                   </div>
                   <div class="pipe-step">
                     <div class="pipe-no">2</div>
                     <div>
-                      <h3>运营配置</h3>
-                      <p>后台维护分类、活动、时段、轮播图、悬赏任务、佣金规则和上传素材。</p>
+                      <h3>用户下单与履约</h3>
+                      <p>小程序承接浏览、下单、支付、退款、核销和订单详情。</p>
                     </div>
                   </div>
                   <div class="pipe-step">
                     <div class="pipe-no">3</div>
                     <div>
-                      <h3>用户转化</h3>
-                      <p>小程序完成浏览、筛选、预约、支付、核销、退款和个人中心服务。</p>
+                      <h3>增长与结算</h3>
+                      <p>邀请关系、佣金记录、提现申请和悬赏任务围绕状态流转落在后端服务中。</p>
                     </div>
                   </div>
                   <div class="pipe-step">
                     <div class="pipe-no">4</div>
                     <div>
-                      <h3>增长复盘</h3>
-                      <p>佣金、邀请、悬赏和经营报表形成每日复盘材料，并可推送到内部群机器人。</p>
+                      <h3>数据复盘</h3>
+                      <p>自动化工具汇总运营数据，输出日报图片、Excel 文件和内部通知。</p>
                     </div>
                   </div>
+                </div>
+              </div>
+
+              <div class="pipeline-copy reveal delay-2">
+                <h3>工程能力</h3>
+                <p>
+                  Demo 展示的是界面，但真正要解决的是规则和维护成本：状态一致性、后台可操作性、数据可追踪性。
+                </p>
+                <div class="stack-tags">
+                  <span>状态管理</span>
+                  <span>后台分组</span>
+                  <span>运营筛选</span>
+                  <span>数据导出</span>
+                  <span>异常处理</span>
+                  <span>维护入口</span>
                 </div>
               </div>
             </div>
@@ -2225,13 +2382,44 @@
               <p class="section-kicker">Source Samples</p>
               <h2>脱敏源码片段</h2>
             </div>
-            <p class="section-note">保留工程结构与实现思路，字段、路径和配置均已替换为通用示例。</p>
+            <p class="section-note">
+              保留工程结构与实现思路，字段、路径和配置均已替换为通用示例。
+            </p>
           </div>
 
-          <div class="code-grid">
-            <div class="code-card">
-              <div class="code-title">Java Controller：统一响应与参数校验</div>
-              <pre><code>@RestController
+          <div class="source-grid">
+            <div class="source-copy reveal">
+              <div>
+                <strong>可展示的工程实现</strong>
+                <p>
+                  这里选取的是最能体现系统开发能力的几类代码：接口层、状态流转、自动化处理流程和表结构设计。
+                </p>
+              </div>
+
+              <div class="source-switch">
+                <button class="active" data-source="controller">
+                  <strong>Java Controller</strong>
+                  <small>统一响应、参数校验、接口分层</small>
+                </button>
+                <button data-source="service">
+                  <strong>Java Service</strong>
+                  <small>订单支付后的状态流转与事务处理</small>
+                </button>
+                <button data-source="python">
+                  <strong>Python Pipeline</strong>
+                  <small>采集、清洗、导出和推送链路</small>
+                </button>
+                <button data-source="sql">
+                  <strong>SQL Schema</strong>
+                  <small>业务表结构和索引设计示例</small>
+                </button>
+              </div>
+            </div>
+
+            <div class="code-grid reveal delay-1">
+              <div class="code-card" data-code="controller">
+                <div class="code-title">Java Controller：统一响应与参数校验</div>
+                <pre><code>@RestController
 @RequestMapping("/api/orders")
 public class OrderController {
     private final OrderService orderService;
@@ -2247,11 +2435,11 @@ public class OrderController {
         return ApiResponse.ok(orderService.getOrderDetail(id));
     }
 }</code></pre>
-            </div>
+              </div>
 
-            <div class="code-card">
-              <div class="code-title">Java Service：订单状态流转</div>
-              <pre><code>@Service
+              <div class="code-card" data-code="service" hidden>
+                <div class="code-title">Java Service：订单状态流转</div>
+                <pre><code>@Service
 public class OrderService {
     @Transactional
     public OrderResponse markPaid(Long orderId, PayNotify notify) {
@@ -2266,11 +2454,11 @@ public class OrderService {
         return OrderResponse.from(order);
     }
 }</code></pre>
-            </div>
+              </div>
 
-            <div class="code-card">
-              <div class="code-title">Python 自动化：采集、清洗、输出</div>
-              <pre><code>def collect_and_export(accounts):
+              <div class="code-card" data-code="python" hidden>
+                <div class="code-title">Python 自动化：采集、清洗、输出</div>
+                <pre><code>def collect_and_export(accounts):
     rows = []
     for account in accounts:
         try:
@@ -2283,11 +2471,11 @@ public class OrderService {
     export_excel(df, "masked_report.xlsx")
     export_chart(df, "masked_report.png")
     notify_group_robot("report generated")</code></pre>
-            </div>
+              </div>
 
-            <div class="code-card">
-              <div class="code-title">SQL：脱敏后的业务表结构示例</div>
-              <pre><code>create table orders (
+              <div class="code-card" data-code="sql" hidden>
+                <div class="code-title">SQL：脱敏后的业务表结构示例</div>
+                <pre><code>create table orders (
     id bigint primary key auto_increment,
     order_no varchar(64) not null unique,
     user_id bigint not null,
@@ -2298,6 +2486,7 @@ public class OrderService {
     created_at datetime not null,
     index idx_user_status (user_id, status)
 );</code></pre>
+              </div>
             </div>
           </div>
         </div>
@@ -2309,7 +2498,7 @@ public class OrderService {
         <div class="footer-panel">
           <div>
             <strong>王月 · 系统开发工程师作品集</strong>
-            <p>已交付项目采用脱敏展示，聚焦系统设计、接口开发、数据库建模、集成对接和自动化工具能力。</p>
+            <p>聚焦系统设计、接口开发、数据库建模、集成对接、自动化工具与交付维护能力。</p>
           </div>
           <a class="footer-link" href="#overview">返回顶部</a>
         </div>
@@ -2320,55 +2509,168 @@ public class OrderService {
       const adminData = {
         activities: {
           title: "活动管理",
+          summary: "面向运营配置，负责活动、图集、库存、俱乐部关联和内容素材维护。",
+          badge: "内容配置",
+          metrics: [
+            ["36", "活动条目"],
+            ["12", "当前上架"],
+            ["8", "时段模板"],
+            ["4", "待补素材"]
+          ],
           rows: [
-            ["海上活动上架", "维护标题、价格、库存、时段、图集和状态", "运营"],
-            ["俱乐部关联", "活动可绑定俱乐部、分类、地点和详情说明", "内容"],
-            ["批量导入", "面向非技术人员的 Excel 数据导入导出", "效率"]
+            ["海上活动上架", "维护标题、价格、库存、时段、图集和状态", "已发布", "success"],
+            ["俱乐部关联", "活动绑定俱乐部、分类、地点和详情说明", "进行中", ""],
+            ["图片巡检", "批量检查缺图和无效上传文件", "待处理", "warn"]
+          ],
+          bars: [
+            ["图集完整度", 88],
+            ["上架准备度", 74],
+            ["库存配置率", 92]
+          ],
+          timeline: [
+            ["09:30", "更新轮播图与分类排序"],
+            ["11:10", "补充活动图集和时段价格"],
+            ["15:00", "执行缺图检查并清理失效素材"]
           ]
         },
         orders: {
           title: "订单履约",
+          summary: "面向交易履约，覆盖订单筛选、支付状态、核销、退款与订单导出。",
+          badge: "交易履约",
+          metrics: [
+            ["126", "订单总数"],
+            ["18", "待核销"],
+            ["6", "退款中"],
+            ["94%", "支付成功率"]
+          ],
           rows: [
-            ["订单筛选", "按状态、手机号、时间范围查询订单", "检索"],
-            ["核销与退款", "管理端退款不回收佣金，用户端退款回收佣金", "规则"],
-            ["销售看板", "总销售额、已核销、未核销等指标汇总", "统计"]
+            ["订单筛选", "按状态、手机号、时间范围查询订单", "高频", ""],
+            ["核销与退款", "后台退款与用户退款区分佣金回收规则", "关键规则", "success"],
+            ["订单导出", "按渠道和日期导出对账数据", "可用", ""]
+          ],
+          bars: [
+            ["已支付", 94],
+            ["已核销", 68],
+            ["退款完成", 82]
+          ],
+          timeline: [
+            ["10:20", "处理支付回调并更新订单状态"],
+            ["13:00", "运营核销当日预约订单"],
+            ["17:40", "导出结算数据用于复盘"]
           ]
         },
         commission: {
           title: "用户增长",
+          summary: "围绕邀请关系、佣金账户、提现申请和悬赏任务设计增长与结算流程。",
+          badge: "增长与结算",
+          metrics: [
+            ["52", "邀请绑定"],
+            ["31", "待结算"],
+            ["8", "提现申请"],
+            ["15", "悬赏任务"]
+          ],
           rows: [
-            ["邀请二维码", "扫码绑定邀请关系，形成推广链路", "增长"],
-            ["佣金账户", "可提现、待结算、累计已提和明细记录", "结算"],
-            ["悬赏任务", "任务领取、内容提交、审核与奖励", "转化"]
+            ["邀请二维码", "扫码绑定邀请关系，形成推广链路", "增长", "success"],
+            ["佣金账户", "可提现、待结算、累计已提和明细记录", "结算", ""],
+            ["悬赏任务", "任务领取、内容提交、审核和奖励发放", "转化", ""]
+          ],
+          bars: [
+            ["邀请转化率", 62],
+            ["佣金结算率", 74],
+            ["提现处理率", 81]
+          ],
+          timeline: [
+            ["09:50", "生成邀请二维码并绑定关系"],
+            ["14:30", "审核提现申请并更新状态"],
+            ["18:00", "统计悬赏任务完成率"]
           ]
         },
         system: {
           title: "系统设置",
+          summary: "聚焦后台账号、文件上传、运行环境和发布维护链路。",
+          badge: "配置维护",
+          metrics: [
+            ["9", "后台角色"],
+            ["3", "环境配置"],
+            ["2", "清理脚本"],
+            ["100%", "HTTPS"]
+          ],
           rows: [
-            ["后台账号", "管理端账号密码维护", "安全"],
-            ["上传清理", "检查缺图、清理无效上传文件", "运维"],
-            ["部署配置", "Nginx/HTTPS/JAR/systemd 发布链路", "发布"]
+            ["后台账号", "管理端账号密码维护与权限边界", "安全", "success"],
+            ["上传清理", "检查缺图、清理无效上传文件", "维护", ""],
+            ["部署配置", "Nginx / HTTPS / JAR / systemd 发布链路", "发布", ""]
+          ],
+          bars: [
+            ["配置完整度", 89],
+            ["环境稳定度", 85],
+            ["维护自动化", 68]
+          ],
+          timeline: [
+            ["08:40", "核对环境变量与证书配置"],
+            ["12:00", "执行上传清理脚本"],
+            ["19:10", "回归检查后台登录与文件访问"]
           ]
         }
       };
 
+      const sourceButtons = document.querySelectorAll(".source-switch button");
+      const codeCards = document.querySelectorAll(".code-card");
       const panel = document.getElementById("adminPanel");
       const buttons = document.querySelectorAll(".admin-side button");
 
       function renderAdmin(tab) {
         const item = adminData[tab];
         panel.innerHTML = `
-          <h3>${item.title}</h3>
-          <div class="table">
-            ${item.rows.map((row) => `
-              <div class="row">
-                <div>
-                  <strong>${row[0]}</strong>
-                  <small>${row[1]}</small>
-                </div>
-                <span class="status">${row[2]}</span>
+          <div class="dashboard-head">
+            <div>
+              <h3>${item.title}</h3>
+              <p>${item.summary}</p>
+            </div>
+            <span class="dashboard-badge">${item.badge}</span>
+          </div>
+          <div class="dashboard-metrics">
+            ${item.metrics.map(([value, label]) => `
+              <div class="dashboard-metric">
+                <strong>${value}</strong>
+                <span>${label}</span>
               </div>
             `).join("")}
+          </div>
+          <div class="dashboard-grid">
+            <div class="dashboard-card">
+              <h4>模块概览</h4>
+              <div class="table">
+                ${item.rows.map((row) => `
+                  <div class="row">
+                    <div>
+                      <strong>${row[0]}</strong>
+                      <small>${row[1]}</small>
+                    </div>
+                    <span class="status ${row[3]}">${row[2]}</span>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+            <div class="dashboard-card">
+              <h4>运营观察</h4>
+              <div class="chart">
+                ${item.bars.map(([name, percent]) => `
+                  <div class="bar-line">
+                    <span>${name}</span>
+                    <div class="bar-track"><div class="bar" style="width:${percent}%"></div></div>
+                    <small>${percent}%</small>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+          </div>
+          <div class="dashboard-card" style="margin-top:14px;">
+            <h4>当日流程</h4>
+            <div class="dashboard-timeline">
+              ${item.timeline.map(([time, text]) => `
+                <li><b>${time}</b><span>${text}</span></li>
+              `).join("")}
+            </div>
           </div>
         `;
       }
@@ -2381,6 +2683,26 @@ public class OrderService {
         });
       });
 
+      sourceButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          sourceButtons.forEach((target) => target.classList.remove("active"));
+          button.classList.add("active");
+          const key = button.dataset.source;
+          codeCards.forEach((card) => {
+            card.hidden = card.dataset.code !== key;
+          });
+        });
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+          }
+        });
+      }, { threshold: 0.15 });
+
+      document.querySelectorAll(".reveal").forEach((node) => observer.observe(node));
       renderAdmin("activities");
     </script>
   </body>
