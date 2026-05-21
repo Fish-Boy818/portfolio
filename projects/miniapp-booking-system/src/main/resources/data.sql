@@ -10,13 +10,13 @@ values
   (8, '浪屿水上营地', '宁波 · 象山', '宁波市象山松兰山', '13312340008', '桨板,冲浪,露营', '/assets/images/clubs/club-8.png', '', '/assets/images/clubs/club-8.png,/assets/images/clubs/club-6.png,/assets/images/clubs/club-9.png'),
   (9, '深蓝潜行中心', '海南 · 万宁', '海南省万宁市日月湾', '13312340009', '潜水,冲浪,摄影', '/assets/images/clubs/club-9.png', '', '/assets/images/clubs/club-9.png,/assets/images/clubs/club-4.png,/assets/images/clubs/club-10.png'),
   (10, '阳光海上运动', '广州 · 南沙', '广州市南沙湾码头', '13312340010', '摩托艇,香蕉船,日落', '/assets/images/clubs/club-10.png', '', '/assets/images/clubs/club-10.png,/assets/images/clubs/club-5.png,/assets/images/clubs/club-1.png'),
-  (11, '子扬摩托艇俱乐部', '三亚后海', '三亚后海', '', '摩托艇,海上项目', '/uploads/4a546d26bf9d4810b47ed0bd6ce13f89.jpg', '', '')
+  (11, '示例海上运动中心', '三亚后海', '三亚后海', '', '摩托艇,海上项目', '/uploads/4a546d26bf9d4810b47ed0bd6ce13f89.jpg', '', '')
 on duplicate key update name = values(name), location = values(location), address = values(address),
   phone = values(phone), tags = values(tags), cover = values(cover), license_image = values(license_image), gallery = values(gallery);
 
 insert into profile_contents (id, notice_title, notice_content, about_us_content, review_mode_enabled, site_activity_limit, tab_home_text, tab_category_text, tab_orders_text, tab_welfare_text, tab_profile_text)
 values
-  (1, '平台公告', '欢迎来到御乾海上俱乐部，最新活动与服务说明请以平台公告为准。', '御乾专注海上运动体验服务，提供多城市俱乐部预约、活动下单与售后保障。', 0, 6, '首页', '分类', '订单', '悬赏', '我的')
+  (1, '平台公告', '欢迎来到示例海上运动平台，最新活动与服务说明请以平台公告为准。', '示例平台专注海上运动体验服务，提供多城市俱乐部预约、活动下单与售后保障。', 0, 6, '首页', '分类', '订单', '悬赏', '我的')
 on duplicate key update notice_title = values(notice_title), notice_content = values(notice_content), about_us_content = values(about_us_content),
   review_mode_enabled = values(review_mode_enabled),
   site_activity_limit = values(site_activity_limit),

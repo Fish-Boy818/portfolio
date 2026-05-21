@@ -198,7 +198,7 @@
           <div class="activity-card__image">${imageTag(cover, title)}</div>
           <div class="activity-card__body">
             <h3>${escapeHtml(title)}</h3>
-            <p class="meta">${escapeHtml(text(item.clubName, "御乾推荐"))} · ${escapeHtml(text(item.clubLocation, "三亚"))}</p>
+            <p class="meta">${escapeHtml(text(item.clubName, "示例推荐"))} · ${escapeHtml(text(item.clubLocation, "三亚"))}</p>
             <div class="price">${price ? `¥${price}` : "到店咨询"}</div>
             <div class="tag-row"><span class="tag">展示中</span><span class="tag">小程序内查看</span></div>
           </div>

@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 public class ProfileContentService {
     private static final long DEFAULT_ID = 1L;
     private static final String DEFAULT_NOTICE_TITLE = "平台公告";
-    private static final String DEFAULT_NOTICE_CONTENT = "欢迎来到御乾海上俱乐部，最新活动与服务说明请以平台公告为准。";
-    private static final String DEFAULT_ABOUT_US_CONTENT = "御乾专注海上运动体验服务，提供多城市俱乐部预约、活动下单与售后保障。";
+    private static final String DEFAULT_NOTICE_CONTENT = "欢迎来到示例海上运动平台，最新活动与服务说明请以平台公告为准。";
+    private static final String DEFAULT_ABOUT_US_CONTENT = "示例平台专注海上运动体验服务，提供多城市俱乐部预约、活动下单与售后保障。";
     private static final String DEFAULT_TAB_HOME_TEXT = "首页";
     private static final String DEFAULT_TAB_CATEGORY_TEXT = "分类";
     private static final String DEFAULT_TAB_ORDERS_TEXT = "订单";

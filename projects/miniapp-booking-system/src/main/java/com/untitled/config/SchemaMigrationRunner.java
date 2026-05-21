@@ -23,7 +23,7 @@ public class SchemaMigrationRunner {
         migrateUsersDepthColumn();
         migrateClubsDouyinUrlColumn();
         migrateClubsLicenseImageColumn();
-        seedZiyangClub();
+        seedSampleClub();
         migrateAdminCredentialsTable();
         migrateProfileContentsTable();
         migrateWelfareSubmissionsTable();
@@ -74,16 +74,16 @@ public class SchemaMigrationRunner {
         }
     }
 
-    private void seedZiyangClub() {
+    private void seedSampleClub() {
         try {
-            Integer count = jdbcTemplate.queryForObject("select count(1) from clubs where name = ?", Integer.class, "子扬摩托艇俱乐部");
+            Integer count = jdbcTemplate.queryForObject("select count(1) from clubs where name = ?", Integer.class, "示例海上运动中心");
             if (count != null && count > 0) {
                 return;
             }
             jdbcTemplate.update(
                     "insert into clubs (name, location, address, phone, open_time, tags, cover, license_image, gallery, created_at, updated_at) " +
                             "values (?, ?, ?, ?, ?, ?, ?, ?, ?, now(), now())",
-                    "子扬摩托艇俱乐部",
+                    "示例海上运动中心",
                     "三亚后海",
                     "三亚后海",
                     "",
@@ -93,9 +93,9 @@ public class SchemaMigrationRunner {
                     "",
                     ""
             );
-            log.info("schema migrated: default club 子扬摩托艇俱乐部 created");
+            log.info("schema migrated: default sample club created");
         } catch (Exception ex) {
-            log.warn("default club 子扬摩托艇俱乐部 skipped: {}", ex.getMessage());
+            log.warn("default sample club skipped: {}", ex.getMessage());
         }
     }
 
@@ -136,8 +136,8 @@ public class SchemaMigrationRunner {
                         "insert into profile_contents (id, notice_title, notice_content, about_us_content, platform_service_phone, review_mode_enabled, site_activity_limit, tab_home_text, tab_category_text, tab_orders_text, tab_welfare_text, tab_profile_text, created_at, updated_at) " +
                                 "values (1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now(), now())",
                         "平台公告",
-                        "欢迎来到御乾海上俱乐部，最新活动与服务说明请以平台公告为准。",
-                        "御乾专注海上运动体验服务，提供多城市俱乐部预约、活动下单与售后保障。",
+                        "欢迎来到示例海上运动平台，最新活动与服务说明请以平台公告为准。",
+                        "示例平台专注海上运动体验服务，提供多城市俱乐部预约、活动下单与售后保障。",
                         "",
                         0,
                         6,

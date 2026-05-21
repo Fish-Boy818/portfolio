@@ -10,7 +10,7 @@ const {
   invalidatePendingInvite
 } = require("../../utils/auth");
 
-const USER_AGREEMENT_TEXT = "欢迎使用御乾小程序。你在使用本服务时，应遵守法律法规及平台规则，不得进行违规或侵权行为。你需对账号下的操作与订单行为负责。";
+const USER_AGREEMENT_TEXT = "欢迎使用示例平台小程序。你在使用本服务时，应遵守法律法规及平台规则，不得进行违规或侵权行为。你需对账号下的操作与订单行为负责。";
 const PRIVACY_POLICY_TEXT = "为完成登录、下单、支付与售后服务，我们会处理必要信息（微信标识、手机号、订单与支付结果）。你可在“我的”页面申请查询、更正或删除相关信息。";
 
 function syncTabBar(page, selected) {
