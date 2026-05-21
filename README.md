@@ -1,6 +1,6 @@
-# 系统开发工程师作品集
+# 个人技术主页
 
-面向 Java 后端与系统开发岗位的项目作品集，重点展示业务建模、接口开发、后台管理、小程序端、自动化工具和模型应用能力。
+用于记录系统开发、Java 后端、小程序、自动化工具和模型应用项目。内容以项目结构、实现思路、运行说明和脱敏源码为主。
 
 在线访问：<https://fish-boy818.github.io/portfolio/>
 
@@ -8,7 +8,7 @@
 
 | 项目 | 说明 |
 | --- | --- |
-| [`index.html`](index.html) | 在线作品集页面，展示能力概览、技术架构、项目 Demo 和脱敏源码片段 |
+| [`index.html`](index.html) | 在线主页，展示项目概览、技术架构、交互 Demo 和脱敏源码片段 |
 | [`projects/account-data-collector/`](projects/account-data-collector/) | 账号管理与数据采集工具 |
 | [`projects/miniapp-booking-system/`](projects/miniapp-booking-system/) | 小程序预约与运营后台系统 |
 | [`projects/pytorch_sentiment_demo/`](projects/pytorch_sentiment_demo/) | PyTorch 中文情感分类 Demo |
@@ -20,9 +20,9 @@
 - Python、Selenium、Pandas、Matplotlib、Requests
 - PyTorch、TextCNN、FastAPI
 
-## 阅读建议
+## 阅读方式
 
-招聘方可先看 `index.html` 的项目概览，再按需进入 `projects/` 查看脱敏后的源码、运行说明和示例配置。
+可以先从 `index.html` 了解整体项目和技术路线，再进入 `projects/` 查看具体源码、运行说明和示例配置。
 
 ## 本地预览
 
