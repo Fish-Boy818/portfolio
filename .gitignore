@@ -3,3 +3,7 @@ Thumbs.db
 *.tmp
 *.log
 _text_review.txt
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/

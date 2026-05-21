@@ -3,7 +3,56 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="王月的系统开发工程师作品集，展示 Java 后端、Spring Boot、MyBatis、MySQL、Vue 3、微信小程序、Python 自动化采集与数据分析项目。"
+    />
+    <meta name="author" content="王月" />
+    <meta name="theme-color" content="#2563eb" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://fish-boy818.github.io/portfolio/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:title" content="王月 | 系统开发工程师作品集" />
+    <meta
+      property="og:description"
+      content="系统开发、Java 后端、技术项目协同方向作品集，覆盖业务系统、管理后台、微信小程序和 Python 自动化数据链路。"
+    />
+    <meta property="og:url" content="https://fish-boy818.github.io/portfolio/" />
+    <meta property="og:image" content="https://fish-boy818.github.io/portfolio/assets/python/data-overview.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="王月 | 系统开发工程师作品集" />
+    <meta
+      name="twitter:description"
+      content="Java 后端、Spring Boot、MySQL、Vue 3、微信小程序与 Python 自动化项目展示。"
+    />
+    <meta name="twitter:image" content="https://fish-boy818.github.io/portfolio/assets/python/data-overview.png" />
     <title>王月 | 系统开发工程师作品集</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfilePage",
+        "name": "王月 | 系统开发工程师作品集",
+        "url": "https://fish-boy818.github.io/portfolio/",
+        "inLanguage": "zh-CN",
+        "about": {
+          "@type": "Person",
+          "name": "王月",
+          "jobTitle": "系统开发工程师 / Java 后端开发方向",
+          "knowsAbout": [
+            "Java",
+            "Spring Boot",
+            "MyBatis",
+            "MySQL",
+            "Vue 3",
+            "微信小程序",
+            "Python",
+            "Selenium",
+            "Pandas"
+          ]
+        }
+      }
+    </script>
     <style>
       :root {
         --ink: #0f172a;
@@ -95,6 +144,27 @@
         border-bottom: 1px solid rgba(37, 99, 235, 0.09);
         background: rgba(248, 251, 255, 0.84);
         backdrop-filter: blur(22px) saturate(1.2);
+      }
+
+      .skip-link {
+        position: fixed;
+        left: 16px;
+        top: 12px;
+        z-index: 100;
+        transform: translateY(-160%);
+        padding: 10px 14px;
+        border-radius: 999px;
+        color: #fff;
+        background: var(--primary-deep);
+        text-decoration: none;
+        box-shadow: var(--shadow-md);
+        transition: transform 0.18s ease;
+      }
+
+      .skip-link:focus {
+        transform: translateY(0);
+        outline: 3px solid rgba(56, 189, 248, 0.42);
+        outline-offset: 3px;
       }
 
       .nav-inner {
@@ -2017,6 +2087,7 @@
     </style>
   </head>
   <body>
+    <a class="skip-link" href="#main">跳到主要内容</a>
     <nav class="nav">
       <div class="shell nav-inner">
         <div class="brand">
@@ -2121,7 +2192,7 @@
       </div>
     </header>
 
-    <main>
+    <main id="main">
       <section id="overview">
         <div class="shell">
           <div class="section-head">
@@ -2208,22 +2279,22 @@
 
           <div class="capability-grid">
             <div class="capability reveal">
-              <img src="assets/miniapp/icons/surf.png" alt="" />
+              <img src="assets/miniapp/icons/surf.png" alt="" loading="lazy" decoding="async" />
               <h3>后端业务开发</h3>
               <p>Spring Boot、Spring MVC、MyBatis、Maven、RESTful API、接口鉴权、统一异常处理。</p>
             </div>
             <div class="capability reveal delay-1">
-              <img src="assets/miniapp/icons/jetski.png" alt="" />
+              <img src="assets/miniapp/icons/jetski.png" alt="" loading="lazy" decoding="async" />
               <h3>数据库与性能</h3>
               <p>MySQL 表设计、SQL 编写、分页查询、索引优化、事务管理，并在实习中参与 Redis 缓存优化。</p>
             </div>
             <div class="capability reveal delay-2">
-              <img src="assets/miniapp/icons/banana.png" alt="" />
+              <img src="assets/miniapp/icons/banana.png" alt="" loading="lazy" decoding="async" />
               <h3>前后端集成</h3>
               <p>Vue 3 管理后台、微信小程序、微信登录、微信支付、支付回调、文件上传与导入导出。</p>
             </div>
             <div class="capability reveal delay-2">
-              <img src="assets/miniapp/icons/surf.png" alt="" />
+              <img src="assets/miniapp/icons/surf.png" alt="" loading="lazy" decoding="async" />
               <h3>技术项目协同</h3>
               <p>需求拆解、任务分解、联调推进、问题跟踪、发布检查和版本支持。</p>
             </div>
@@ -2458,11 +2529,11 @@
                     <div class="phone-body">
                       <div class="search">搜索活动 / 项目 / 俱乐部</div>
                       <div class="mini-banner">
-                        <img src="assets/miniapp/activities/activity-1.png" alt="海上活动图" />
+                        <img src="assets/miniapp/activities/activity-1.png" alt="海上活动图" loading="lazy" decoding="async" />
                       </div>
                       <div class="mini-list">
                         <div class="mini-card">
-                          <img src="assets/miniapp/clubs/club-1.png" alt="俱乐部图" />
+                          <img src="assets/miniapp/clubs/club-1.png" alt="俱乐部图" loading="lazy" decoding="async" />
                           <div>
                             <strong>游艇出海体验</strong>
                             <span>可选时段 · 在线预约 · 到店核销</span>
@@ -2470,7 +2541,7 @@
                           </div>
                         </div>
                         <div class="mini-card">
-                          <img src="assets/miniapp/activities/activity-4.png" alt="活动图" />
+                          <img src="assets/miniapp/activities/activity-4.png" alt="活动图" loading="lazy" decoding="async" />
                           <div>
                             <strong>海钓 / 摩托艇</strong>
                             <span>二级价格 · 佣金邀请 · 订单退款</span>
@@ -2560,10 +2631,10 @@
 
               <div class="report-stack">
                 <div class="report-frame">
-                  <img src="assets/python/data-overview.png" alt="数据概览报表截图" />
+                  <img src="assets/python/data-overview.png" alt="数据概览报表截图" loading="lazy" decoding="async" />
                 </div>
                 <div class="report-frame">
-                  <img src="assets/python/promotion-report.png" alt="推广报表截图" />
+                  <img src="assets/python/promotion-report.png" alt="推广报表截图" loading="lazy" decoding="async" />
                 </div>
               </div>
             </article>
@@ -2787,10 +2858,10 @@ Python Crawler     / Pandas Pipeline / Chart Export / Robot Notify</code></pre>
               <div class="admin-shell">
                 <aside class="admin-side">
                   <strong>运营后台</strong>
-                  <button class="active" data-tab="activities">活动管理</button>
-                  <button data-tab="orders">订单履约</button>
-                  <button data-tab="commission">用户增长</button>
-                  <button data-tab="system">系统设置</button>
+                  <button type="button" class="active" data-tab="activities" aria-pressed="true">活动管理</button>
+                  <button type="button" data-tab="orders" aria-pressed="false">订单履约</button>
+                  <button type="button" data-tab="commission" aria-pressed="false">用户增长</button>
+                  <button type="button" data-tab="system" aria-pressed="false">系统设置</button>
                 </aside>
                 <div class="admin-main" id="adminPanel"></div>
               </div>
@@ -2876,23 +2947,23 @@ Python Crawler     / Pandas Pipeline / Chart Export / Robot Notify</code></pre>
               </div>
 
               <div class="source-switch">
-                <button class="active" data-source="controller">
+                <button type="button" class="active" data-source="controller" aria-pressed="true">
                   <strong>Java Controller</strong>
                   <small>统一响应、参数校验、接口分层</small>
                 </button>
-                <button data-source="service">
+                <button type="button" data-source="service" aria-pressed="false">
                   <strong>Java Service</strong>
                   <small>订单支付后的状态流转与事务处理</small>
                 </button>
-                <button data-source="python">
+                <button type="button" data-source="python" aria-pressed="false">
                   <strong>Python Pipeline</strong>
                   <small>采集、清洗、导出和推送链路</small>
                 </button>
-                <button data-source="sql">
+                <button type="button" data-source="sql" aria-pressed="false">
                   <strong>SQL Schema</strong>
                   <small>业务表结构和索引设计示例</small>
                 </button>
-                <button data-source="pytorch">
+                <button type="button" data-source="pytorch" aria-pressed="false">
                   <strong>PyTorch Demo</strong>
                   <small>字符级编码、TextCNN 推理与模型封装</small>
                 </button>
@@ -3256,16 +3327,24 @@ def predict(text: str, model, checkpoint: dict, device: torch.device) -&gt; dict
 
       buttons.forEach((button) => {
         button.addEventListener("click", () => {
-          buttons.forEach((target) => target.classList.remove("active"));
+          buttons.forEach((target) => {
+            target.classList.remove("active");
+            target.setAttribute("aria-pressed", "false");
+          });
           button.classList.add("active");
+          button.setAttribute("aria-pressed", "true");
           renderAdmin(button.dataset.tab);
         });
       });
 
       sourceButtons.forEach((button) => {
         button.addEventListener("click", () => {
-          sourceButtons.forEach((target) => target.classList.remove("active"));
+          sourceButtons.forEach((target) => {
+            target.classList.remove("active");
+            target.setAttribute("aria-pressed", "false");
+          });
           button.classList.add("active");
+          button.setAttribute("aria-pressed", "true");
           const key = button.dataset.source;
           codeCards.forEach((card) => {
             card.hidden = card.dataset.code !== key;
@@ -3273,15 +3352,21 @@ def predict(text: str, model, checkpoint: dict, device: torch.device) -&gt; dict
         });
       });
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in");
-          }
-        });
-      }, { threshold: 0.15 });
+      const revealNodes = document.querySelectorAll(".reveal");
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
 
-      document.querySelectorAll(".reveal").forEach((node) => observer.observe(node));
+        revealNodes.forEach((node) => observer.observe(node));
+      } else {
+        revealNodes.forEach((node) => node.classList.add("in"));
+      }
       renderAdmin("activities");
     </script>
   </body>
