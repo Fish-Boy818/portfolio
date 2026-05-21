@@ -9,15 +9,6 @@
   },
   "packOptions": {
     "include": [],
-    "ignore": [
-      {
-        "value": "/minitest",
-        "type": "folder"
-      },
-      {
-        "type": "folder",
-        "value": "minitest/"
-      }
-    ]
+    "ignore": []
   }
 }

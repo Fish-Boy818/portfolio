@@ -90,7 +90,7 @@ function adminTabs() {
         { key: "cover", label: "封面" },
         { key: "licenseImage", label: "营业执照" },
         { key: "location", label: "位置" },
-        { key: "douyinUrl", label: "抖音主页" },
+        { key: "douyinUrl", label: "社媒主页" },
         { key: "openTime", label: "营业时间" },
         { key: "address", label: "地址" }
       ],
@@ -104,7 +104,7 @@ function adminTabs() {
         { key: "location", label: "位置" },
         { key: "address", label: "地址" },
         { key: "phone", label: "电话" },
-        { key: "douyinUrl", label: "抖音主页链接", placeholder: "https://www.douyin.com/user/..." },
+        { key: "douyinUrl", label: "社媒主页链接", placeholder: "https://example.com/profile/..." },
         { key: "openTime", label: "营业时间", placeholder: "如：08:00-19:30" },
         { key: "tags", label: "标签", type: "list", placeholder: "标签1,标签2" },
         {

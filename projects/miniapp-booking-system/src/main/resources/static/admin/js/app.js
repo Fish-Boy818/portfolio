@@ -251,7 +251,7 @@ const ADMIN_MODULE_GUIDES = {
     tableHint: "推荐优先检查封面、位置、营业时间是否为空，这些最影响展示效果。",
     emptyTitle: "先创建第一个俱乐部",
     emptyDescription: "俱乐部是活动和订单的归属主体，建议先录入基础资料。",
-    formTip: "新建俱乐部时，优先填名称、位置、地址和封面图；抖音门店文案也可以直接粘贴识别。",
+    formTip: "新建俱乐部时，优先填名称、位置、地址和封面图；门店文案也可以直接粘贴识别。",
     checklist: [
       "先填俱乐部名称和所在位置",
       "再补地址、电话、营业时间",
@@ -956,7 +956,7 @@ createApp({
         contact: {
           key: "contact",
           title: "联系方式与展示",
-          description: "补充电话、抖音主页和标签，方便前台展示与联系。",
+          description: "补充电话、社媒主页和标签，方便前台展示与联系。",
           fields: ["phone", "douyinUrl", "tags"]
         },
         media: {
@@ -2576,7 +2576,7 @@ createApp({
       const normalizedHeaderLine = delimiter === "," ? headerLine.replace(/，/g, ",") : headerLine;
       const headers = this.splitImportLine(normalizedHeaderLine, delimiter);
       if (!this.isDyProductImport(headers)) {
-        throw new Error("未识别为抖音商品导出表，请检查表头");
+        throw new Error("未识别为商品导出表，请检查表头");
       }
       const columnMap = headers.map((header) => DY_PRODUCT_IMPORT_MAP[normalizeHeaderKey(header)] || null);
       const rows = [];
@@ -3260,7 +3260,7 @@ createApp({
         operatorCommissionAmount: "小程序运营",
         userPhone: "手机号",
         imageUrl: "媒体",
-        douyinUrl: "抖音",
+        douyinUrl: "社媒主页",
         noticeContent: "公告",
         aboutUsContent: "关于我们"
       };
@@ -3697,7 +3697,7 @@ createApp({
     parseClubImport(text) {
       const raw = String(text || "").replace(/\r/g, "\n").trim();
       if (!raw) {
-        throw new Error("请先粘贴抖音门店信息");
+        throw new Error("请先粘贴门店信息");
       }
       const lines = raw
         .split("\n")
@@ -3728,7 +3728,7 @@ createApp({
           }
         }
         if (!result.phone) {
-          const skipLine = /抖音号|账号|认证|分钟|min/i.test(line);
+          const skipLine = /平台账号|账号|认证|分钟|min/i.test(line);
           if (!skipLine) {
             const phoneMatch = line.match(/1[3-9]\d{9}/) || line.match(/\d{3,4}-?\d{7,8}/);
             if (phoneMatch) {
@@ -3770,7 +3770,7 @@ createApp({
           const isCategoryLabel = /门店品类|主营类目|经营类目|品类|类目/.test(line);
           const isCategoryLine =
             isCategoryLabel ||
-            (!/地址|电话|联系人|营业|时间|账号|认证|抖音号/.test(line) && /[·、]/.test(line) && line.length <= 40);
+            (!/地址|电话|联系人|营业|时间|账号|认证|平台账号/.test(line) && /[·、]/.test(line) && line.length <= 40);
           if (isCategoryLine) {
             let candidate = "";
             if (isCategoryLabel) {

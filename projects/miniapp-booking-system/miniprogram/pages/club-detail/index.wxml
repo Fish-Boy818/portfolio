@@ -44,7 +44,7 @@
       <view class="douyin-btn-wrap" wx:if="{{club.douyinUrl}}">
         <view class="douyin-btn" bindtap="onGoDouyinHome">
           <text class="douyin-btn-icon">抖</text>
-          <text class="douyin-btn-text">去抖音看俱乐部主页</text>
+          <text class="douyin-btn-text">查看俱乐部主页</text>
           <text class="douyin-btn-arrow">›</text>
         </view>
       </view>

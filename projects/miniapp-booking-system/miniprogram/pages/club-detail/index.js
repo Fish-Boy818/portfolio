@@ -183,11 +183,11 @@ Page({
     const club = this.data.club || {};
     const douyinUrl = normalizeHttpUrl(club.douyinUrl);
     if (!douyinUrl) {
-      wx.showToast({ title: "未配置抖音主页链接", icon: "none" });
+      wx.showToast({ title: "未配置社媒主页链接", icon: "none" });
       return;
     }
     wx.navigateTo({
-      url: `/pages/webview/index?title=${encodeURIComponent("俱乐部抖音主页")}&url=${encodeURIComponent(douyinUrl)}`
+      url: `/pages/webview/index?title=${encodeURIComponent("俱乐部社媒主页")}&url=${encodeURIComponent(douyinUrl)}`
     });
   }
 });

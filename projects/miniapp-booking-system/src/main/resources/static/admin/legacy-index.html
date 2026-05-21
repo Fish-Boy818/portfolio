@@ -369,12 +369,12 @@
               </ol>
             </div>
             <div v-if="currentTab === 'clubs'" class="smart-import">
-              <div class="smart-import__title">粘贴抖音门店信息自动识别</div>
-              <div class="muted">从抖音来客/商家号页面复制文字粘贴，系统会自动填充名称、电话、地址、标签。</div>
+              <div class="smart-import__title">粘贴门店信息自动识别</div>
+              <div class="muted">从商家后台或商家号页面复制文字粘贴，系统会自动填充名称、电话、地址、标签。</div>
               <textarea
                 class="smart-import__area"
                 v-model.trim="clubImportText"
-                placeholder="示例：\n三亚子扬摩托艇俱乐部\n抖音号：23847541641\n简介：...\n地址：...\n电话：..."
+                placeholder="示例：\n三亚子扬摩托艇俱乐部\n平台账号：23847541641\n简介：...\n地址：...\n电话：..."
               ></textarea>
               <div class="smart-import__actions">
                 <button class="ghost-btn" @click="applyClubImport">识别并填充</button>
