@@ -1,0 +1,26 @@
+.venv/
+.idea/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local secrets and real business data
+.env
+account_ids.txt
+account_names.txt
+auto_accounts.json
+
+# Runtime outputs
+*.log
+*.png
+*.jpg
+*.jpeg
+*.xlsx
+*.csv
+output/
+reports/
+screenshots/
+
+# Local scratch/history files kept outside the public repo
+popularize copy*.py
+test(1).py

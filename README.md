@@ -45,6 +45,7 @@ http://localhost:8000/
 - `sitemap.xml`：提供站点地图，便于搜索引擎发现页面。
 - `index.html`：包含 SEO、Open Graph、Twitter Card 和结构化数据元信息。
 - `projects/pytorch_sentiment_demo/`：PyTorch 中文情感分类 Demo 源码、样例数据和测试。
+- `projects/douyin-laike-account-tool/`：抖音来客账号管理与数据采集工具，已移除真实账号和凭据。
 
 GitHub Pages 建议配置：
 
@@ -71,6 +72,7 @@ GitHub Pages 建议配置：
 ├── index.html
 ├── assets/
 ├── projects/
+│   ├── douyin-laike-account-tool/
 │   └── pytorch_sentiment_demo/
 ├── robots.txt
 ├── sitemap.xml
