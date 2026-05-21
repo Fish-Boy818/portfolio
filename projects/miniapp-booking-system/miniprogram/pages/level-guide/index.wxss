@@ -1,0 +1,26 @@
+.page {
+  padding: var(--space-page);
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.guide-card {
+  padding: 14rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.guide-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  font-family: var(--font-title);
+}
+
+.guide-text {
+  font-size: 26rpx;
+  color: var(--color-muted);
+  line-height: 1.6;
+}

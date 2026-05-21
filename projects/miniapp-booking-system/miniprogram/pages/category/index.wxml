@@ -1,0 +1,77 @@
+<view class="page page--with-tabbar category-page">
+  <view class="custom-nav-placeholder" style="height: {{navTotalHeight}}px;"></view>
+  <view class="custom-nav" style="padding-top: {{statusBarHeight}}px;">
+    <view class="custom-nav-inner" style="height: {{navBarHeight}}px;">
+    </view>
+  </view>
+
+  <search-bar value="{{keyword}}" placeholder="搜索俱乐部/活动" bind:input="onInput" bind:search="onSearch" bind:clear="onClear"></search-bar>
+
+  <view class="category-body">
+    <scroll-view class="category-nav" scroll-x>
+      <view class="nav-row">
+        <view class="nav-item {{item.key === activeCategoryKey ? 'active' : ''}}" wx:for="{{categories}}" wx:key="key" data-id="{{item.key}}" bindtap="onSelectCategory">
+          <image class="nav-icon" src="{{item.icon}}" mode="aspectFit"></image>
+          <text class="nav-title">{{item.name}}</text>
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class="category-content">
+      <view class="content-card card reveal">
+        <view class="content-head">
+          <view class="content-main">
+            <text class="content-title">{{activeCategory.name}}</text>
+            <text class="content-sub" wx:if="{{activeCategory.sub}}">{{activeCategory.sub}}</text>
+          </view>
+        </view>
+        <text class="content-desc" wx:if="{{activeCategory.desc}}">{{activeCategory.desc}}</text>
+        <view class="content-tags" wx:if="{{activeCategory.highlights && activeCategory.highlights.length}}">
+          <text class="content-tag" wx:for="{{activeCategory.highlights}}" wx:key="*this">{{item}}</text>
+        </view>
+      </view>
+
+      <view class="section-title reveal delay-1">
+        <text>推荐俱乐部</text>
+        <view class="section-action">
+          <text class="section-link" bindtap="onGoClubList">查看全部</text>
+          <view class="section-toggle" bindtap="onToggleClubs">
+            <text class="section-link">{{showClubs ? '收起' : '展开'}}</text>
+            <text class="section-chevron {{showClubs ? 'open' : ''}}">›</text>
+          </view>
+        </view>
+      </view>
+      <scroll-view class="club-scroll" scroll-x wx:if="{{showClubs}}">
+        <view class="club-row">
+          <club-card wx:for="{{clubPreview}}" wx:key="id" club="{{item}}" bind:tap="onTapClub"></club-card>
+        </view>
+      </scroll-view>
+
+      <view class="section-title reveal delay-1">
+        <text>精选活动</text>
+        <view class="section-action">
+          <text class="section-link" bindtap="onGoList">筛选更多</text>
+          <view class="section-toggle" bindtap="onToggleItems">
+            <text class="section-link">{{showItems ? '收起' : '展开'}}</text>
+            <text class="section-chevron {{showItems ? 'open' : ''}}">›</text>
+          </view>
+        </view>
+      </view>
+
+      <view wx:if="{{showItems && status === 'loading'}}" class="state-block">
+        <skeleton count="2"></skeleton>
+      </view>
+      <view wx:elif="{{showItems && status === 'error'}}" class="state-block">
+        <empty-state title="加载失败" description="{{errorMessage}}" showButton buttonText="重新加载" bind:action="onRetry"></empty-state>
+      </view>
+      <view wx:elif="{{showItems && status === 'empty'}}" class="state-block">
+        <empty-state title="暂无结果" description="换个关键词或分类试试" showButton buttonText="清空搜索" bind:action="onClear"></empty-state>
+      </view>
+      <view wx:elif="{{showItems}}" class="item-list">
+        <item-card wx:for="{{itemPreview}}" wx:key="id" item="{{item}}" bind:tap="onTapItem"></item-card>
+      </view>
+    </view>
+  </view>
+
+  <view class="page-bottom-spacer"></view>
+</view>

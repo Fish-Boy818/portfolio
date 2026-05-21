@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "options": {
+    "styleIsolation": "apply-shared"
+  },
+  "usingComponents": {
+    "price-tag": "/components/price-tag/index"
+  }
+}

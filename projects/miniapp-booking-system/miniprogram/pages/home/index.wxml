@@ -1,0 +1,80 @@
+<view class="page page--with-tabbar home-page">
+  <search-bar value="{{keyword}}" placeholder="搜索活动/项目" bind:input="onInput" bind:search="onSearch" bind:clear="onClear"></search-bar>
+
+  <view class="banner-wrap reveal">
+    <view class="banner card">
+      <swiper class="banner-swiper" autoplay="{{swiperAutoplay}}" interval="{{bannerInterval}}" circular="{{false}}" current="{{bannerCurrent}}" skip-hidden-item-layout="{{true}}" bindchange="onBannerChange">
+        <swiper-item wx:for="{{banners}}" wx:key="id">
+          <view class="banner-slide">
+            <video
+              wx:if="{{item.isVideo}}"
+              id="{{'banner-video-' + index}}"
+              data-index="{{index}}"
+              class="banner-video"
+              src="{{item.mediaUrl}}"
+              autoplay="{{false}}"
+              preload="auto"
+              muted="{{bannerMuted}}"
+              controls="{{false}}"
+              show-center-play-btn="{{false}}"
+              enable-play-gesture="{{false}}"
+              loop="{{false}}"
+              bindloadedmetadata="onBannerVideoLoaded"
+              bindcanplay="onBannerVideoCanPlay"
+              binderror="onBannerVideoError"
+              bindended="onBannerVideoEnded"
+              objectFit="cover"
+            ></video>
+            <view wx:if="{{item.isVideo && !item.videoReady}}" class="banner-video-preview">
+              <view class="banner-video-dot"></view>
+              <text class="banner-video-text">视频加载中</text>
+            </view>
+            <view wx:if="{{!item.isVideo}}" class="banner-image" style="{{item.style}}"></view>
+            <view
+              wx:if="{{item.isVideo && index === bannerCurrent}}"
+              class="banner-sound-btn"
+              catchtap="onToggleBannerSound"
+            >
+              <text class="banner-sound-icon">{{bannerMuted ? "🔇" : "🔊"}}</text>
+            </view>
+            <view class="banner-overlay"></view>
+            <view class="banner-copy">
+              <text class="banner-title">{{item.title}}</text>
+              <text class="banner-sub">{{item.subtitle}}</text>
+            </view>
+          </view>
+        </swiper-item>
+      </swiper>
+    </view>
+  </view>
+
+  <view class="section-title reveal delay-2">
+    <text>俱乐部推荐</text>
+  </view>
+
+  <scroll-view class="club-scroll" scroll-x>
+    <view class="club-row">
+      <club-card wx:for="{{clubs}}" wx:key="id" club="{{item}}" bind:tap="onTapClub"></club-card>
+    </view>
+  </scroll-view>
+
+  <view class="section-title reveal delay-2">
+    <text>热门活动</text>
+    <text class="link" bindtap="onGoList">查看全部</text>
+  </view>
+
+  <view wx:if="{{status === 'loading'}}" class="state-block">
+    <skeleton count="2"></skeleton>
+  </view>
+  <view wx:elif="{{status === 'error'}}" class="state-block">
+    <empty-state title="加载失败" description="{{errorMessage}}" showButton buttonText="重新加载" bind:action="onRetry"></empty-state>
+  </view>
+  <view wx:elif="{{status === 'empty'}}" class="state-block">
+    <empty-state title="暂无推荐" description="换个时间再来看看" showButton buttonText="刷新推荐" bind:action="onRetry"></empty-state>
+  </view>
+  <view wx:else class="item-list">
+    <item-card wx:for="{{items}}" wx:key="id" item="{{item}}" bind:tap="onTapItem"></item-card>
+  </view>
+
+  <view class="page-bottom-spacer"></view>
+</view>

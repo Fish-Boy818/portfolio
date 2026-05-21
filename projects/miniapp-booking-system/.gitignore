@@ -1,0 +1,9 @@
+target/
+uploads/
+logs/
+*.log
+.env
+.idea/
+*.iml
+miniprogram/project.private.config.json
+miniprogram/minitest/

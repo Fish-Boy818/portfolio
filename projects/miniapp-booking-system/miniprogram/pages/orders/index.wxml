@@ -1,0 +1,27 @@
+<view class="page page--with-tabbar orders-page">
+  <scroll-view class="filter-row card reveal" scroll-x show-scrollbar="false">
+    <view class="filter-track">
+      <view class="filter-item {{activeStatus === 'all' ? 'active' : ''}}" data-status="all" bindtap="onFilter">全部</view>
+      <view class="filter-item {{activeStatus === 'unpaid' ? 'active' : ''}}" data-status="unpaid" bindtap="onFilter">待支付</view>
+      <view class="filter-item {{activeStatus === 'paid' ? 'active' : ''}}" data-status="paid" bindtap="onFilter">已支付</view>
+      <view class="filter-item {{activeStatus === 'used' ? 'active' : ''}}" data-status="used" bindtap="onFilter">已核销</view>
+      <view class="filter-item {{activeStatus === 'refund' ? 'active' : ''}}" data-status="refund" bindtap="onFilter">已退款</view>
+      <view class="filter-item {{activeStatus === 'cancelled' ? 'active' : ''}}" data-status="cancelled" bindtap="onFilter">已取消</view>
+    </view>
+  </scroll-view>
+
+  <view wx:if="{{status === 'loading'}}" class="state-block">
+    <skeleton count="3"></skeleton>
+  </view>
+  <view wx:elif="{{status === 'error'}}" class="state-block">
+    <empty-state title="加载失败" description="{{errorMessage}}" showButton buttonText="重新加载" bind:action="onRetry"></empty-state>
+  </view>
+  <view wx:elif="{{status === 'empty'}}" class="state-block">
+    <empty-state title="暂无订单" description="去首页看看更多商品" showButton buttonText="去首页" bind:action="onGoHome"></empty-state>
+  </view>
+  <view wx:else class="order-list">
+    <order-card wx:for="{{orders}}" wx:key="id" order="{{item}}" bind:primary="onPrimary" bind:secondary="onSecondary"></order-card>
+  </view>
+
+  <view class="page-bottom-spacer"></view>
+</view>

@@ -1,0 +1,74 @@
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/miniapp_booking?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:}
+  sql:
+    init:
+      mode: never
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+      encoding: UTF-8
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+wechat:
+  appid: ${WECHAT_APPID:}
+  secret: ${WECHAT_SECRET:}
+  login-url: ${WECHAT_LOGIN_URL:https://api.weixin.qq.com/sns/jscode2session}
+  invite:
+    page: ${WECHAT_INVITE_PAGE:pages/home/index}
+    env-version: ${WECHAT_INVITE_ENV_VERSION:release}
+    width: ${WECHAT_INVITE_WIDTH:430}
+    fallback-url: ${WECHAT_INVITE_FALLBACK_URL:https://example.com/invite}
+  pay:
+    mchid: ${WECHAT_PAY_MCHID:}
+    sp-appid: ${WECHAT_PAY_SP_APPID:}
+    sub-mchid: ${WECHAT_PAY_SUB_MCHID:}
+    sub-appid: ${WECHAT_PAY_SUB_APPID:}
+    serial-no: ${WECHAT_PAY_SERIAL_NO:}
+    private-key-path: ${WECHAT_PAY_PRIVATE_KEY_PATH:}
+    api-v3-key: ${WECHAT_PAY_API_V3_KEY:}
+    notify-url: ${WECHAT_PAY_NOTIFY_URL:https://example.com/api/pay/notify}
+    withdraw-notify-url: ${WECHAT_PAY_WITHDRAW_NOTIFY_URL:https://example.com/api/commission/withdraw/notify}
+    api-base-url: ${WECHAT_PAY_API_BASE_URL:https://api.mch.weixin.qq.com}
+    platform-cert-path: ${WECHAT_PAY_PLATFORM_CERT_PATH:}
+    transfer-scene-id: ${WECHAT_PAY_TRANSFER_SCENE_ID:}
+    transfer-remark: ${WECHAT_PAY_TRANSFER_REMARK:佣金提现}
+    transfer-recv-perception: ${WECHAT_PAY_TRANSFER_RECV_PERCEPTION:佣金提现}
+    transfer-info-type: ${WECHAT_PAY_TRANSFER_INFO_TYPE:岗位类型}
+    transfer-info-content: ${WECHAT_PAY_TRANSFER_INFO_CONTENT:推广员}
+    transfer-info-type2: ${WECHAT_PAY_TRANSFER_INFO_TYPE2:报酬说明}
+    transfer-info-content2: ${WECHAT_PAY_TRANSFER_INFO_CONTENT2:活动佣金结算}
+
+commission:
+  withdraw:
+    min-amount: ${COMMISSION_WITHDRAW_MIN_AMOUNT:10}
+    single-max-amount: ${COMMISSION_WITHDRAW_SINGLE_MAX_AMOUNT:200}
+    daily-max-count: ${COMMISSION_WITHDRAW_DAILY_MAX_COUNT:1}
+    daily-max-amount: ${COMMISSION_WITHDRAW_DAILY_MAX_AMOUNT:1000}
+
+admin:
+  username: ${ADMIN_USERNAME:}
+  password: ${ADMIN_PASSWORD:}
+
+app:
+  upload-dir: ${APP_UPLOAD_DIR:uploads}
+
+storage:
+  type: ${STORAGE_TYPE:local}
+
+tos:
+  access-key: ${TOS_ACCESS_KEY:}
+  secret-key: ${TOS_SECRET_KEY:}
+  endpoint: ${TOS_ENDPOINT:https://tos-cn-beijing.volces.com}
+  region: ${TOS_REGION:cn-beijing}
+  bucket: ${TOS_BUCKET:}
+  public-url: ${TOS_PUBLIC_URL:}
+  path-style: ${TOS_PATH_STYLE:false}

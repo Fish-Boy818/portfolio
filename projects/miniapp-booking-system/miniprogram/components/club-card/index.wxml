@@ -1,0 +1,16 @@
+<view class="club-card card {{variant === 'list' ? 'club-card--list' : ''}}" bindtap="onTap" data-id="{{safeClub.id}}">
+  <view class="club-cover">
+    <image class="club-cover-img" src="{{safeClub.cover}}" mode="aspectFill" wx:if="{{safeClub.cover}}"></image>
+    <view class="club-cover-layer {{safeClub.coverClass}}" wx:if="{{!safeClub.cover}}"></view>
+  </view>
+  <view class="club-body">
+    <view class="club-row">
+      <text class="club-name">{{safeClub.name}}</text>
+    </view>
+    <text class="club-meta" wx:if="{{safeClub.location}}">{{safeClub.location}}</text>
+    <view class="club-tags" wx:if="{{safeClub.tags && safeClub.tags.length}}">
+      <text class="tag" wx:for="{{safeClub.tags}}" wx:key="*this">{{item}}</text>
+    </view>
+    <text class="club-hours" wx:if="{{safeClub.openTime}}">营业时间 {{safeClub.openTime}}</text>
+  </view>
+</view>

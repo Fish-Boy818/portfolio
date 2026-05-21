@@ -1,0 +1,224 @@
+.page {
+  padding: var(--space-page);
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.status-card {
+  padding: 14rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.status-title {
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.status-sub {
+  font-size: 26rpx;
+  color: var(--color-muted);
+}
+
+.info-card {
+  padding: 14rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.product-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12rpx;
+}
+
+.media {
+  width: 168rpx;
+  height: 126rpx;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(47, 107, 255, 0.22), rgba(90, 200, 255, 0.35));
+  overflow: hidden;
+}
+
+.media-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.product-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.product-info .title {
+  font-size: 30rpx;
+  font-weight: 700;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.label {
+  color: var(--color-muted);
+  font-size: 26rpx;
+}
+
+.value {
+  font-size: 26rpx;
+  font-weight: 600;
+}
+
+.value.emphasis {
+  color: var(--color-primary);
+  font-size: 30rpx;
+}
+
+.deal-price-wrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10rpx;
+}
+
+.deal-price-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 4rpx 10rpx;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(140deg, rgba(47, 107, 255, 0.12), rgba(90, 200, 255, 0.14));
+  border: 1rpx solid rgba(47, 107, 255, 0.2);
+}
+
+.deal-price-main {
+  display: flex;
+  align-items: flex-end;
+  gap: 2rpx;
+  font-family: var(--font-title);
+  line-height: 1;
+}
+
+.deal-price-main .currency {
+  font-size: 30rpx;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.deal-price-main .amount {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.deal-price-badge {
+  padding: 2rpx 8rpx;
+  border-radius: var(--radius-pill);
+  font-size: 26rpx;
+  font-weight: 700;
+  background: rgba(47, 107, 255, 0.2);
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.deal-price-secondary {
+  font-size: 26rpx;
+  color: var(--color-muted);
+  text-decoration: line-through;
+}
+
+.verify-card {
+  padding: 14rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  border: 2rpx solid rgba(47, 107, 255, 0.35);
+  background: linear-gradient(180deg, rgba(47, 107, 255, 0.1), rgba(90, 200, 255, 0.05));
+  box-shadow: 0 12rpx 28rpx rgba(47, 107, 255, 0.18);
+}
+
+.verify-btn {
+  height: 80rpx;
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.verify-btn-active {
+  color: #FFFFFF;
+  border: none;
+  background: linear-gradient(135deg, #2F6BFF, #5A9BFF);
+  box-shadow: 0 12rpx 24rpx rgba(47, 107, 255, 0.35);
+}
+
+.pay-card {
+  padding: 14rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.refund-card {
+  padding: 14rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.support-card {
+  padding: 14rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.support-actions {
+  display: flex;
+  gap: 12rpx;
+  align-items: center;
+}
+
+.support-btn {
+  flex: 1;
+  min-width: 0;
+  height: 76rpx;
+  line-height: 76rpx;
+  font-size: 28rpx;
+  padding: 0 10rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-ghost {
+  background: #F3F6FF;
+  border: 2rpx solid #D8E3FF;
+  color: #2F6BFF;
+}
+
+.verify-code {
+  font-size: 28rpx;
+  font-weight: 700;
+  padding: 10rpx 12rpx;
+  border-radius: var(--radius-lg);
+  background: rgba(47, 107, 255, 0.12);
+  color: var(--color-primary);
+}
+
+.verify-time {
+  font-size: 26rpx;
+  color: var(--color-muted);
+}
+
+.state-block {
+  padding-top: 20rpx;
+}
+

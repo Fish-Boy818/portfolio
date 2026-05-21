@@ -1,0 +1,9 @@
+<view class="price-tag {{minHeight ? 'is-tall' : ''}} {{full ? 'is-full' : ''}}" style="{{minHeight ? 'min-height:' + minHeight + ';' : ''}}">
+  <view class="price-main">
+    <text class="currency">¥</text>
+    <text class="amount">{{price}}</text>
+  </view>
+  <view class="price-meta">
+    <view class="price-badge">{{levelLabel || '活动价'}}</view>
+  </view>
+</view>

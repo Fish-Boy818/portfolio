@@ -1,0 +1,23 @@
+{
+  "appid": "touristappid",
+  "compileType": "miniprogram",
+  "setting": {
+    "urlCheck": false,
+    "minified": true,
+    "minifyWXML": true,
+    "minifyWXSS": true
+  },
+  "packOptions": {
+    "include": [],
+    "ignore": [
+      {
+        "value": "/minitest",
+        "type": "folder"
+      },
+      {
+        "type": "folder",
+        "value": "minitest/"
+      }
+    ]
+  }
+}

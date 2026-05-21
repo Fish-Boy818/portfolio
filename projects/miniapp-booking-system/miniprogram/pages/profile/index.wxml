@@ -1,0 +1,121 @@
+<view class="page page--with-tabbar profile-page">
+  <view wx:if="{{status === 'loading'}}" class="state-block">
+    <skeleton count="2"></skeleton>
+  </view>
+  <view wx:elif="{{status === 'error'}}" class="state-block">
+    <empty-state title="加载失败" description="{{errorMessage}}" showButton buttonText="重新加载" bind:action="onRetry"></empty-state>
+  </view>
+  <view wx:elif="{{status === 'unauth'}}" class="state-block">
+    <empty-state title="未登录" description="{{unauthDesc}}"></empty-state>
+    <view class="unauth-actions">
+      <view class="privacy-row" bindtap="onTogglePrivacyAgree">
+        <view class="privacy-check {{privacyAgreed ? 'privacy-check--active' : ''}}">{{privacyAgreed ? '✓' : ''}}</view>
+        <view class="privacy-text">
+          <text>我已阅读并同意</text>
+          <text class="privacy-link" catchtap="onOpenUserAgreement">《用户协议》</text>
+          <text>和</text>
+          <text class="privacy-link" catchtap="onOpenPrivacyPolicy">《隐私政策》</text>
+        </view>
+      </view>
+      <button
+        class="btn {{privacyAgreed ? 'btn-primary' : 'btn-disabled'}}"
+        disabled="{{!privacyAgreed}}"
+        open-type="getPhoneNumber"
+        bindgetphonenumber="onPhoneAuthLogin"
+      >手机号授权登录</button>
+    </view>
+  </view>
+  <view wx:else>
+    <view class="user-card card reveal">
+      <view class="avatar" style="{{user.avatarUrl ? 'background-image:url(' + user.avatarUrl + ');' : ''}}"></view>
+      <view class="user-info">
+        <view class="row">
+          <text class="name">{{displayName}}</text>
+        </view>
+        <text class="muted">手机号 {{displayPhone}}</text>
+        <button class="avatar-choose" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar" disabled="{{uploadingAvatar}}">
+          {{uploadingAvatar ? '上传中...' : (user.avatarUrl ? '更换头像' : '选择微信头像')}}
+        </button>
+      </view>
+      <view class="edit" bindtap="onEditOpen">编辑</view>
+    </view>
+
+    <view class="card summary-card reveal delay-1">
+      <view class="summary-item" data-status="unpaid" bindtap="onGoOrdersByStatus">
+        <text class="summary-num">{{orderSummary.unpaid}}</text>
+        <text class="summary-label">待支付</text>
+      </view>
+      <view class="summary-item" data-status="paid" bindtap="onGoOrdersByStatus">
+        <text class="summary-num">{{orderSummary.paid}}</text>
+        <text class="summary-label">已支付</text>
+      </view>
+      <view class="summary-item" data-status="used" bindtap="onGoOrdersByStatus">
+        <text class="summary-num">{{orderSummary.used}}</text>
+        <text class="summary-label">已核销</text>
+      </view>
+      <view class="summary-item" data-status="refund" bindtap="onGoOrdersByStatus">
+        <text class="summary-num">{{orderSummary.refund}}</text>
+        <text class="summary-label">已退款</text>
+      </view>
+    </view>
+
+    <view class="card menu-card reveal delay-3">
+      <view class="menu-item" bindtap="onGoOrders">
+        <text>我的订单</text>
+        <text class="arrow">›</text>
+      </view>
+      <view class="menu-item" wx:if="{{!reviewMode}}" bindtap="onGoBountyRecords">
+        <text>悬赏记录</text>
+        <text class="arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="onGoCommissionCenter">
+        <text>佣金中心</text>
+        <text class="arrow">›</text>
+      </view>
+    </view>
+
+    <view class="card menu-card reveal delay-3">
+      <view class="menu-item" bindtap="onOpenNotice">
+        <text>公告</text>
+        <text class="arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="onOpenAboutUs">
+        <text>关于我们</text>
+        <text class="arrow">›</text>
+      </view>
+      <view class="menu-item menu-item--danger" bindtap="onLogout">
+        <text>退出登录</text>
+        <text class="arrow">›</text>
+      </view>
+    </view>
+
+    <view class="card tips-card reveal delay-3">
+      <text class="tips-title">服务提醒</text>
+      <text class="tips-line">1. 支付后请在订单详情点击“去核销”完成核销。</text>
+      <text class="tips-line">2. 未支付订单 5 分钟后自动取消。</text>
+      <text class="tips-line">3. 如遇问题可在订单页联系商家或平台介入。</text>
+    </view>
+  </view>
+
+  <view class="edit-mask" wx:if="{{editing}}" bindtap="onEditClose">
+    <view class="edit-panel card" catchtap="onEditPanel">
+      <text class="edit-title">编辑个人信息</text>
+      <view class="field">
+        <text class="field-label">姓名</text>
+        <input class="field-input" value="{{editName}}" placeholder="请输入姓名" maxlength="12" bindinput="onEditNameInput" />
+      </view>
+      <view class="field">
+        <text class="field-label">手机号</text>
+        <view class="field-static">{{displayPhone || '未绑定'}}</view>
+        <text class="field-tip">手机号与扫码资格绑定，为避免资格冲突，当前不支持自行修改。</text>
+      </view>
+      <text class="edit-error" wx:if="{{editError}}">{{editError}}</text>
+      <view class="edit-actions">
+        <button class="btn btn-secondary" bindtap="onEditClose">取消</button>
+        <button class="btn btn-primary" bindtap="onEditSave">保存</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="page-bottom-spacer"></view>
+</view>

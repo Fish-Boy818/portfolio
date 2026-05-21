@@ -1,0 +1,386 @@
+.page {
+  padding: var(--space-page);
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  min-height: calc(100vh - 120rpx);
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding: 14rpx;
+}
+
+.avatar {
+  width: 92rpx;
+  height: 92rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(47, 107, 255, 0.2), rgba(90, 200, 255, 0.3));
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.name {
+  font-size: 38rpx;
+  font-weight: 700;
+}
+
+.avatar-choose {
+  margin: 0;
+  padding: 0;
+  width: fit-content;
+  min-width: 0;
+  height: 44rpx;
+  line-height: 44rpx;
+  font-size: 28rpx;
+  color: var(--color-primary);
+  background: transparent;
+}
+
+.avatar-choose::after {
+  border: none;
+}
+
+.edit {
+  font-size: 32rpx;
+  color: var(--color-primary);
+}
+
+.level-card {
+  padding: 14rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.level-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.level-title {
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.level-badge {
+  padding: 4rpx 12rpx;
+  border-radius: var(--radius-pill);
+  background: rgba(47, 107, 255, 0.18);
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.level-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rpx;
+}
+
+.level-main .amount {
+  font-size: 40rpx;
+  font-weight: 700;
+  font-family: var(--font-title);
+}
+
+.level-main .label {
+  font-size: 26rpx;
+  color: var(--color-muted);
+}
+
+.progress {
+  height: 8rpx;
+  border-radius: var(--radius-pill);
+  background: rgba(47, 107, 255, 0.08);
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(135deg, #2F6BFF, #5AC8FF);
+}
+
+.level-tip {
+  font-size: 28rpx;
+  color: var(--color-muted);
+}
+
+.invite-card {
+  padding: 14rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.invite-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.invite-title {
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.invite-count {
+  font-size: 26rpx;
+  color: var(--color-muted);
+}
+
+.invite-enabled {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.invite-qrcode {
+  width: 280rpx;
+  height: 280rpx;
+  border-radius: var(--radius-md);
+  background: #fff;
+}
+
+.invite-code {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.invite-tip {
+  font-size: 26rpx;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.invite-disabled {
+  font-size: 26rpx;
+  color: var(--color-muted);
+}
+
+.invite-records {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.invite-record {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 26rpx;
+  color: var(--color-muted);
+}
+
+.invite-name {
+  color: var(--color-text);
+}
+
+.invite-time {
+  font-size: 26rpx;
+}
+
+.menu-card {
+  padding: 4rpx 0;
+}
+
+.summary-card {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6rpx;
+  padding: 10rpx 6rpx;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rpx;
+  padding: 10rpx 4rpx;
+  border-radius: 12rpx;
+  background: rgba(47, 107, 255, 0.08);
+}
+
+.summary-num {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: var(--color-primary);
+  font-family: var(--font-title);
+}
+
+.summary-label {
+  font-size: 28rpx;
+  color: var(--color-muted);
+}
+
+.tips-card {
+  padding: 14rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.tips-title {
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.tips-line {
+  font-size: 28rpx;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12rpx 14rpx;
+  font-size: 34rpx;
+}
+
+.menu-item--danger {
+  color: var(--color-danger);
+}
+
+.arrow {
+  color: var(--color-muted);
+  font-size: 32rpx;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.state-block {
+  padding-top: 20rpx;
+}
+
+.unauth-actions {
+  margin-top: 16rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.privacy-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8rpx;
+  padding: 4rpx 2rpx;
+}
+
+.privacy-check {
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 6rpx;
+  border: 2rpx solid #B9C6E8;
+  color: #FFFFFF;
+  font-size: 22rpx;
+  line-height: 26rpx;
+  text-align: center;
+  margin-top: 2rpx;
+  box-sizing: border-box;
+}
+
+.privacy-check--active {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+}
+
+.privacy-text {
+  flex: 1;
+  font-size: 28rpx;
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+
+.privacy-link {
+  color: var(--color-primary);
+}
+
+.edit-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 12, 24, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.edit-panel {
+  width: 600rpx;
+  padding: 16rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.edit-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  font-family: var(--font-title);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.field-label {
+  font-size: 30rpx;
+  color: var(--color-muted);
+}
+
+.field-input {
+  height: 64rpx;
+  border-radius: var(--radius-md);
+  border: 2rpx solid rgba(47, 107, 255, 0.18);
+  padding: 0 14rpx;
+  background: #FFFFFF;
+  font-size: 34rpx;
+}
+
+.field-static {
+  min-height: 64rpx;
+  border-radius: var(--radius-md);
+  border: 2rpx solid rgba(47, 107, 255, 0.12);
+  padding: 14rpx;
+  background: rgba(47, 107, 255, 0.04);
+  font-size: 34rpx;
+  color: var(--color-text);
+  box-sizing: border-box;
+}
+
+.field-tip {
+  font-size: 26rpx;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.edit-error {
+  font-size: 30rpx;
+  color: var(--color-danger);
+}
+
+.edit-actions {
+  display: flex;
+  gap: 10rpx;
+}
+
+.edit-actions .btn {
+  flex: 1;
+}
+

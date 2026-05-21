@@ -1,0 +1,233 @@
+page {
+  --color-primary: #2F6BFF;
+  --color-secondary: #1D4ED8;
+  --color-accent: #5AC8FF;
+  --color-bg: #F5F8FF;
+  --color-card: #FFFFFF;
+  --color-text: #1C1F2A;
+  --color-muted: #667085;
+  --color-line: #E3EBF8;
+  --color-danger: #E54545;
+  --color-success: #1F9DBA;
+  --color-info: #2F6BFF;
+  --shadow-soft: 0 12rpx 32rpx rgba(0, 0, 0, 0.08);
+  --shadow-float: 0 16rpx 40rpx rgba(0, 0, 0, 0.12);
+  --radius-xl: 18rpx;
+  --radius-lg: 14rpx;
+  --radius-md: 10rpx;
+  --radius-pill: 999rpx;
+  --space-page: 16rpx;
+  --space-card: 14rpx;
+  --space-gap: 10rpx;
+  --font-title: "ZCOOL XiaoWei", "Source Han Serif SC", serif;
+  --font-body: "LXGW WenKai", "Source Han Sans CN", sans-serif;
+  background-color: var(--color-bg);
+  background-image: none;
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+.page--with-tabbar {
+  padding-bottom: calc(184rpx + env(safe-area-inset-bottom));
+}
+
+.page-bottom-spacer {
+  width: 100%;
+  height: calc(184rpx + env(safe-area-inset-bottom));
+  flex-shrink: 0;
+}
+
+view {
+  box-sizing: border-box;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 72rpx;
+  border-radius: var(--radius-md);
+  font-size: 32rpx;
+  font-weight: 600;
+  letter-spacing: 1rpx;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #2F6BFF, #5A9BFF);
+  color: #FFFFFF;
+  box-shadow: var(--shadow-float);
+}
+
+.btn-secondary {
+  background: #FFFFFF;
+  border: 2rpx solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-disabled {
+  background: #D5DCEB;
+  color: #9AA3B2;
+  box-shadow: none;
+}
+
+.card {
+  background: var(--color-card);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-soft);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rpx 12rpx;
+  border-radius: var(--radius-pill);
+  font-size: 26rpx;
+  font-weight: 600;
+}
+
+.badge--success {
+  background: rgba(31, 157, 186, 0.18);
+  color: var(--color-success);
+}
+
+.badge--warning {
+  background: rgba(47, 107, 255, 0.16);
+  color: var(--color-primary);
+}
+
+.badge--danger {
+  background: rgba(229, 69, 69, 0.15);
+  color: var(--color-danger);
+}
+
+.badge--info {
+  background: rgba(47, 107, 255, 0.16);
+  color: var(--color-info);
+}
+
+.price-tag {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+  padding: 10rpx 12rpx;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.9);
+  border: 2rpx solid rgba(47, 107, 255, 0.12);
+}
+
+.price-tag.is-unlocked {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(29, 78, 216, 0.16);
+}
+
+.price-main {
+  display: flex;
+  align-items: flex-end;
+  gap: 4rpx;
+  font-family: var(--font-title);
+}
+
+.price-main .currency {
+  font-size: 42rpx;
+  color: var(--color-primary);
+}
+
+.price-main .amount {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.price-meta {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+}
+
+.price-badge {
+  padding: 4rpx 10rpx;
+  border-radius: var(--radius-pill);
+  font-size: 26rpx;
+  font-weight: 700;
+  background: rgba(47, 107, 255, 0.18);
+  color: var(--color-primary);
+}
+
+.price-tag.is-unlocked .price-badge {
+  background: rgba(29, 78, 216, 0.2);
+  color: var(--color-secondary);
+}
+
+.price-secondary {
+  font-size: 26rpx;
+  color: var(--color-muted);
+  text-decoration: line-through;
+}
+
+.price-tip {
+  font-size: 26rpx;
+  color: var(--color-muted);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 32rpx;
+  font-weight: 700;
+  font-family: var(--font-title);
+  letter-spacing: 1rpx;
+}
+
+.section-title .link {
+  font-size: 26rpx;
+  color: var(--color-secondary);
+}
+
+.muted {
+  color: var(--color-muted);
+  font-size: 26rpx;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10rpx;
+}
+
+.reveal {
+  animation: riseIn 520ms ease both;
+}
+
+.reveal.delay-1 {
+  animation-delay: 80ms;
+}
+
+.reveal.delay-2 {
+  animation-delay: 140ms;
+}
+
+.reveal.delay-3 {
+  animation-delay: 200ms;
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(16rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

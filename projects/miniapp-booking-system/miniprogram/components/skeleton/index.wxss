@@ -1,0 +1,70 @@
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 18rpx;
+}
+
+.skeleton-card {
+  display: flex;
+  gap: 16rpx;
+  padding: 18rpx;
+  border-radius: var(--radius-xl);
+  background: #FFFFFF;
+  box-shadow: var(--shadow-soft);
+}
+
+.skeleton-media {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 18rpx;
+  background: #E9EEF9;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14rpx;
+  padding-top: 6rpx;
+}
+
+.skeleton-lines .line {
+  height: 20rpx;
+  border-radius: 999rpx;
+  background: #E9EEF9;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-lines .line-lg {
+  width: 70%;
+  height: 24rpx;
+}
+
+.skeleton-lines .line-md {
+  width: 60%;
+}
+
+.skeleton-lines .line-sm {
+  width: 40%;
+}
+
+.skeleton-media::after,
+.skeleton-lines .line::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0));
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  to {
+    left: 120%;
+  }
+}

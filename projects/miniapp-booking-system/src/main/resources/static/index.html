@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <title>御乾传媒 | 海上俱乐部推荐</title>
+    <meta name="description" content="御乾传媒海上俱乐部活动展示，浏览冲浪、浮游、电动冲浪板等精选项目。">
+    <link rel="stylesheet" href="/site/css/site.css">
+  </head>
+  <body>
+    <div id="entry" class="entry" role="button" tabindex="0" aria-label="进入首页">
+      <div class="entry__image" id="entryImage"></div>
+      <div class="entry__shade"></div>
+      <div class="entry__content">
+        <p class="eyebrow">YUQIAN CLUB</p>
+        <h1>御乾海上俱乐部</h1>
+        <p>精选三亚后海冲浪与海上项目</p>
+        <button type="button" id="enterButton">点击进入</button>
+      </div>
+    </div>
+
+    <main id="home" class="site is-hidden">
+      <header class="hero">
+        <nav class="nav" aria-label="主导航">
+          <div class="brand">
+            <span class="brand__mark"></span>
+            <span>御乾</span>
+          </div>
+          <a class="nav__link" href="#activities">入驻商家活动</a>
+        </nav>
+
+        <section class="hero__grid">
+          <div class="hero__copy">
+            <p class="eyebrow">SANYA WATER SPORTS</p>
+            <h2 id="heroTitle">海上俱乐部 · 夏季畅玩</h2>
+            <p id="heroSubtitle">冲浪、浮游、电动冲浪板等项目展示。</p>
+            <div class="hero__actions">
+              <a href="#activities" class="button button--primary">查看入驻商家活动</a>
+              <a href="#clubs" class="button button--ghost">入驻俱乐部推荐</a>
+            </div>
+          </div>
+          <div class="hero__media" id="heroMedia" aria-label="推荐图片"></div>
+        </section>
+      </header>
+
+      <section class="search-panel" aria-label="搜索活动">
+        <label class="search" for="searchInput">
+          <span></span>
+          <input id="searchInput" type="search" placeholder="搜索活动 / 项目">
+        </label>
+      </section>
+
+      <section id="clubs" class="section">
+        <div class="section__head">
+          <div>
+            <p class="eyebrow">CLUBS</p>
+            <h2>入驻俱乐部推荐</h2>
+          </div>
+        </div>
+        <div id="clubList" class="club-list"></div>
+      </section>
+
+      <section id="activities" class="section">
+        <div class="section__head">
+          <div>
+            <p class="eyebrow">MERCHANT PICKS</p>
+            <h2>入驻商家活动推荐</h2>
+          </div>
+          <span class="section__note">仅展示，具体下单请进入小程序</span>
+        </div>
+        <div id="activityList" class="activity-list"></div>
+        <div id="emptyState" class="empty is-hidden">暂无匹配活动</div>
+      </section>
+    </main>
+
+    <div id="licenseModal" class="license-modal is-hidden" aria-hidden="true">
+      <div class="license-modal__backdrop" data-close-license></div>
+      <div class="license-modal__panel" role="dialog" aria-modal="true" aria-labelledby="licenseTitle">
+        <button class="license-modal__close" type="button" data-close-license>关闭</button>
+        <p class="eyebrow">BUSINESS LICENSE</p>
+        <h2 id="licenseTitle">营业执照</h2>
+        <div id="licenseBody" class="license-modal__body"></div>
+      </div>
+    </div>
+
+    <script src="/site/js/site.js" defer></script>
+  </body>
+</html>

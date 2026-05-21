@@ -1,0 +1,22 @@
+<view class="item-card card" bindtap="onTap" data-id="{{item && item.id}}">
+  <view class="thumb">
+    <image class="thumb-img" src="{{item.cover}}" mode="aspectFill" wx:if="{{item.cover}}"></image>
+  </view>
+  <view class="item-main">
+    <text class="item-title line-clamp-2">{{item.title || ''}}</text>
+    <view class="meta-row">
+      <view class="tag-row">
+        <text class="tag" wx:for="{{tagList}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+      </view>
+      <view class="price-row">
+        <view class="price-left">
+          <text class="currency">¥</text>
+          <text class="price">{{item.price}}</text>
+        </view>
+        <button class="buy-btn {{isDisabled ? 'disabled' : ''}}" disabled="{{isDisabled}}">{{buttonText}}</button>
+      </view>
+      <text class="commission" wx:if="{{showCommission}}">预计佣金：¥{{expectedCommission}}</text>
+    </view>
+  </view>
+</view>
+

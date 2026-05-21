@@ -1,0 +1,140 @@
+.page {
+  padding: var(--space-page);
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.club-header {
+  display: flex;
+  gap: 12rpx;
+  padding: 12rpx;
+  align-items: center;
+}
+
+.club-mark {
+  width: 76rpx;
+  height: 57rpx;
+  border-radius: 18rpx;
+  overflow: hidden;
+  background: linear-gradient(135deg, #2F6BFF, #5AC8FF);
+}
+
+.club-mark-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.club-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.club-title-row {
+  display: flex;
+  align-items: center;
+}
+
+.club-name {
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.club-meta {
+  font-size: 26rpx;
+  color: var(--color-muted);
+}
+
+.club-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rpx;
+}
+
+.tag {
+  padding: 4rpx 10rpx;
+  border-radius: var(--radius-pill);
+  background: rgba(47, 107, 255, 0.12);
+  color: var(--color-primary);
+  font-size: 26rpx;
+}
+
+.filter-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6rpx;
+  padding: 8rpx;
+}
+
+.filter-item {
+  text-align: center;
+  padding: 8rpx 0;
+  font-size: 26rpx;
+  color: var(--color-muted);
+  border-radius: var(--radius-pill);
+  background: rgba(47, 107, 255, 0.08);
+}
+
+.filter-item.active {
+  color: #FFFFFF;
+  font-weight: 700;
+  background: linear-gradient(135deg, #2F6BFF, #5A9BFF);
+}
+
+.filter-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.group-label {
+  font-size: 26rpx;
+  color: var(--color-muted);
+  width: 72rpx;
+}
+
+.group-scroll {
+  flex: 1;
+}
+
+.group-row {
+  display: flex;
+  gap: 6rpx;
+  padding-bottom: 4rpx;
+}
+
+.chip {
+  padding: 6rpx 12rpx;
+  border-radius: var(--radius-pill);
+  background: rgba(47, 107, 255, 0.08);
+  color: var(--color-muted);
+  font-size: 26rpx;
+  white-space: nowrap;
+}
+
+.chip.active {
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #2F6BFF, #5A9BFF);
+  font-weight: 600;
+}
+
+.item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.state-block {
+  padding-bottom: 8rpx;
+}
+

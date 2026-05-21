@@ -1,0 +1,10 @@
+<view class="skeleton {{mode}}">
+  <view class="skeleton-card" wx:for="{{countList}}" wx:key="*this">
+    <view class="skeleton-media"></view>
+    <view class="skeleton-lines">
+      <view class="line line-lg"></view>
+      <view class="line line-md"></view>
+      <view class="line line-sm"></view>
+    </view>
+  </view>
+</view>

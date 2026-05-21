@@ -1,0 +1,31 @@
+<view class="page invite-list-page">
+  <custom-nav title="邀请记录"></custom-nav>
+  <view wx:if="{{status === 'loading'}}" class="state-block">
+    <skeleton count="3"></skeleton>
+  </view>
+  <view wx:elif="{{status === 'error'}}" class="state-block">
+    <empty-state title="加载失败" description="{{errorMessage}}" showButton buttonText="重新加载" bind:action="onRetry"></empty-state>
+  </view>
+  <view wx:else>
+    <view class="card summary-card reveal">
+      <text class="summary-title">累计邀请</text>
+      <text class="summary-value">{{inviteCount}} 人</text>
+    </view>
+
+    <view class="card list-card reveal delay-1">
+      <view class="section-title">
+        <text>邀请明细</text>
+      </view>
+      <view wx:if="{{records.length === 0}}" class="muted">暂无邀请记录</view>
+      <view wx:for="{{records}}" wx:key="index" class="line-item">
+        <view class="line-head">
+          <text class="line-title">{{item.nickname}}</text>
+          <text class="line-phone">{{item.phone}}</text>
+        </view>
+        <view class="line-meta">
+          <text>{{item.invitedAt}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

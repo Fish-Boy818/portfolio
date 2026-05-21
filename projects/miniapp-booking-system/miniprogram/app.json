@@ -1,0 +1,64 @@
+{
+    "pages":  [
+                  "pages/home/index",
+                  "pages/category/index",
+                  "pages/club-list/index",
+                  "pages/list/index",
+                  "pages/detail/index",
+                  "pages/club-detail/index",
+                  "pages/webview/index",
+                  "pages/slot-picker/index",
+                  "pages/order-confirm/index",
+                  "pages/orders/index",
+                  "pages/bounty/index",
+                  "pages/bounty-detail/index",
+                  "pages/bounty-records/index",
+                  "pages/welfare/index",
+                  "pages/order-detail/index",
+                  "pages/commission-center/index",
+                  "pages/commission-invites/index",
+                  "pages/commission-records/index",
+                  "pages/commission-withdrawals/index",
+                  "pages/profile-content/index",
+                  "pages/profile/index",
+                  "pages/level-guide/index"
+              ],
+    "lazyCodeLoading": "requiredComponents",
+    "window":  {
+                   "navigationBarTitleText":  "海上俱乐部",
+                   "navigationBarBackgroundColor":  "#F5F8FF",
+                   "navigationBarTextStyle":  "black",
+                   "backgroundColor":  "#F5F8FF"
+               },
+    "tabBar":  {
+                   "custom": true,
+                   "color":  "#6B6B6F",
+                   "selectedColor":  "#2F6BFF",
+                   "backgroundColor":  "#FFFFFF",
+                   "fontSize":  16,
+                   "borderStyle":  "white",
+                   "list":  [
+                                {
+                                    "pagePath":  "pages/home/index",
+                                    "text":  "首页"
+                                },
+                                {
+                                    "pagePath":  "pages/category/index",
+                                    "text":  "分类"
+                                },
+                                {
+                                    "pagePath":  "pages/orders/index",
+                                    "text":  "订单"
+                                },
+                                {
+                                    "pagePath":  "pages/bounty/index",
+                                    "text":  "悬赏"
+                                },
+                                {
+                                    "pagePath":  "pages/profile/index",
+                                    "text":  "我的"
+                                }
+                            ]
+               },
+    "sitemapLocation":  "sitemap.json"
+}

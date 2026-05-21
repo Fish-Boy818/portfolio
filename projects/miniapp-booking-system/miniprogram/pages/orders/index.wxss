@@ -1,0 +1,52 @@
+.page {
+  padding: var(--space-page);
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.filter-row {
+  padding: 10rpx;
+  width: 100%;
+}
+
+.filter-track {
+  display: flex;
+  gap: 6rpx;
+  padding-top: 2rpx;
+  padding-bottom: 6rpx;
+}
+
+.filter-item {
+  text-align: center;
+  padding: 8rpx 16rpx;
+  min-height: 54rpx;
+  line-height: 38rpx;
+  font-size: 26rpx;
+  color: var(--color-muted);
+  border-radius: var(--radius-pill);
+  border: 2rpx solid transparent;
+  background: rgba(47, 107, 255, 0.08);
+  white-space: nowrap;
+}
+
+.filter-item.active {
+  color: #FFFFFF;
+  font-weight: 700;
+  border-color: rgba(255, 255, 255, 0.45);
+  background: linear-gradient(135deg, #2F6BFF, #5A9BFF);
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.state-block {
+  padding-bottom: 8rpx;
+}

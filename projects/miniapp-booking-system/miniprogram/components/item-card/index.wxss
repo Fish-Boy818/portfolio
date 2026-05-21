@@ -1,0 +1,132 @@
+.item-card {
+  display: flex;
+  gap: 10rpx;
+  padding: 8rpx 10rpx;
+  align-items: stretch;
+}
+
+.thumb {
+  width: 176rpx;
+  height: 144rpx;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(47, 107, 255, 0.22), rgba(90, 200, 255, 0.3));
+  overflow: hidden;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.thumb-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.item-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+  min-width: 0;
+  min-height: 144rpx;
+  justify-content: space-between;
+}
+
+.item-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 38rpx;
+  min-height: 76rpx;
+}
+
+.meta-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 4rpx;
+  min-height: 34rpx;
+  max-height: 34rpx;
+  overflow: hidden;
+}
+
+.tag {
+  padding: 2rpx 8rpx;
+  border-radius: var(--radius-pill);
+  font-size: 24rpx;
+  line-height: 30rpx;
+  background: rgba(47, 107, 255, 0.12);
+  color: var(--color-primary);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10rpx;
+  margin-top: 0;
+}
+
+.commission {
+  font-size: 24rpx;
+  color: var(--color-secondary);
+  line-height: 30rpx;
+}
+
+.price-left {
+  display: flex;
+  align-items: baseline;
+  gap: 4rpx;
+  font-family: var(--font-title);
+}
+
+.currency {
+  font-size: 24rpx;
+  color: var(--color-primary);
+}
+
+.price {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.origin {
+  font-size: 26rpx;
+  color: var(--color-muted);
+  text-decoration: line-through;
+  margin-left: 4rpx;
+}
+
+.buy-btn {
+  min-width: 92rpx;
+  height: 46rpx;
+  padding: 0 10rpx;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #2F6BFF, #5A9BFF);
+  color: #ffffff;
+  font-size: 24rpx;
+  font-weight: 700;
+  line-height: 46rpx;
+}
+
+.buy-btn.disabled {
+  background: rgba(148, 163, 184, 0.5);
+  color: #ffffff;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+

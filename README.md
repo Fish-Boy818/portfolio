@@ -10,6 +10,7 @@
 | --- | --- |
 | [`index.html`](index.html) | 在线作品集页面，展示个人概览、技术架构、项目 Demo 和脱敏源码片段 |
 | [`projects/account-data-collector/`](projects/account-data-collector/) | 账号管理与数据采集工具 |
+| [`projects/miniapp-booking-system/`](projects/miniapp-booking-system/) | 小程序预约与运营后台系统 |
 | [`projects/pytorch_sentiment_demo/`](projects/pytorch_sentiment_demo/) | PyTorch 中文情感分类 Demo |
 
 ## 技术栈
@@ -39,6 +40,7 @@ http://localhost:8000/
 ├── assets/
 ├── projects/
 │   ├── account-data-collector/
+│   ├── miniapp-booking-system/
 │   └── pytorch_sentiment_demo/
 ├── robots.txt
 ├── sitemap.xml

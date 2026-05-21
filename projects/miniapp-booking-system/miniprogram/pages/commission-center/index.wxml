@@ -1,0 +1,85 @@
+<view class="page commission-page">
+  <custom-nav title="佣金中心"></custom-nav>
+  <view wx:if="{{status === 'loading'}}" class="state-block">
+    <skeleton count="2"></skeleton>
+  </view>
+  <view wx:elif="{{status === 'error'}}" class="state-block">
+    <empty-state title="加载失败" description="{{errorMessage}}" showButton buttonText="重新加载" bind:action="onRetry"></empty-state>
+  </view>
+  <view wx:elif="{{status === 'empty'}}" class="state-block">
+    <empty-state title="暂无佣金资格" description="{{errorMessage}}" showButton buttonText="重新加载" bind:action="onRetry"></empty-state>
+  </view>
+  <view wx:else>
+    <view class="card summary-card reveal">
+      <view class="summary-title">佣金账户</view>
+      <view class="summary-grid">
+        <view class="summary-item">
+          <text class="summary-label">可提现</text>
+          <text class="summary-value">¥{{account.withdrawableBalance}}</text>
+        </view>
+        <view class="summary-item">
+          <text class="summary-label">待结算</text>
+          <text class="summary-value">¥{{account.pendingBalance}}</text>
+        </view>
+        <view class="summary-item">
+          <text class="summary-label">累计已提</text>
+          <text class="summary-value">¥{{account.withdrawnTotal}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card invite-card reveal delay-1">
+      <view class="invite-header">
+        <text class="invite-title">邀请二维码</text>
+        <text class="invite-count">已邀请 {{inviteCount}} 人</text>
+      </view>
+      <view wx:if="{{inviteEnabled}}" class="invite-enabled">
+        <image class="invite-qrcode" src="{{inviteQrcodeUrl}}" mode="aspectFit" bindtap="onPreviewInviteQrcode"></image>
+        <text class="invite-code">邀请码：{{inviteCode}}</text>
+        <text class="invite-tip">好友扫描你的二维码后获得反佣权限</text>
+      </view>
+      <view wx:else class="invite-disabled">
+        <text>当前账号未开通邀请资格</text>
+      </view>
+      <view class="invite-records-entry" wx:if="{{inviteEnabled}}" bindtap="onOpenInviteRecords">
+        <view class="invite-records-entry-main">
+          <text class="invite-records-entry-title">邀请记录</text>
+          <text class="invite-records-entry-count">{{inviteCount}}人</text>
+        </view>
+            <text class="invite-records-entry-action">›</text>
+      </view>
+    </view>
+
+    <view class="card withdraw-card reveal delay-2">
+      <view class="section-title"><text>发起提现</text></view>
+      <view class="withdraw-row">
+        <input class="withdraw-input" type="digit" value="{{withdrawAmount}}" placeholder="请输入提现金额" bindinput="onAmountInput" />
+        <button class="mini-btn" bindtap="onWithdrawAll">全部提现</button>
+      </view>
+      <text class="withdraw-tip">可提现余额 ¥{{account.withdrawableBalance}}</text>
+      <text class="withdraw-tip">规则：最低10元，每日1次，每日最多1000元</text>
+      <text class="withdraw-error" wx:if="{{withdrawError}}">{{withdrawError}}</text>
+      <button class="btn btn-primary" bindtap="onSubmitWithdraw" loading="{{submitting}}" disabled="{{submitting}}">提交提现申请</button>
+    </view>
+
+    <view class="card list-card reveal delay-3">
+      <view class="section-entry" bindtap="onOpenCommissionRecords">
+        <view class="section-entry-main">
+          <text class="section-entry-title">佣金明细</text>
+          <text class="section-entry-count">{{records.length}}条</text>
+        </view>
+              <text class="section-entry-action">›</text>
+      </view>
+    </view>
+
+    <view class="card list-card reveal delay-4">
+      <view class="section-entry" bindtap="onOpenWithdrawals">
+        <view class="section-entry-main">
+          <text class="section-entry-title">提现记录</text>
+          <text class="section-entry-count">{{withdrawals.length}}条</text>
+        </view>
+              <text class="section-entry-action">›</text>
+      </view>
+    </view>
+  </view>
+</view>

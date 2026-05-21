@@ -1,0 +1,39 @@
+.page {
+  padding: var(--space-page);
+  min-height: 100vh;
+}
+
+.state-block {
+  padding-top: 20rpx;
+}
+
+.content-card {
+  padding: 16rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.content-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.content-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.content-time {
+  font-size: 26rpx;
+  color: var(--color-muted);
+}
+
+.content-text {
+  font-size: 30rpx;
+  line-height: 1.72;
+  color: var(--color-text);
+  white-space: pre-wrap;
+}

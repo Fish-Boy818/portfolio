@@ -1,0 +1,106 @@
+<view class="page page--with-tabbar bounty-records-page">
+  <custom-nav title="{{pageTitle}}"></custom-nav>
+
+  <view wx:if="{{status === 'loading'}}" class="state-block">
+    <skeleton count="3"></skeleton>
+  </view>
+
+  <view wx:elif="{{status === 'review'}}" class="state-block">
+    <empty-state
+      title="任务记录升级中"
+      description="任务记录入口正在升级，暂时不可用。"
+    ></empty-state>
+  </view>
+
+  <view wx:elif="{{status === 'error'}}" class="state-block">
+    <empty-state
+      title="悬赏记录加载失败"
+      description="{{errorMessage}}"
+      showButton
+      buttonText="重新加载"
+      bind:action="onRetry"
+    ></empty-state>
+  </view>
+
+  <view wx:elif="{{status === 'unauth'}}" class="state-block">
+    <empty-state
+      title="请先登录"
+      description="{{errorMessage}}"
+      showButton
+      buttonText="去我的页面"
+      bind:action="onGoProfile"
+    ></empty-state>
+  </view>
+
+  <view wx:elif="{{status === 'empty'}}" class="state-block">
+    <empty-state
+      title="还没有悬赏记录"
+      description="先去悬赏里接取一个任务，完成后再回来查看进度和结果。"
+    ></empty-state>
+  </view>
+
+  <view wx:else class="records-shell">
+    <view class="card records-summary reveal">
+      <view class="records-summary__text">
+        <text class="records-summary__title">我的悬赏记录</text>
+        <text class="records-summary__desc">查看每个任务的提交进度、审核结果和驳回缘由。</text>
+      </view>
+      <text class="records-summary__count">{{items.length}} 条</text>
+    </view>
+
+    <view class="records-list">
+      <view class="card record-card reveal" wx:for="{{items}}" wx:key="recordKey">
+        <view class="record-head">
+          <view class="record-title-wrap">
+            <text class="record-title">{{item.location}}</text>
+            <text class="record-range">{{item.commissionRangeText}}</text>
+          </view>
+          <text class="record-status {{item.claimStatusClass}}">{{item.claimStatusText}}</text>
+        </view>
+
+        <view class="record-meta-grid">
+          <view class="record-meta-chip" wx:if="{{item.acceptedAtText}}">
+            <text class="record-meta-chip__label">接取</text>
+            <text class="record-meta-chip__value">{{item.acceptedAtText}}</text>
+          </view>
+          <view class="record-meta-chip" wx:if="{{item.submittedAtText}}">
+            <text class="record-meta-chip__label">提交</text>
+            <text class="record-meta-chip__value">{{item.submittedAtText}}</text>
+          </view>
+          <view class="record-meta-chip" wx:if="{{item.reviewedAtText}}">
+            <text class="record-meta-chip__label">审核</text>
+            <text class="record-meta-chip__value">{{item.reviewedAtText}}</text>
+          </view>
+          <view class="record-meta-chip record-meta-chip--highlight" wx:if="{{item.claimStatus === 'approved'}}">
+            <text class="record-meta-chip__label">奖励</text>
+            <text class="record-meta-chip__value">¥{{item.rewardAmountText}}</text>
+          </view>
+        </view>
+
+        <view class="record-note record-note--danger" wx:if="{{item.claimStatus === 'rejected'}}">
+          <text class="record-note__label">驳回缘由</text>
+          <text class="record-note__text">{{item.rejectionReasonText}}</text>
+        </view>
+
+        <view class="record-screenshot" wx:if="{{item.showScreenshot}}">
+          <image
+            class="record-image"
+            src="{{item.screenshotUrl}}"
+            mode="aspectFill"
+            data-url="{{item.screenshotUrl}}"
+            bindtap="onPreviewImage"
+          ></image>
+          <text class="record-screenshot__hint">提交截图</text>
+        </view>
+
+        <view class="record-footer" wx:if="{{item.actionText && item.claimStatus !== 'approved'}}">
+          <button class="btn {{item.actionButtonClass}} record-action" data-id="{{item.id}}" data-submission-id="{{item.resubmitSubmissionId}}" bindtap="onOpenRecord">
+            {{item.actionText}}
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="page-bottom-spacer"></view>
+</view>

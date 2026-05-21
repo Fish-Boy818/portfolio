@@ -1,0 +1,1078 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>御乾管理后台</title>
+    <style>
+      [v-cloak] {
+        display: none !important;
+      }
+    </style>
+    <link rel="stylesheet" href="/admin/css/admin.css?v=202603190004" />
+    <script src="/admin/js/vendor/vue.global.prod.js?v=202603060330"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+  </head>
+  <body>
+    <div id="app" class="app" v-cloak>
+      <aside class="sidebar" :class="{ 'sidebar--collapsed': sidebarCollapsed }">
+        <div class="brand">
+          <span class="logo-dot"></span>
+          <div>
+            <div class="brand-title">御乾</div>
+            <div class="brand-sub">管理后台</div>
+          </div>
+          <button
+            class="sidebar-toggle"
+            type="button"
+            @click="toggleSidebar"
+            :title="sidebarCollapsed ? '展开菜单' : '收起菜单'"
+            :aria-label="sidebarCollapsed ? '展开菜单' : '收起菜单'"
+          >
+            <span
+              class="sidebar-toggle__chevron"
+              :class="{ 'sidebar-toggle__chevron--collapsed': sidebarCollapsed }"
+              aria-hidden="true"
+            ></span>
+          </button>
+        </div>
+        <div class="nav-search-wrap">
+          <input v-model.trim="tabKeyword" class="nav-search" placeholder="筛选模块..." />
+        </div>
+        <div class="nav-groups">
+          <section class="nav-group" v-for="group in groupedTabs" :key="group.key">
+            <div class="nav-group-title">{{ group.label }}</div>
+            <nav class="nav">
+              <button
+                v-for="tab in group.tabs"
+                :key="tab.key"
+                class="nav-item"
+                :class="{ active: currentTab === tab.key }"
+                @click="switchTab(tab.key)"
+              >
+                {{ tab.label }}
+              </button>
+            </nav>
+          </section>
+          <div class="nav-empty" v-if="!groupedTabs.length">没有匹配模块</div>
+        </div>
+        <div class="sidebar-footer">
+          <div class="status-pill" :class="{ online: authed }">
+            {{ authed ? "已登录" : "未登录" }}
+          </div>
+          <button class="ghost-btn" v-if="authed" @click="logout">退出登录</button>
+        </div>
+      </aside>
+
+      <main class="main" :class="{ 'main--dense': denseTable, 'main--sidebar-collapsed': sidebarCollapsed }">
+        <header class="topbar">
+          <div class="topbar-main">
+            <button
+              v-if="sidebarCollapsed"
+              class="menu-symbol-btn"
+              type="button"
+              @click="toggleSidebar"
+              title="展开菜单"
+              aria-label="展开菜单"
+            >
+              <span class="menu-symbol-btn__bars" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </button>
+            <div class="topbar-main__content">
+              <div>
+                <div class="page-eyebrow">{{ currentGroupLabel }}</div>
+                <div class="page-title-row">
+                  <div class="page-title">{{ currentTabLabel }}</div>
+                  <span class="page-inline-count" v-if="authed">{{ filteredItems.length }} 条</span>
+                </div>
+                <div class="page-sub">{{ moduleGuide.description }}</div>
+              </div>
+              <div class="top-meta" v-if="authed">
+                <span class="meta-pill">{{ moduleGuide.goal }}</span>
+                <span class="meta-pill" v-if="activeFilterTags.length">已筛选 {{ activeFilterTags.length }} 项</span>
+              </div>
+            </div>
+          </div>
+          <div class="top-actions">
+            <button class="ghost-btn" @click="refresh" :disabled="loading">
+              刷新
+            </button>
+            <button
+              class="ghost-btn"
+              v-if="currentTab === 'orders'"
+              @click="exportOrders"
+              :disabled="loading || !authed"
+            >
+              导出Excel
+            </button>
+            <button
+              class="ghost-btn"
+              v-if="supportsBatch"
+              @click="openImport"
+              :disabled="loading || !authed"
+            >
+              批量导入
+            </button>
+            <button
+              class="primary-btn"
+              v-if="activeTab && activeTab.allowCreate !== false"
+              @click="openCreate"
+              :disabled="loading || !authed"
+            >
+              新增 {{ currentTabLabel }}
+            </button>
+          </div>
+        </header>
+
+        <section class="workspace-panel" :class="{ 'workspace-panel--collapsed': workspaceGuideCollapsed }" v-if="authed">
+          <div class="workspace-hero card">
+            <div class="workspace-hero__top">
+              <div class="workspace-hero__eyebrow">新手工作指引</div>
+              <button class="ghost-btn workspace-toggle-btn" type="button" @click="toggleWorkspaceGuide">
+                {{ workspaceGuideCollapsed ? "展开指引" : "隐藏指引" }}
+              </button>
+            </div>
+            <div class="workspace-hero__title">{{ moduleGuide.title }}</div>
+            <div class="workspace-hero__desc" v-if="!workspaceGuideCollapsed">{{ moduleGuide.description }}</div>
+            <div class="workspace-checklist" v-if="!workspaceGuideCollapsed">
+              <div class="workspace-checklist__item" v-for="(item, index) in moduleGuide.checklist" :key="`${currentTab}-step-${index}`">
+                <span class="workspace-checklist__index">{{ index + 1 }}</span>
+                <span>{{ item }}</span>
+              </div>
+            </div>
+            <div class="workspace-actions" v-if="!workspaceGuideCollapsed">
+              <button
+                v-for="action in moduleGuide.actions"
+                :key="`${currentTab}-${action.label}`"
+                :class="action.style === 'primary' ? 'primary-btn' : 'ghost-btn'"
+                @click="runGuideAction(action)"
+                :disabled="guideActionDisabled(action) || loading"
+              >
+                {{ action.label }}
+              </button>
+            </div>
+          </div>
+          <div class="workspace-stats" :class="{ 'workspace-stats--compact': currentTab === 'orders' }" v-if="!workspaceGuideCollapsed">
+            <article class="stat-card" v-for="item in dashboardStats" :key="`${currentTab}-${item.label}`">
+              <div class="stat-card__label">{{ item.label }}</div>
+              <div class="stat-card__value">{{ item.value }}</div>
+              <div class="stat-card__hint">{{ item.hint }}</div>
+            </article>
+          </div>
+        </section>
+
+        <section class="quick-workbench" v-if="authed">
+          <span class="quick-label">常用模块</span>
+          <span class="quick-caption">给日常运营、订单巡检和基础资料维护使用</span>
+          <div class="quick-tabs">
+            <button
+              class="quick-tab-btn"
+              v-for="tab in quickTabs"
+              :key="tab.key"
+              :class="{ active: currentTab === tab.key }"
+              @click="switchTab(tab.key)"
+            >
+              {{ tab.label }}
+            </button>
+          </div>
+        </section>
+
+        <section class="content">
+          <div v-if="!authed" class="card login-card">
+            <h2>管理员登录</h2>
+            <p class="muted">使用后台账号密码登录后即可管理全部数据</p>
+            <div class="form-grid">
+              <div class="form-field">
+                <label>账号</label>
+                <input v-model.trim="loginForm.username" placeholder="请输入账号" />
+              </div>
+              <div class="form-field">
+                <label>密码</label>
+                <input v-model.trim="loginForm.password" type="password" placeholder="请输入密码" />
+              </div>
+            </div>
+            <button class="primary-btn full" @click="login" :disabled="loading">
+              {{ loading ? "登录中..." : "登录" }}
+            </button>
+            <div class="hint" v-if="error">{{ error }}</div>
+          </div>
+
+          <div v-else class="card data-card">
+            <div class="toolbar">
+              <div class="toolbar-left">
+                <div class="toolbar-overview">
+                  <span class="count">共 {{ filteredItems.length }} 条</span>
+                  <span class="toolbar-note">{{ tableHintText }}</span>
+                </div>
+                <label class="search-shell">
+                  <span class="search-shell__icon">搜</span>
+                  <input v-model.trim="keyword" class="search" :placeholder="searchPlaceholder" />
+                </label>
+                <select
+                  v-if="activeTab && activeTab.key === 'activities'"
+                  v-model="activityClubFilter"
+                  class="toolbar-select"
+                >
+                  <option value="">全部俱乐部</option>
+                  <option v-for="club in options.clubs" :key="club.id" :value="club.id">
+                    {{ club.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="toolbar-right">
+                <button
+                  class="ghost-btn"
+                  :class="{ 'ghost-btn--active': denseTable }"
+                  @click="toggleDenseTable"
+                  :title="denseTable ? '恢复默认行高' : '切换为紧凑行高'"
+                >
+                  {{ denseTable ? "舒展表格" : "紧凑表格" }}
+                </button>
+                <button
+                  v-if="activeTab && activeTab.key === 'activities'"
+                  class="ghost-btn"
+                  @click="groupActivitiesByClub = !groupActivitiesByClub"
+                >
+                  {{ groupActivitiesByClub ? "取消分组" : "按俱乐部分组" }}
+                </button>
+                <button
+                  class="ghost-btn"
+                  v-if="showCleanupUploads && hasMissingUploads"
+                  @click="showOnlyMissingMedia = !showOnlyMissingMedia"
+                >
+                  {{ showOnlyMissingMedia ? "查看全部" : "只看缺图" }}
+                </button>
+                <button class="ghost-btn" v-if="showCleanupUploads" @click="cleanupUploads">
+                  清理闲置图片
+                </button>
+                <button class="ghost-btn" @click="clearFilters">清除筛选</button>
+              </div>
+            </div>
+            <div class="toolbar-meta-row" v-if="activeFilterTags.length || moduleGuide.goal">
+              <div class="filter-chips" v-if="activeFilterTags.length">
+                <span class="filter-chip" v-for="tag in activeFilterTags" :key="tag">{{ tag }}</span>
+              </div>
+              <div class="toolbar-tip">{{ moduleGuide.goal }}</div>
+            </div>
+            <div v-if="showMissingAlert" class="missing-alert">
+              <div class="missing-alert__title">
+                检测到 {{ missingUploads.missingCount }} 处图片文件缺失，请及时添加
+              </div>
+              <div class="missing-alert__desc">
+                缺图会导致小程序出现 404 或空白图，建议先补齐再继续运营。
+              </div>
+              <ul class="missing-alert__list">
+                <li v-for="(item, idx) in missingUploadItemsPreview" :key="`missing-${idx}`">
+                  <button type="button" class="missing-alert__jump" @click="jumpToMissingItem(item)">
+                    {{ missingItemText(item) }}
+                    <span class="missing-alert__arrow">&gt;</span>
+                  </button>
+                </li>
+              </ul>
+              <div v-if="missingUploadMoreCount > 0" class="missing-alert__more">
+                还有 {{ missingUploadMoreCount }} 处未展示，请尽快补图。
+              </div>
+            </div>
+            <div
+              v-if="activeTab && activeTab.key === 'orders' && orderSummary"
+              class="summary-row"
+            >
+              <button
+                type="button"
+                class="summary-card"
+                :class="{ 'summary-card--active': orderStatusFilter === item.key }"
+                v-for="item in orderSummary"
+                :key="item.key"
+                @click="setOrderFilter(item.key)"
+              >
+                <div class="summary-label">{{ item.label }}</div>
+                <div class="summary-value">{{ item.count }}</div>
+              </button>
+            </div>
+            <div
+              v-if="activeTab && activeTab.key === 'orders'"
+              class="date-filter-row"
+            >
+              <span class="count">时间筛选</span>
+              <button
+                type="button"
+                class="ghost-btn date-filter-btn"
+                :class="{ 'date-filter-btn--active': orderDateFilter === 'week' }"
+                @click="setOrderDateFilter('week')"
+              >
+                近7天
+              </button>
+              <button
+                type="button"
+                class="ghost-btn date-filter-btn"
+                :class="{ 'date-filter-btn--active': orderDateFilter === 'month' }"
+                @click="setOrderDateFilter('month')"
+              >
+                近1个月
+              </button>
+              <button
+                type="button"
+                class="ghost-btn date-filter-btn"
+                :class="{ 'date-filter-btn--active': orderDateFilter === 'all' }"
+                @click="setOrderDateFilter('all')"
+              >
+                全部时间
+              </button>
+            </div>
+
+            <div v-if="loading" class="loading">数据加载中...</div>
+            <div v-else-if="error" class="error">{{ error }}</div>
+            <div
+              v-else
+              class="table-wrap"
+              :class="{
+                'table-wrap--activities': activeTab && activeTab.key === 'activities',
+                'table-wrap--orders': activeTab && activeTab.key === 'orders'
+              }"
+            >
+              <table>
+                <thead>
+                  <tr>
+                    <th v-for="col in displayColumns" :key="col.key" :class="tableColumnClass(col)">
+                      {{ tableHeaderLabel(col) }}
+                    </th>
+                    <th class="actions-col" v-if="showActionColumn">操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <template v-if="activeTab && activeTab.key === 'activities' && groupActivitiesByClub">
+                    <template v-for="group in groupedActivities" :key="`group-${group.clubId}`">
+                      <tr class="group-row">
+                        <td :colspan="tableColumnSpan">
+                          俱乐部：{{ group.clubName }}（{{ group.items.length }}）
+                        </td>
+                      </tr>
+                      <tr v-for="row in group.items" :key="row.id" class="table-row" @dblclick="openActivityRowEdit(row, $event)">
+                        <td v-for="col in displayColumns" :key="col.key" :class="tableColumnClass(col)">
+                          <template v-if="isMediaFieldKey(col.key)">
+                            <div class="table-media-list" v-if="tableMediaPreviewList(row, col).length">
+                              <div
+                                class="table-media-item"
+                                v-for="(item, idx) in tableMediaPreviewList(row, col)"
+                                :key="`${col.key}-${idx}`"
+                                @click="openMediaPreview(item)"
+                              >
+                                <span class="table-media-type" v-if="item.isVideo">视频</span>
+                                <video
+                                  v-if="item.isVideo"
+                                  :src="item.url"
+                                  muted
+                                  playsinline
+                                  preload="metadata"
+                                  @error="onTableMediaError($event)"
+                                ></video>
+                                <img v-else :src="item.url" alt="table-preview" @error="onTableMediaError($event)" />
+                              </div>
+                              <span class="table-media-more" v-if="tableMediaMoreCount(row, col) > 0">
+                                +{{ tableMediaMoreCount(row, col) }}
+                              </span>
+                            </div>
+                            <span v-else class="table-media-empty-card">{{ mediaEmptyText(col) }}</span>
+                          </template>
+                          <template v-else-if="isUrlCell(row, col)">
+                            <a class="table-link" :href="normalizeExternalUrl(row[col.key])" target="_blank" rel="noreferrer">
+                              {{ urlCellLabel(row, col) }}
+                            </a>
+                          </template>
+                          <template v-else>
+                            <span :class="cellTextClass(row, col)" :title="cellTooltipText(row, col)">
+                              {{ displayCellText(row, col) }}
+                            </span>
+                          </template>
+                        </td>
+                        <td v-if="showActionColumn" class="actions">
+                          <button class="ghost-btn action-btn action-btn--primary" v-if="activeTab.allowEdit !== false" @click="openEdit(row)">编辑</button>
+                          <button class="ghost-btn action-btn action-btn--quiet" v-if="currentTab === 'clubs' && row.address" @click="copyClubAddress(row)">复制地址</button>
+                          <button class="ghost-btn danger action-btn action-btn--danger" v-if="activeTab.allowDelete !== false" @click="remove(row)">删除</button>
+                        </td>
+                      </tr>
+                    </template>
+                  </template>
+                  <template v-else>
+                    <tr v-for="row in pagedItems" :key="row.id" class="table-row" @dblclick="openActivityRowEdit(row, $event)">
+                      <td v-for="col in displayColumns" :key="col.key" :class="tableColumnClass(col)">
+                        <template v-if="isMediaFieldKey(col.key)">
+                          <div class="table-media-list" v-if="tableMediaPreviewList(row, col).length">
+                            <div
+                              class="table-media-item"
+                              v-for="(item, idx) in tableMediaPreviewList(row, col)"
+                              :key="`${col.key}-${idx}`"
+                              @click="openMediaPreview(item)"
+                            >
+                              <span class="table-media-type" v-if="item.isVideo">视频</span>
+                              <video
+                                v-if="item.isVideo"
+                                :src="item.url"
+                                muted
+                                playsinline
+                                preload="metadata"
+                                @error="onTableMediaError($event)"
+                              ></video>
+                              <img v-else :src="item.url" alt="table-preview" @error="onTableMediaError($event)" />
+                            </div>
+                            <span class="table-media-more" v-if="tableMediaMoreCount(row, col) > 0">
+                              +{{ tableMediaMoreCount(row, col) }}
+                            </span>
+                          </div>
+                          <span v-else class="table-media-empty-card">{{ mediaEmptyText(col) }}</span>
+                        </template>
+                        <template v-else-if="isUrlCell(row, col)">
+                          <a class="table-link" :href="normalizeExternalUrl(row[col.key])" target="_blank" rel="noreferrer">
+                            {{ urlCellLabel(row, col) }}
+                          </a>
+                        </template>
+                        <template v-else-if="currentTab === 'orders' && col.key === 'orderNo'">
+                          <div class="order-quick-cell">
+                            <span :class="cellTextClass(row, col)" :title="cellTooltipText(row, col)">
+                              {{ displayCellText(row, col) }}
+                            </span>
+                            <div class="order-quick-actions">
+                              <button class="ghost-btn action-btn action-btn--primary" v-if="activeTab.allowEdit !== false" @click="openEdit(row)">编辑</button>
+                              <button class="ghost-btn action-btn action-btn--quiet" @click="copyOrderNo(row)">复制</button>
+                              <button class="ghost-btn action-btn action-btn--primary" v-if="row.status === 'unpaid'" @click="changeOrder(row, 'paid')">已支付</button>
+                              <button class="ghost-btn action-btn action-btn--primary" v-if="row.status === 'paid'" @click="changeOrder(row, 'used')">核销</button>
+                              <button class="ghost-btn danger action-btn action-btn--danger" v-if="row.status === 'paid' || row.status === 'used'" @click="refundOrder(row)">退款</button>
+                              <button class="ghost-btn danger action-btn action-btn--danger" v-if="activeTab.allowDelete !== false" @click="remove(row)">删除</button>
+                              <button class="ghost-btn action-btn action-btn--quiet" v-if="row.status === 'unpaid'" @click="changeOrder(row, 'cancelled')">取消</button>
+                            </div>
+                          </div>
+                        </template>
+                        <template v-else>
+                          <span :class="cellTextClass(row, col)" :title="cellTooltipText(row, col)">
+                            {{ displayCellText(row, col) }}
+                          </span>
+                        </template>
+                      </td>
+                      <td v-if="showActionColumn" class="actions">
+                        <button class="ghost-btn action-btn action-btn--primary" v-if="activeTab.allowEdit !== false" @click="openEdit(row)">编辑</button>
+                        <button class="ghost-btn action-btn action-btn--quiet" v-if="currentTab === 'clubs' && row.address" @click="copyClubAddress(row)">复制地址</button>
+                        <button class="ghost-btn danger action-btn action-btn--danger" v-if="activeTab.allowDelete !== false" @click="remove(row)">删除</button>
+                      </td>
+                    </tr>
+                  </template>
+                  <tr v-if="filteredItems.length === 0">
+                    <td :colspan="tableColumnSpan" class="empty">
+                      <div class="empty-state">
+                        <div class="empty-state__title">{{ emptyState.title }}</div>
+                        <div class="empty-state__desc">{{ emptyState.description }}</div>
+                        <div class="empty-state__actions">
+                          <button
+                            class="primary-btn"
+                            v-if="activeTab && activeTab.allowCreate !== false"
+                            @click="openCreate"
+                          >
+                            新增 {{ currentTabLabel }}
+                          </button>
+                          <button class="ghost-btn" v-if="activeFilterTags.length" @click="clearFilters">
+                            清除筛选
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="pagination-bar" v-if="filteredItems.length > 0">
+              <div class="pagination-meta">
+                显示第 {{ pageStart }}-{{ pageEnd }} 条，共 {{ filteredItems.length }} 条
+              </div>
+              <div class="pagination-actions">
+                <label class="pagination-size">
+                  每页
+                  <select
+                    class="toolbar-select pagination-size-select"
+                    :value="pageSize"
+                    @change="setPageSize(Number($event.target.value))"
+                  >
+                    <option v-for="size in pageSizeOptions" :key="`size-${size}`" :value="size">
+                      {{ size }}
+                    </option>
+                  </select>
+                  条
+                </label>
+                <button
+                  type="button"
+                  class="ghost-btn pagination-btn"
+                  @click="goToPage(1)"
+                  :disabled="safeCurrentPage <= 1"
+                >
+                  首页
+                </button>
+                <button
+                  type="button"
+                  class="ghost-btn pagination-btn"
+                  @click="prevPage"
+                  :disabled="safeCurrentPage <= 1"
+                >
+                  上一页
+                </button>
+                <div class="pagination-pages">
+                  <button
+                    type="button"
+                    class="page-btn"
+                    v-for="page in visiblePageNumbers"
+                    :key="`page-${page}`"
+                    :class="{ active: safeCurrentPage === page }"
+                    @click="goToPage(page)"
+                  >
+                    {{ page }}
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  class="ghost-btn pagination-btn"
+                  @click="nextPage"
+                  :disabled="safeCurrentPage >= totalPages"
+                >
+                  下一页
+                </button>
+                <button
+                  type="button"
+                  class="ghost-btn pagination-btn"
+                  @click="goToPage(totalPages)"
+                  :disabled="safeCurrentPage >= totalPages"
+                >
+                  末页
+                </button>
+                <span class="pagination-summary">{{ safeCurrentPage }} / {{ totalPages }}</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <div class="modal-mask" v-if="showModal">
+        <div class="modal card" :class="{ 'modal--compact': currentTab === 'activities' }">
+          <div class="modal-header">
+            <div>
+              <h3>{{ editing ? "编辑" : "新增" }} {{ currentTabLabel }}</h3>
+              <div class="modal-subtitle">{{ moduleGuide.formTip }}</div>
+            </div>
+            <button class="ghost-btn" @click="closeModal">关闭</button>
+          </div>
+          <div class="modal-body" ref="modalBody" @scroll="handleModalBodyScroll">
+            <div class="form-assistant">
+              <div class="form-assistant__header">
+                <div>
+                  <div class="form-assistant__title">按提示填写即可，系统不会要求你一次填完所有内容</div>
+                  <div class="form-assistant__meta">{{ formCompletionText }}</div>
+                </div>
+                <div class="form-assistant__tags">
+                  <span class="assist-tag">带 * 为必填</span>
+                  <span class="assist-tag" v-if="supportsBatch">支持批量导入</span>
+                  <span class="assist-tag" v-if="showCleanupUploads">可检查图片缺失</span>
+                </div>
+              </div>
+            </div>
+            <div v-if="currentTab === 'activities'" class="beginner-tip">
+              <div class="beginner-tip__title">新手填写顺序（按这 4 步就行）</div>
+              <ol class="beginner-tip__list">
+                <li>先填“用户支付价”：用户下单看到并支付的金额</li>
+                <li>再填“给商家金额”：每单给商家的钱</li>
+                <li>再填“用户1佣金”：下单用户本人拿多少</li>
+                <li>再填“用户2佣金”：邀请人拿多少（没有邀请人则并入用户1）</li>
+              </ol>
+            </div>
+            <div v-if="currentTab === 'clubs'" class="smart-import">
+              <div class="smart-import__title">粘贴抖音门店信息自动识别</div>
+              <div class="muted">从抖音来客/商家号页面复制文字粘贴，系统会自动填充名称、电话、地址、标签。</div>
+              <textarea
+                class="smart-import__area"
+                v-model.trim="clubImportText"
+                placeholder="示例：\n三亚子扬摩托艇俱乐部\n抖音号：23847541641\n简介：...\n地址：...\n电话：..."
+              ></textarea>
+              <div class="smart-import__actions">
+                <button class="ghost-btn" @click="applyClubImport">识别并填充</button>
+                <button class="ghost-btn" @click="clearClubImport">清空</button>
+              </div>
+              <div class="hint error" v-if="clubImportError">{{ clubImportError }}</div>
+            </div>
+            <div v-if="useSectionedFormLayout && currentFormSections.length" class="form-section-nav">
+              <button
+                type="button"
+                class="form-section-nav__item"
+                :class="{
+                  'form-section-nav__item--active': activeFormSectionKey === section.key,
+                  'form-section-nav__item--complete': isFormSectionComplete(section)
+                }"
+                v-for="section in currentFormSections"
+                :key="`nav-${section.key}`"
+                :title="section.description"
+                @click="scrollToFormSection(section.key)"
+              >
+                <span class="form-section-nav__title">{{ section.title }}</span>
+                <span class="form-section-nav__meta">{{ sectionCompletionText(section) }}</span>
+              </button>
+            </div>
+            <div v-if="useSectionedFormLayout" class="form-sections">
+              <section
+                class="form-section"
+                v-for="section in currentFormSections"
+                :key="section.key"
+                :data-form-section="section.key"
+              >
+                <div class="form-section__header">
+                  <div>
+                    <div class="form-section__title">{{ section.title }}</div>
+                    <div class="form-section__desc">{{ section.description }}</div>
+                  </div>
+                </div>
+                <div class="form-grid form-grid--compact">
+                  <div
+                    v-for="field in section.fields"
+                    :key="field.key"
+                    :class="[
+                      'form-field',
+                      {
+                        'form-field--wide':
+                          field.type === 'textarea' ||
+                          field.type === 'images' ||
+                          field.type === 'bountySteps' ||
+                          field.key === 'description' ||
+                          field.key === 'bundle' ||
+                          field.key === 'noticeContent' ||
+                          field.key === 'aboutUsContent',
+                        'form-field--media': field.type === 'image' || field.type === 'images',
+                        'form-field--select': field.type === 'select'
+                      }
+                    ]"
+                  >
+                    <label class="field-label">
+                      <span>{{ field.label }}</span>
+                      <span class="field-pill field-pill--required" v-if="field.required">必填</span>
+                      <span class="field-pill" v-else>选填</span>
+                    </label>
+                    <textarea
+                      v-if="field.type === 'textarea'"
+                      v-model.trim="form[field.key]"
+                      :placeholder="field.placeholder || ''"
+                    ></textarea>
+                    <select
+                      v-else-if="field.type === 'select'"
+                      v-model="form[field.key]"
+                      @change="onSelectChange(field)"
+                    >
+                      <option value="">请选择</option>
+                      <option v-for="opt in normalizedOptions(field)" :key="opt.value" :value="opt.value">
+                        {{ opt.label }}
+                      </option>
+                    </select>
+                    <div v-else-if="field.type === 'multi'" class="multi-select">
+                      <label
+                        v-for="opt in normalizedOptions(field)"
+                        :key="opt.value"
+                        class="multi-option"
+                      >
+                        <input
+                          type="checkbox"
+                          :value="opt.value"
+                          v-model="form[field.key]"
+                        />
+                        <span>{{ opt.label }}</span>
+                      </label>
+                    </div>
+                    <div v-else-if="field.type === 'bountySteps'" class="bounty-steps-editor">
+                      <div class="bounty-step-card" v-for="(step, stepIndex) in (form[field.key] || [])" :key="`${field.key}-${stepIndex}`">
+                        <div class="bounty-step-card__head">
+                          <span class="bounty-step-card__index">步骤 {{ stepIndex + 1 }}</span>
+                          <button
+                            type="button"
+                            class="ghost-btn danger"
+                            @click="removeBountyStep(field.key, stepIndex)"
+                            :disabled="(form[field.key] || []).length <= 1"
+                          >
+                            删除
+                          </button>
+                        </div>
+                        <div class="bounty-step-card__body">
+                          <textarea
+                            v-model.trim="step.text"
+                            placeholder="填写这一条任务说明；如果只想展示图片，可以留空文字"
+                          ></textarea>
+                          <div class="bounty-step-upload">
+                            <input type="file" accept="image/*" @change="onBountyStepUpload(field.key, stepIndex, $event)" />
+                            <div class="preview-grid" v-if="step.imageUrl">
+                              <div class="preview-item" @click="openMediaPreview(step.imageUrl)">
+                                <img :src="step.imageUrl" alt="preview" />
+                                <button type="button" class="preview-remove" @click.stop="removeBountyStepImage(field.key, stepIndex)">×</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" class="ghost-btn bounty-steps-add" @click="addBountyStep(field.key)">新增说明</button>
+                    </div>
+                    <div v-else-if="field.type === 'image'" class="upload-row">
+                      <input type="file" :accept="uploadAccept(field)" @change="onUpload(field, $event)" />
+                      <span class="tag" v-if="hasPending(field.key)">待上传</span>
+                      <span class="tag" v-else-if="form[field.key]">已上传</span>
+                      <div class="preview-grid" v-if="existingImageList(field).length">
+                        <div class="preview-item" v-for="(url, idx) in existingImageList(field)" :key="`exist-${idx}`" @click="openMediaPreview(url)">
+                          <span class="preview-type" v-if="isVideoUrl(url)">视频</span>
+                          <video v-if="isVideoUrl(url)" :src="url" muted playsinline preload="metadata" controls></video>
+                          <img v-else :src="url" alt="preview" />
+                          <button type="button" class="preview-remove" @click.stop="removeExistingImage(field, idx)">×</button>
+                        </div>
+                      </div>
+                      <div class="preview-grid preview-grid--pending" v-if="pendingPreviewList(field).length">
+                        <div class="preview-item" v-for="(item, idx) in pendingPreviewList(field)" :key="`pending-${idx}`" @click="openMediaPreview(item)">
+                          <span class="preview-type" v-if="item.isVideo">视频</span>
+                          <video v-if="item.isVideo" :src="item.url" muted playsinline preload="metadata" controls></video>
+                          <img v-else :src="item.url" alt="preview" />
+                          <button type="button" class="preview-remove" @click.stop="removePendingImage(field, idx)">×</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div v-else-if="field.type === 'images'" class="upload-row">
+                      <input type="file" :accept="uploadAccept(field)" multiple @change="onUpload(field, $event)" />
+                      <span class="tag" v-if="hasPending(field.key)">待上传</span>
+                      <div class="preview-grid" v-if="existingImageList(field).length">
+                        <div class="preview-item" v-for="(url, idx) in existingImageList(field)" :key="`exist-${idx}`" @click="openMediaPreview(url)">
+                          <span class="preview-type" v-if="isVideoUrl(url)">视频</span>
+                          <video v-if="isVideoUrl(url)" :src="url" muted playsinline preload="metadata" controls></video>
+                          <img v-else :src="url" alt="preview" />
+                          <button type="button" class="preview-remove" @click.stop="removeExistingImage(field, idx)">×</button>
+                        </div>
+                      </div>
+                      <div class="preview-grid preview-grid--pending" v-if="pendingPreviewList(field).length">
+                        <div class="preview-item" v-for="(item, idx) in pendingPreviewList(field)" :key="`pending-${idx}`" @click="openMediaPreview(item)">
+                          <span class="preview-type" v-if="item.isVideo">视频</span>
+                          <video v-if="item.isVideo" :src="item.url" muted playsinline preload="metadata" controls></video>
+                          <img v-else :src="item.url" alt="preview" />
+                          <button type="button" class="preview-remove" @click.stop="removePendingImage(field, idx)">×</button>
+                        </div>
+                      </div>
+                    </div>
+                    <input
+                      v-else
+                      v-model.trim="form[field.key]"
+                      :class="{ 'input-mono': currentTab === 'categories' && field.key === 'key' }"
+                      :type="field.type === 'number' ? 'number' : field.type === 'date' ? 'date' : field.type === 'password' ? 'password' : 'text'"
+                      :placeholder="field.placeholder || ''"
+                    />
+                    <small class="field-help" v-if="field.help">{{ field.help }}</small>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div v-else class="form-grid" :class="{ 'form-grid--compact': currentTab === 'activities' }">
+              <div
+                v-for="field in formFields"
+                :key="field.key"
+                :class="[
+                  'form-field',
+                  {
+                    'form-field--wide':
+                      field.type === 'textarea' ||
+                      field.type === 'images' ||
+                      field.type === 'bountySteps' ||
+                      field.key === 'description' ||
+                      field.key === 'bundle' ||
+                      field.key === 'noticeContent' ||
+                      field.key === 'aboutUsContent',
+                    'form-field--media': field.type === 'image' || field.type === 'images',
+                    'form-field--select': field.type === 'select'
+                  }
+                ]"
+                v-show="fieldVisible(field)"
+              >
+                <label class="field-label">
+                  <span>{{ field.label }}</span>
+                  <span class="field-pill field-pill--required" v-if="field.required">必填</span>
+                  <span class="field-pill" v-else>选填</span>
+                </label>
+                <textarea
+                  v-if="field.type === 'textarea'"
+                  v-model.trim="form[field.key]"
+                  :placeholder="field.placeholder || ''"
+                ></textarea>
+                <select
+                  v-else-if="field.type === 'select'"
+                  v-model="form[field.key]"
+                  @change="onSelectChange(field)"
+                >
+                  <option value="">请选择</option>
+                  <option v-for="opt in normalizedOptions(field)" :key="opt.value" :value="opt.value">
+                    {{ opt.label }}
+                  </option>
+                </select>
+                <div v-else-if="field.type === 'multi'" class="multi-select">
+                  <label
+                    v-for="opt in normalizedOptions(field)"
+                    :key="opt.value"
+                    class="multi-option"
+                  >
+                    <input
+                      type="checkbox"
+                      :value="opt.value"
+                      v-model="form[field.key]"
+                    />
+                    <span>{{ opt.label }}</span>
+                  </label>
+                </div>
+                <div v-else-if="field.type === 'bountySteps'" class="bounty-steps-editor">
+                  <div class="bounty-step-card" v-for="(step, stepIndex) in (form[field.key] || [])" :key="`${field.key}-${stepIndex}`">
+                    <div class="bounty-step-card__head">
+                      <span class="bounty-step-card__index">步骤 {{ stepIndex + 1 }}</span>
+                      <button
+                        type="button"
+                        class="ghost-btn danger"
+                        @click="removeBountyStep(field.key, stepIndex)"
+                        :disabled="(form[field.key] || []).length <= 1"
+                      >
+                        删除
+                      </button>
+                    </div>
+                    <div class="bounty-step-card__body">
+                      <textarea
+                        v-model.trim="step.text"
+                        placeholder="填写这一条任务说明；如果只想展示图片，可以留空文字"
+                      ></textarea>
+                      <div class="bounty-step-upload">
+                        <input type="file" accept="image/*" @change="onBountyStepUpload(field.key, stepIndex, $event)" />
+                        <div class="preview-grid" v-if="step.imageUrl">
+                          <div class="preview-item" @click="openMediaPreview(step.imageUrl)">
+                            <img :src="step.imageUrl" alt="preview" />
+                            <button type="button" class="preview-remove" @click.stop="removeBountyStepImage(field.key, stepIndex)">×</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="button" class="ghost-btn bounty-steps-add" @click="addBountyStep(field.key)">新增说明</button>
+                </div>
+                  <div v-else-if="field.type === 'image'" class="upload-row">
+                    <input type="file" :accept="uploadAccept(field)" @change="onUpload(field, $event)" />
+                    <span class="tag" v-if="hasPending(field.key)">待上传</span>
+                    <span class="tag" v-else-if="form[field.key]">已上传</span>
+                    <div class="preview-grid" v-if="existingImageList(field).length">
+                      <div class="preview-item" v-for="(url, idx) in existingImageList(field)" :key="`exist-${idx}`" @click="openMediaPreview(url)">
+                        <span class="preview-type" v-if="isVideoUrl(url)">视频</span>
+                        <video v-if="isVideoUrl(url)" :src="url" muted playsinline preload="metadata" controls></video>
+                        <img v-else :src="url" alt="preview" />
+                        <button type="button" class="preview-remove" @click.stop="removeExistingImage(field, idx)">×</button>
+                      </div>
+                    </div>
+                    <div class="preview-grid preview-grid--pending" v-if="pendingPreviewList(field).length">
+                      <div class="preview-item" v-for="(item, idx) in pendingPreviewList(field)" :key="`pending-${idx}`" @click="openMediaPreview(item)">
+                        <span class="preview-type" v-if="item.isVideo">视频</span>
+                        <video v-if="item.isVideo" :src="item.url" muted playsinline preload="metadata" controls></video>
+                        <img v-else :src="item.url" alt="preview" />
+                        <button type="button" class="preview-remove" @click.stop="removePendingImage(field, idx)">×</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-else-if="field.type === 'images'" class="upload-row">
+                    <input type="file" :accept="uploadAccept(field)" multiple @change="onUpload(field, $event)" />
+                    <span class="tag" v-if="hasPending(field.key)">待上传</span>
+                    <div class="preview-grid" v-if="existingImageList(field).length">
+                      <div class="preview-item" v-for="(url, idx) in existingImageList(field)" :key="`exist-${idx}`" @click="openMediaPreview(url)">
+                        <span class="preview-type" v-if="isVideoUrl(url)">视频</span>
+                        <video v-if="isVideoUrl(url)" :src="url" muted playsinline preload="metadata" controls></video>
+                        <img v-else :src="url" alt="preview" />
+                        <button type="button" class="preview-remove" @click.stop="removeExistingImage(field, idx)">×</button>
+                      </div>
+                    </div>
+                    <div class="preview-grid preview-grid--pending" v-if="pendingPreviewList(field).length">
+                      <div class="preview-item" v-for="(item, idx) in pendingPreviewList(field)" :key="`pending-${idx}`" @click="openMediaPreview(item)">
+                        <span class="preview-type" v-if="item.isVideo">视频</span>
+                        <video v-if="item.isVideo" :src="item.url" muted playsinline preload="metadata" controls></video>
+                        <img v-else :src="item.url" alt="preview" />
+                        <button type="button" class="preview-remove" @click.stop="removePendingImage(field, idx)">×</button>
+                      </div>
+                    </div>
+                  </div>
+                <input
+                  v-else
+                  v-model.trim="form[field.key]"
+                  :class="{ 'input-mono': currentTab === 'categories' && field.key === 'key' }"
+                  :type="field.type === 'number' ? 'number' : field.type === 'date' ? 'date' : field.type === 'password' ? 'password' : 'text'"
+                  :placeholder="field.placeholder || ''"
+                />
+                <small class="field-help" v-if="field.help">{{ field.help }}</small>
+              </div>
+            </div>
+            <div class="save-progress" v-if="saveProgress.show">
+              <div class="save-progress__head">
+                <span>{{ saveProgress.stage }}</span>
+                <span>{{ saveProgress.percent }}%</span>
+              </div>
+              <div class="save-progress__bar">
+                <div class="save-progress__fill" :style="{ width: saveProgress.percent + '%' }"></div>
+              </div>
+              <div class="save-progress__detail">{{ saveProgress.detail }}</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="modal-footer__meta">
+              <div class="modal-footer__title">{{ editing ? "正在编辑当前内容" : "准备新增一条内容" }}</div>
+              <div class="modal-footer__desc">
+                {{ formCompletionText }}
+                <span v-if="useSectionedFormLayout && currentFormSections.length">
+                  · 共 {{ currentFormSections.length }} 个区块
+                </span>
+              </div>
+            </div>
+            <div class="modal-footer__actions">
+              <button class="ghost-btn" @click="closeModal">取消</button>
+              <button class="primary-btn" @click="submitForm" :disabled="saving">
+                {{ saving ? "保存中..." : "保存" }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-mask" v-if="showImport">
+        <div class="modal card">
+          <div class="modal-header">
+            <h3>批量导入 {{ currentTabLabel }}</h3>
+            <button class="ghost-btn" @click="closeImport">关闭</button>
+            </div>
+            <div class="modal-body">
+              <div class="import-tabs">
+                <button
+                  class="tab-btn"
+                  :class="{ active: importMode === 'table' }"
+                  @click="setImportMode('table')"
+                >
+                  表格导入
+                </button>
+                <button
+                  class="tab-btn"
+                  :class="{ active: importMode === 'json' }"
+                  @click="setImportMode('json')"
+                >
+                  JSON 导入
+                </button>
+              </div>
+
+              <div v-if="importMode === 'table'" class="import-panel">
+                <p class="muted">
+                  支持 Excel (.xlsx/.xls)、CSV、制表符分隔文件。可直接从 Excel 复制表格粘贴。第一行必须是表头。
+                </p>
+                <div class="import-actions">
+                  <button class="ghost-btn" @click="downloadTemplate">下载模板</button>
+                  <label class="ghost-btn file-btn">
+                    选择文件
+                    <input
+                      type="file"
+                      accept=".csv,.tsv,.xlsx,.xls,text/csv,text/tab-separated-values,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
+                      @change="onImportFile"
+                    />
+                  </label>
+                </div>
+                <div class="import-actions" v-if="currentTab === 'activities'">
+                  <select class="toolbar-select" v-model="importClubId">
+                    <option value="">自动匹配门店</option>
+                    <option v-for="club in options.clubs" :key="club.id" :value="club.id">
+                      手动指定：{{ club.name }}
+                    </option>
+                  </select>
+                  <span class="muted">匹配失败时可用此选项兜底</span>
+                </div>
+                <textarea
+                  class="import-area"
+                  v-model.trim="importTableText"
+                  @input="onImportTextInput"
+                  placeholder="示例：&#10;名称	位置	地址	电话	标签	起价	封面图	图集"
+                ></textarea>
+                <div class="import-fields">
+                  <span class="tag" v-for="field in importFields" :key="field.key">
+                    {{ field.label || field.key }}<span v-if="field.required">*</span>
+                  </span>
+                </div>
+                <div class="import-preview" v-if="importPreview.length">
+                  <div class="count">预览前 {{ importPreview.length }} 条</div>
+                  <div class="table-wrap">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th v-for="col in importPreviewColumns" :key="col.key">
+                            {{ col.label || col.key }}
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="(row, idx) in importPreview" :key="idx">
+                          <td v-for="col in importPreviewColumns" :key="col.key">
+                            {{ formatPreviewValue(row[col.key], col.key) }}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <div v-else class="import-panel">
+                <p class="muted">
+                  请输入 JSON 数组，每个对象字段与“新增{{ currentTabLabel }}”一致。
+                </p>
+                <textarea
+                  class="import-area"
+                  v-model.trim="importText"
+                  placeholder='示例：[{"name":"俱乐部A","location":"三亚"}]'
+                ></textarea>
+              </div>
+
+              <div class="hint" v-if="importResult">
+                共 {{ importResult.total }} 条，成功 {{ importResult.success }}，失败 {{ importResult.failed }}
+              </div>
+              <div class="hint error" v-if="importError">{{ importError }}</div>
+            </div>
+          <div class="modal-footer">
+            <button class="ghost-btn" @click="closeImport">取消</button>
+            <button class="primary-btn" @click="submitImport" :disabled="saving">
+              {{ saving ? "导入中..." : "开始导入" }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-mask modal-mask--preview" v-if="mediaPreview.show" @click="closeMediaPreview">
+        <div class="media-preview" @click.stop>
+          <button type="button" class="ghost-btn media-preview__close" @click="closeMediaPreview">关闭</button>
+          <video
+            v-if="mediaPreview.isVideo && !mediaPreview.error"
+            :src="mediaPreview.url"
+            controls
+            autoplay
+            muted
+            playsinline
+            preload="auto"
+            @error="onPreviewMediaError"
+          ></video>
+          <img v-else-if="!mediaPreview.error" :src="mediaPreview.url" alt="preview-large" @error="onPreviewMediaError" />
+          <div v-else class="media-preview__error">预览失败，请检查图片格式或地址</div>
+        </div>
+      </div>
+      <div class="toast" v-if="toast.show" :class="[toast.type, toast.hiding ? 'hiding' : '']">
+        <div class="toast__header">
+          <div class="toast__icon-wrap">
+            <div class="toast__icon-ring"></div>
+            <div class="toast__icon">{{ toastIcon }}</div>
+          </div>
+          <div class="toast__title">{{ toastTitle }}</div>
+        </div>
+        <div class="toast__body">
+          <div class="toast__message">{{ toast.message }}</div>
+        </div>
+        <div class="toast__actions">
+          <button class="toast__btn toast__btn--primary" @click="hideToast">知道了</button>
+        </div>
+      </div>
+    </div>
+    <script src="/admin/js/api.js?v=202603060330"></script>
+    <script src="/admin/js/config.js?v=202603120020"></script>
+    <script src="/admin/js/app.js?v=202603190001"></script>
+  </body>
+</html>

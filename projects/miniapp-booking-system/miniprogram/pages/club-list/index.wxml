@@ -1,0 +1,29 @@
+<view class="page club-list-page">
+  <custom-nav title="俱乐部列表"></custom-nav>
+
+  <search-bar value="{{keyword}}" placeholder="搜索俱乐部" bind:input="onInput" bind:search="onSearch" bind:clear="onClear"></search-bar>
+
+  <view class="toolbar card reveal">
+    <text class="count">共 {{clubs.length}} 家</text>
+    <text class="hint">点击俱乐部可查看详情</text>
+  </view>
+
+  <view wx:if="{{status === 'loading'}}" class="state-block">
+    <skeleton count="4"></skeleton>
+  </view>
+  <view wx:elif="{{status === 'error'}}" class="state-block">
+    <empty-state title="加载失败" description="{{errorMessage}}" showButton buttonText="重新加载" bind:action="onRetry"></empty-state>
+  </view>
+  <view wx:elif="{{status === 'empty'}}" class="state-block">
+    <empty-state title="暂无俱乐部" description="换个关键词或稍后再试" showButton buttonText="清空搜索" bind:action="onClear"></empty-state>
+  </view>
+  <view wx:else class="club-list">
+    <club-card
+      wx:for="{{clubs}}"
+      wx:key="id"
+      club="{{item}}"
+      variant="list"
+      bind:tap="onTapClub"
+    ></club-card>
+  </view>
+</view>

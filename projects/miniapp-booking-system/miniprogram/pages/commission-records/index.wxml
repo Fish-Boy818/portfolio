@@ -1,0 +1,23 @@
+<view class="page record-list-page">
+  <custom-nav title="佣金明细"></custom-nav>
+  <view wx:if="{{status === 'loading'}}" class="state-block">
+    <skeleton count="3"></skeleton>
+  </view>
+  <view wx:elif="{{status === 'error'}}" class="state-block">
+    <empty-state title="加载失败" description="{{errorMessage}}" showButton buttonText="重新加载" bind:action="onRetry"></empty-state>
+  </view>
+  <view wx:else class="card list-card reveal">
+    <view wx:if="{{records.length === 0}}" class="muted">暂无佣金记录</view>
+    <view wx:for="{{records}}" wx:key="id" class="line-item">
+      <view class="line-head">
+        <text class="line-title">{{item.activityTitle || item.orderNo}}</text>
+        <text class="line-amount">+¥{{item.commissionAmount}}</text>
+      </view>
+      <view class="line-meta">
+        <text>{{item.statusText}}</text>
+        <text>{{item.orderNo}}</text>
+      </view>
+      <view class="line-time" wx:if="{{item.timeText}}">{{item.timeText}}</view>
+    </view>
+  </view>
+</view>

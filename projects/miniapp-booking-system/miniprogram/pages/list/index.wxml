@@ -1,0 +1,61 @@
+<view class="page list-page">
+  <custom-nav title="活动列表"></custom-nav>
+  <search-bar value="{{keyword}}" placeholder="搜索活动/项目" bind:input="onInput" bind:search="onSearch" bind:clear="onClear"></search-bar>
+
+  <view class="club-header card reveal" wx:if="{{club}}" bindtap="onGoClub">
+    <view class="club-mark">
+      <image class="club-mark-img" src="{{club.cover}}" mode="aspectFill"></image>
+    </view>
+    <view class="club-info">
+    <view class="club-title-row">
+      <text class="club-name">{{club.name}}</text>
+    </view>
+      <text class="club-meta">{{club.location}}</text>
+      <view class="club-tags">
+        <text class="tag" wx:for="{{club.tags}}" wx:key="*this">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="filter-row card reveal delay-1">
+    <view class="filter-item {{item.id === activeFilter ? 'active' : ''}}" wx:for="{{filters}}" wx:key="id" data-id="{{item.id}}" bindtap="onSelectFilter">
+      {{item.name}}
+    </view>
+  </view>
+
+  <view class="filter-groups">
+    <view class="filter-group">
+      <text class="group-label">价格</text>
+      <scroll-view class="group-scroll" scroll-x>
+        <view class="group-row">
+          <view class="chip {{item.id === activePrice ? 'active' : ''}}" wx:for="{{priceFilters}}" wx:key="id" data-id="{{item.id}}" bindtap="onSelectPrice">
+            {{item.name}}
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="filter-group">
+      <text class="group-label">时段</text>
+      <scroll-view class="group-scroll" scroll-x>
+        <view class="group-row">
+          <view class="chip {{item.id === activeTime ? 'active' : ''}}" wx:for="{{timeFilters}}" wx:key="id" data-id="{{item.id}}" bindtap="onSelectTime">
+            {{item.name}}
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <view wx:if="{{status === 'loading'}}" class="state-block">
+    <skeleton count="3"></skeleton>
+  </view>
+  <view wx:elif="{{status === 'error'}}" class="state-block">
+    <empty-state title="加载失败" description="{{errorMessage}}" showButton buttonText="重新加载" bind:action="onRetry"></empty-state>
+  </view>
+  <view wx:elif="{{status === 'empty'}}" class="state-block">
+    <empty-state title="暂无符合条件的活动" description="试试其他筛选条件" showButton buttonText="去首页" bind:action="onGoHome"></empty-state>
+  </view>
+  <view wx:else class="item-list">
+    <item-card wx:for="{{items}}" wx:key="id" item="{{item}}" bind:tap="onTapItem"></item-card>
+  </view>
+</view>

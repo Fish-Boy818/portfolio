@@ -1,0 +1,78 @@
+<view class="page club-detail-page">
+  <custom-nav title="俱乐部详情"></custom-nav>
+
+  <view wx:if="{{status === 'loading'}}" class="state-block">
+    <skeleton count="2"></skeleton>
+  </view>
+  <view wx:elif="{{status === 'error'}}" class="state-block">
+    <empty-state title="加载失败" description="{{errorMessage}}" showButton buttonText="重新加载" bind:action="onRetry"></empty-state>
+  </view>
+  <view wx:elif="{{status === 'empty'}}" class="state-block">
+    <empty-state title="俱乐部不存在" description="请返回首页查看" showButton buttonText="返回首页" bind:action="onGoHome"></empty-state>
+  </view>
+  <view wx:else>
+    <view class="club-hero reveal">
+      <image class="club-cover-img" src="{{club.cover}}" mode="aspectFill" wx:if="{{club.cover}}"></image>
+      <view class="club-cover-img club-cover-fallback" wx:else></view>
+      <view class="hero-mask"></view>
+    </view>
+
+    <view class="club-info card reveal delay-1">
+      <view class="info-top">
+        <view class="info-left">
+          <text class="club-name">{{club.name || ''}}</text>
+          <text class="club-meta" wx:if="{{club.location}}">{{club.location}}</text>
+        </view>
+      </view>
+      <view class="club-tags" wx:if="{{club.tags && club.tags.length}}">
+        <text class="tag" wx:for="{{club.tags}}" wx:key="*this">{{item}}</text>
+      </view>
+      <view class="info-list">
+        <view class="info-row" wx:if="{{club.openTimeText}}">
+          <text class="label">营业时间</text>
+          <text class="value">{{club.openTimeText}}</text>
+        </view>
+        <view class="info-row" wx:if="{{club.address}}">
+          <text class="label">地址</text>
+          <text class="value">{{club.address}}</text>
+        </view>
+        <view class="info-row" wx:if="{{club.phone}}">
+          <text class="label">电话</text>
+          <text class="value">{{club.phone}}</text>
+        </view>
+      </view>
+      <view class="douyin-btn-wrap" wx:if="{{club.douyinUrl}}">
+        <view class="douyin-btn" bindtap="onGoDouyinHome">
+          <text class="douyin-btn-icon">抖</text>
+          <text class="douyin-btn-text">去抖音看俱乐部主页</text>
+          <text class="douyin-btn-arrow">›</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="club-gallery card reveal delay-1" wx:if="{{club.gallery && club.gallery.length}}">
+      <view class="section-title">
+        <text>俱乐部图集</text>
+        <text class="link">精选场景</text>
+      </view>
+      <scroll-view class="gallery-scroll" scroll-x>
+        <view class="gallery-row">
+          <view class="gallery-item" wx:for="{{club.gallery}}" wx:key="*this">
+            <image class="gallery-img" src="{{item}}" mode="aspectFill"></image>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <view class="section-title reveal delay-2">
+      <text>俱乐部活动</text>
+    </view>
+
+    <view wx:if="{{activities.length === 0}}" class="state-block">
+      <empty-state title="暂无活动" description="稍后再来看看" showButton buttonText="去活动列表" bind:action="onGoList"></empty-state>
+    </view>
+    <view wx:else class="item-list">
+      <item-card wx:for="{{activities}}" wx:key="id" item="{{item}}" bind:tap="onTapItem"></item-card>
+    </view>
+  </view>
+</view>

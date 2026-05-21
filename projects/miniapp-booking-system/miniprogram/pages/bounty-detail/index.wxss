@@ -1,0 +1,135 @@
+.bounty-detail-page {
+  padding-bottom: 160rpx;
+}
+
+.bounty-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.bounty-cover-card,
+.bounty-summary-card,
+.bounty-steps-card {
+  overflow: hidden;
+}
+
+.bounty-cover {
+  width: 100%;
+  height: 420rpx;
+  background: #eef3ff;
+}
+
+.bounty-summary-card {
+  padding: 18rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.bounty-summary__location {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: var(--color-text);
+  font-family: var(--font-title);
+}
+
+.bounty-summary__range {
+  font-size: 30rpx;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.bounty-summary__status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46rpx;
+  width: fit-content;
+  padding: 0 18rpx;
+  border-radius: 999rpx;
+  background: rgba(47, 107, 255, 0.12);
+  color: var(--color-primary);
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.bounty-steps-card {
+  padding: 18rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 18rpx;
+}
+
+.step-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  padding-bottom: 14rpx;
+  border-bottom: 1rpx solid var(--color-line);
+}
+
+.step-block:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.step-block__head {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.step-block__index {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+  background: rgba(47, 107, 255, 0.14);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  font-weight: 700;
+}
+
+.step-block__title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.step-block__text,
+.step-block__empty {
+  font-size: 28rpx;
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+.step-block__empty {
+  color: var(--color-muted);
+}
+
+.step-block__image {
+  width: 100%;
+  height: 260rpx;
+  border-radius: var(--radius-lg);
+  background: #eef3ff;
+}
+
+.bounty-detail__footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20rpx 24rpx calc(20rpx + env(safe-area-inset-bottom));
+  background: rgba(245, 248, 255, 0.96);
+}
+
+.bounty-detail__btn {
+  width: 100%;
+}
+
+.state-block {
+  padding-top: 20rpx;
+}

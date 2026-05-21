@@ -1,0 +1,15 @@
+<view class="top-nav-placeholder" style="height: {{totalHeight}}px;"></view>
+<view class="top-nav" style="padding-top: {{statusBarHeight}}px;">
+  <view class="top-nav-inner" style="height: {{navBarHeight}}px;">
+    <view class="top-side top-side-left" style="width: {{sideWidth}}px;">
+      <view wx:if="{{showBack}}" class="back-btn" bindtap="onBack">
+        <view class="back-icon">
+          <view class="back-line back-line-top"></view>
+          <view class="back-line back-line-bottom"></view>
+        </view>
+      </view>
+    </view>
+    <text class="top-title">{{title}}</text>
+    <view class="top-side top-side-right" style="width: {{sideWidth}}px;"></view>
+  </view>
+</view>

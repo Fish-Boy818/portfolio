@@ -1,0 +1,23 @@
+<view class="page withdrawal-list-page">
+  <custom-nav title="提现记录"></custom-nav>
+  <view wx:if="{{status === 'loading'}}" class="state-block">
+    <skeleton count="3"></skeleton>
+  </view>
+  <view wx:elif="{{status === 'error'}}" class="state-block">
+    <empty-state title="加载失败" description="{{errorMessage}}" showButton buttonText="重新加载" bind:action="onRetry"></empty-state>
+  </view>
+  <view wx:else class="card list-card reveal">
+    <view wx:if="{{withdrawals.length === 0}}" class="muted">暂无提现申请</view>
+    <view wx:for="{{withdrawals}}" wx:key="id" class="line-item">
+      <view class="line-head">
+        <text class="line-title">{{item.withdrawNo}}</text>
+        <text class="line-amount">¥{{item.amount}}</text>
+      </view>
+      <view class="line-meta">
+        <text>{{item.statusText}}</text>
+        <text>{{item.timeText}}</text>
+      </view>
+      <view class="line-fail" wx:if="{{item.failReason}}">{{item.failReason}}</view>
+    </view>
+  </view>
+</view>

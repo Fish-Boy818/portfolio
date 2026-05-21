@@ -1,0 +1,88 @@
+<view class="page welfare-page">
+  <custom-nav title="{{pageTitle}}"></custom-nav>
+  <view wx:if="{{status === 'loading'}}" class="state-block">
+    <skeleton count="3"></skeleton>
+  </view>
+  <view wx:elif="{{status === 'review'}}" class="state-block">
+    <empty-state title="{{statusTitle}}" description="{{errorMessage}}"></empty-state>
+  </view>
+  <view wx:elif="{{status === 'error' || status === 'unauth'}}" class="state-block">
+    <empty-state title="{{statusTitle || '请先登录后再参与'}}" description="{{errorMessage}}" showButton buttonText="去我的登录" bind:action="onGoProfile"></empty-state>
+  </view>
+  <view wx:else>
+    <view wx:if="{{selectedBounty}}" class="card bounty-entry-card reveal">
+      <view class="section-title">
+        <text>已接取悬赏</text>
+      </view>
+      <image
+        wx:if="{{selectedBounty.coverImageUrl || selectedBounty.detailImageUrl}}"
+        class="bounty-entry-card__image"
+        src="{{selectedBounty.detailImageUrl || selectedBounty.coverImageUrl}}"
+        mode="aspectFill"
+        data-url="{{selectedBounty.detailImageUrl || selectedBounty.coverImageUrl}}"
+        bindtap="onPreviewBountyImage"
+      ></image>
+      <text class="bounty-entry-card__title">{{selectedBounty.location}}</text>
+      <text class="bounty-entry-card__range">{{selectedBounty.commissionRangeText}}</text>
+      <text class="bounty-entry-card__tip">{{selectedBounty.statusHint}}</text>
+    </view>
+
+    <view class="card hero-card reveal">
+      <text class="hero-title">悬赏任务</text>
+      <text class="hero-desc">完成悬赏要求后，把截图传到这里。后台审核通过后，奖励佣金会直接进入你的佣金账户。</text>
+      <view class="hero-steps">
+        <view class="hero-step">1. 完成悬赏要求并截图</view>
+        <view class="hero-step">2. 上传清晰截图并补充说明</view>
+        <view class="hero-step">3. 提交后，在 我的 悬赏记录里查看</view>
+      </view>
+    </view>
+
+    <view class="card form-card reveal delay-1">
+      <view class="section-title">
+        <text>提交好评截图</text>
+      </view>
+      <text class="field-label">补充说明</text>
+      <textarea
+        class="field-area"
+        value="{{reviewText}}"
+        maxlength="120"
+        placeholder="可选，例如：视频链接、完成时间、补充备注"
+        bindinput="onReviewTextInput"
+      ></textarea>
+
+      <text class="field-label">好评截图</text>
+      <view class="upload-card">
+        <view class="upload-grid">
+          <block wx:for="{{screenshotUrls}}" wx:key="*this">
+            <view class="upload-grid-item">
+              <image class="upload-grid-image" src="{{item}}" mode="aspectFill" bindtap="onPreviewImage" data-url="{{item}}"></image>
+              <view class="upload-grid-remove" bindtap="onRemoveImage" data-index="{{index}}">×</view>
+            </view>
+          </block>
+          <view wx:if="{{screenshotUrls.length < 9}}" class="upload-grid-item upload-grid-add" bindtap="onChooseImage">
+            <text class="upload-grid-add-icon">+</text>
+            <text class="upload-grid-add-text">{{uploading ? '上传中' : '添加图片'}}</text>
+          </view>
+        </view>
+        <text class="upload-tip">已上传 {{screenshotUrls.length}}/9 张，点击图片预览或删除</text>
+      </view>
+
+      <button
+        class="btn btn-primary"
+        bindtap="onChooseImage"
+        loading="{{uploading}}"
+        disabled="{{uploading || (selectedBounty && !selectedBounty.canSubmit)}}"
+      >
+        添加更多截图
+      </button>
+      <button
+        class="btn btn-secondary"
+        bindtap="onSubmit"
+        loading="{{submitting}}"
+        disabled="{{submitting || uploading || (selectedBounty && !selectedBounty.canSubmit)}}"
+      >
+        {{selectedBounty ? selectedBounty.submitButtonText : '提交审核'}}
+      </button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,9 @@
+<view class="empty-state">
+  <view class="empty-illus">
+    <view class="ring"></view>
+    <view class="dot"></view>
+  </view>
+  <text class="empty-title">{{title}}</text>
+  <text class="empty-desc" wx:if="{{description}}">{{description}}</text>
+  <button class="btn btn-primary empty-btn" wx:if="{{showButton}}" bindtap="onAction">{{buttonText}}</button>
+</view>

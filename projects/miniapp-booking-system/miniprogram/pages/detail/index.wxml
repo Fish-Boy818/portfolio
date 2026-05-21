@@ -1,0 +1,106 @@
+<view class="page detail-page">
+  <custom-nav title="活动详情"></custom-nav>
+  <view wx:if="{{status === 'loading'}}" class="state-block">
+    <skeleton count="2"></skeleton>
+  </view>
+  <view wx:elif="{{status === 'error'}}" class="state-block">
+    <empty-state title="加载失败" description="{{errorMessage}}" showButton buttonText="重新加载" bind:action="onRetry"></empty-state>
+  </view>
+  <view wx:elif="{{status === 'empty'}}" class="state-block">
+    <empty-state title="活动已下架" description="看看其他活动" showButton buttonText="返回首页" bind:action="onGoHome"></empty-state>
+  </view>
+  <view wx:else>
+    <view class="hero card reveal">
+      <swiper class="hero-swiper" autoplay interval="5000" circular>
+        <swiper-item wx:for="{{product.gallery}}" wx:key="*this">
+          <image class="hero-image" src="{{item}}" mode="aspectFill"></image>
+        </swiper-item>
+      </swiper>
+    </view>
+
+    <view class="detail-main card reveal delay-1">
+      <view class="title-row">
+        <text class="title">{{product.title}}</text>
+        <view class="badge {{product.badgeClass}}" wx:if="{{product.status === '已下架'}}">{{product.status}}</view>
+      </view>
+      <text class="subtitle" wx:if="{{product.subtitle}}">{{product.subtitle}}</text>
+      <view class="tag-row" wx:if="{{product.tags && product.tags.length}}">
+        <text class="tag" wx:for="{{product.tags}}" wx:key="*this">{{item}}</text>
+      </view>
+
+      <view class="price-block">
+        <view class="price-left">
+          <text class="currency">¥</text>
+          <text class="amount">{{product.price}}</text>
+        </view>
+        <view class="price-pill">活动价</view>
+      </view>
+      <text class="price-tip" wx:if="{{product.tip}}">{{product.tip}}</text>
+      <text class="price-tip" wx:if="{{product.showCommission && product.commissionTipText}}">{{product.commissionTipText}}</text>
+    </view>
+
+    <view class="detail-section card reveal delay-2" wx:if="{{product.store}}">
+      <view class="section-title">
+        <text>商家信息</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">门店</text>
+        <text class="info-value">{{product.store}}</text>
+      </view>
+      <view class="info-row" wx:if="{{product.expire}}">
+        <text class="info-label">有效期</text>
+        <text class="info-value">{{product.expire}}</text>
+      </view>
+    </view>
+
+    <view class="detail-desc card reveal delay-3" wx:if="{{descItems.length}}">
+      <view class="section-title">
+        <text>使用说明</text>
+      </view>
+      <view class="desc-list">
+        <view class="desc-row" wx:for="{{descItems}}" wx:key="label">
+          <text class="desc-label">{{item.label}}</text>
+          <text class="desc-value" wx:if="{{item.value}}">{{item.value}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="detail-section card reveal delay-3" wx:if="{{bundleItems.length || bundleTitle}}">
+      <view class="section-title bundle-title-row">
+        <text class="bundle-title">{{bundleTitle || '商品搭配'}}</text>
+        <text class="bundle-note" wx:if="{{bundleNote}}">{{bundleNote}}</text>
+      </view>
+      <view class="bundle-list">
+        <view class="bundle-line" wx:for="{{bundleItems}}" wx:key="index">
+          <view class="bundle-left">
+            <text class="bundle-dot">•</text>
+            <text class="bundle-name">{{item.name}}</text>
+          </view>
+          <view class="bundle-right">
+            <text class="bundle-qty" wx:if="{{item.qty}}">({{item.qty}})</text>
+            <text class="bundle-price" wx:if="{{item.price}}">{{item.price}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="detail-section card reveal delay-3" wx:if="{{product.detailImages && product.detailImages.length}}">
+      <view class="section-title">
+        <text>图片详情</text>
+      </view>
+      <view class="detail-image-list">
+        <image
+          class="detail-image"
+          wx:for="{{product.detailImages}}"
+          wx:key="*this"
+          src="{{item}}"
+          mode="widthFix"
+        ></image>
+      </view>
+    </view>
+
+    <view class="bottom-bar">
+      <button class="btn {{ctaDisabled ? 'btn-disabled' : 'btn-primary'}}" disabled="{{ctaDisabled}}" bindtap="onOrder">{{ctaText || (ctaDisabled ? '已售罄' : '立即下单')}}</button>
+    </view>
+  </view>
+</view>

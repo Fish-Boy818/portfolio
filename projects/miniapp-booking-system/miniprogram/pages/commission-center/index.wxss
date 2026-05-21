@@ -1,0 +1,213 @@
+.page {
+  padding: var(--space-page);
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.summary-card,
+.withdraw-card,
+.list-card {
+  padding: 14rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.summary-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  font-family: var(--font-title);
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10rpx;
+}
+
+.summary-item {
+  border-radius: var(--radius-md);
+  padding: 10rpx;
+  background: rgba(47, 107, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+  min-width: 0;
+}
+
+.summary-label {
+  font-size: 26rpx;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.summary-value {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: var(--color-primary);
+  font-family: var(--font-title);
+  word-break: break-all;
+}
+
+.invite-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.invite-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.invite-title {
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.invite-count {
+  font-size: 26rpx;
+  color: var(--color-muted);
+}
+
+.invite-enabled {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.invite-qrcode {
+  width: 280rpx;
+  height: 280rpx;
+  border-radius: var(--radius-md);
+  background: #fff;
+}
+
+.invite-code {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.invite-tip {
+  font-size: 26rpx;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.invite-disabled {
+  font-size: 26rpx;
+  color: var(--color-muted);
+}
+
+.invite-records-entry {
+  margin-top: 4rpx;
+  padding: 16rpx;
+  border: 1rpx solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.invite-records-entry-main {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.invite-records-entry-title {
+  font-size: 28rpx;
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.invite-records-entry-count {
+  font-size: 26rpx;
+  color: var(--color-muted);
+}
+
+.invite-records-entry-action {
+  font-size: 32rpx;
+  color: var(--color-primary);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.withdraw-row {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.withdraw-input {
+  flex: 1;
+  height: 66rpx;
+  border-radius: var(--radius-md);
+  border: 2rpx solid rgba(47, 107, 255, 0.2);
+  background: #fff;
+  padding: 0 12rpx;
+  font-size: 30rpx;
+}
+
+.mini-btn {
+  min-width: 140rpx;
+  height: 60rpx;
+  border-radius: var(--radius-pill);
+  background: rgba(47, 107, 255, 0.14);
+  color: var(--color-primary);
+  font-size: 26rpx;
+  font-weight: 700;
+  line-height: 60rpx;
+  padding: 0 12rpx;
+}
+
+.withdraw-tip {
+  font-size: 26rpx;
+  color: var(--color-muted);
+}
+
+.withdraw-error {
+  font-size: 26rpx;
+  color: var(--color-danger);
+}
+
+.section-entry {
+  padding: 10rpx 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-entry-main {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.section-entry-title {
+  font-size: 30rpx;
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.section-entry-count {
+  font-size: 26rpx;
+  color: var(--color-muted);
+}
+
+.section-entry-action {
+  font-size: 32rpx;
+  color: var(--color-primary);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.state-block {
+  padding-top: 20rpx;
+}
+

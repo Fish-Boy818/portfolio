@@ -1,0 +1,132 @@
+<view class="page order-detail-page">
+  <custom-nav title="订单详情"></custom-nav>
+  <view wx:if="{{status === 'loading'}}" class="state-block">
+    <skeleton count="2"></skeleton>
+  </view>
+  <view wx:elif="{{status === 'error'}}" class="state-block">
+    <empty-state title="加载失败" description="{{errorMessage}}" showButton buttonText="重新加载" bind:action="onRetry"></empty-state>
+  </view>
+  <view wx:elif="{{status === 'empty'}}" class="state-block">
+    <empty-state title="订单不存在" description="请返回订单列表查看" showButton buttonText="返回订单" bind:action="onGoOrders"></empty-state>
+  </view>
+  <view wx:else>
+    <view class="status-card card reveal">
+      <text class="status-title">{{statusTitle}}</text>
+      <text class="status-sub">{{statusSub}}</text>
+      <view class="badge {{statusBadgeClass}}">{{statusBadgeText}}</view>
+    </view>
+
+    <view class="card info-card reveal delay-1">
+      <view class="section-title">
+        <text>商品信息</text>
+      </view>
+      <view class="product-row">
+        <view class="media">
+          <image
+            class="media-image"
+            wx:if="{{order.coverImage}}"
+            src="{{order.coverImage}}"
+            mode="aspectFill"
+            binderror="onOrderImageError"
+          ></image>
+        </view>
+        <view class="product-info">
+          <text class="title">{{order.title}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card info-card reveal delay-2">
+      <view class="section-title">
+        <text>成交信息</text>
+      </view>
+      <view class="row">
+        <text class="label">订单号</text>
+        <text class="value">{{order.orderNo || '--'}}</text>
+      </view>
+      <view class="row">
+        <text class="label">下单时间</text>
+        <text class="value">{{order.orderTime || '--'}}</text>
+      </view>
+      <view class="row">
+        <text class="label">单价</text>
+        <text class="value">¥{{order.price}}</text>
+      </view>
+      <view class="row">
+        <text class="label">数量</text>
+        <text class="value">{{order.quantity}} 份</text>
+      </view>
+      <view class="row">
+        <text class="label">实付金额</text>
+        <text class="value emphasis">¥{{order.payAmount}}</text>
+      </view>
+      <view class="row" wx:if="{{order.paidAt}}">
+        <text class="label">支付时间</text>
+        <text class="value">{{order.paidAt}}</text>
+      </view>
+      <view class="deal-price-wrap">
+        <view class="deal-price-chip">
+          <view class="deal-price-main">
+            <text class="currency">¥</text>
+            <text class="amount">{{order.price}}</text>
+          </view>
+          <view class="deal-price-badge">活动价</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card info-card reveal delay-2">
+      <view class="section-title">
+        <text>服务信息</text>
+      </view>
+      <view class="row">
+        <text class="label">服务地点</text>
+        <text class="value">{{order.store}}</text>
+      </view>
+      <view class="row" wx:if="{{order.phone}}">
+        <text class="label">联系电话</text>
+        <text class="value">{{order.phone}}</text>
+      </view>
+    </view>
+
+    <view class="card pay-card reveal delay-3" wx:if="{{showPay}}">
+      <view class="section-title">
+        <text>支付</text>
+      </view>
+      <text class="muted">{{payTip}}</text>
+      <button class="btn {{paying ? 'btn-disabled' : 'btn-primary'}}" disabled="{{paying}}" bindtap="onPay">
+        <text wx:if="{{paying}}">支付中...</text>
+        <text wx:else>{{payButtonText}}</text>
+      </button>
+    </view>
+
+    <view class="card verify-card reveal delay-3" wx:if="{{showVerify}}">
+      <view class="section-title">
+        <text>核销</text>
+        <text class="link">点击核销</text>
+      </view>
+      <text class="muted">{{verifyTip}}</text>
+      <text class="verify-time" wx:if="{{order.verifiedAt}}">核销时间 {{order.verifiedAt}}</text>
+      <button class="btn verify-btn {{verifyDisabled ? 'btn-disabled' : 'verify-btn-active'}}" disabled="{{verifyDisabled}}" bindtap="onVerify">{{verifyButtonText}}</button>
+    </view>
+
+    <view class="card refund-card reveal delay-3" wx:if="{{showRefund}}">
+      <view class="section-title">
+        <text>退款</text>
+      </view>
+      <text class="muted">{{refundTip}}</text>
+      <button class="btn btn-secondary" bindtap="onRefund">{{refundButtonText}}</button>
+    </view>
+
+    <view class="card support-card reveal delay-3" wx:if="{{showExperienceSupport}}">
+      <view class="section-title">
+        <text>体验不好？</text>
+      </view>
+      <text class="muted">优先联系商家，说明情况，我们的商家会第一时间了解事情情况，为您处理！如遇商家对我们的合理诉求置之不理，联系我们介入处理！当然要记得保留好证据哦～</text>
+      <view class="support-actions">
+        <button class="btn btn-secondary support-btn" bindtap="onCallMerchant">联系商家（快速处理）</button>
+        <button class="btn btn-ghost support-btn" bindtap="onCallPlatform">平台介入</button>
+      </view>
+    </view>
+  </view>
+</view>

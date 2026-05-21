@@ -1,0 +1,123 @@
+<view class="page order-confirm-page">
+  <custom-nav title="确认预约"></custom-nav>
+  <view wx:if="{{status === 'loading'}}" class="state-block">
+    <skeleton count="2"></skeleton>
+  </view>
+  <view wx:elif="{{status === 'error'}}" class="state-block">
+    <empty-state title="加载失败" description="{{errorMessage}}" showButton buttonText="重新加载" bind:action="onRetry"></empty-state>
+  </view>
+  <view wx:elif="{{status === 'empty'}}" class="state-block">
+    <empty-state title="无法创建订单" description="{{emptyMessage}}" showButton buttonText="返回选择" bind:action="onGoBack"></empty-state>
+  </view>
+  <view wx:else>
+    <view class="summary card reveal">
+      <view class="media">
+        <image
+          class="media-image"
+          wx:if="{{product.coverImage}}"
+          src="{{product.coverImage}}"
+          mode="aspectFill"
+          binderror="onSummaryImageError"
+        ></image>
+      </view>
+      <view class="summary-info">
+        <text class="title">{{product.title}}</text>
+      <text class="muted">服务地点：{{product.store}}</text>
+        <view class="badge badge--info">无需预约</view>
+      </view>
+    </view>
+
+    <view class="card price-card reveal delay-1">
+      <view class="deal-row">
+        <view class="deal-left">
+          <text class="deal-title">成交价</text>
+          <text class="deal-sub">价格快照</text>
+        </view>
+        <view class="deal-amount">
+          <text class="currency">¥</text>
+          <text class="num">{{payAmount || product.price}}</text>
+        </view>
+      </view>
+      <view class="deal-meta">
+        <text class="deal-pill">活动价</text>
+      </view>
+      <text class="deal-tip" wx:if="{{product.showCommission && product.expectedCommission}}">预计佣金：¥{{product.expectedCommission}}（以订单完成结算为准）</text>
+      <text class="deal-tip" wx:if="{{product.tip}}">{{product.tip}}</text>
+    </view>
+
+    <view class="card info-card reveal delay-2">
+      <view class="row">
+        <text class="label">联系电话</text>
+        <input
+          class="value-input"
+          type="number"
+          maxlength="11"
+          placeholder="请输入手机号"
+          value="{{phone}}"
+          bindinput="onPhoneInput"
+        />
+      </view>
+      <view class="row">
+        <text class="label">份数</text>
+        <view class="qty-stepper">
+          <view class="qty-btn" bindtap="onQtyMinus">-</view>
+          <text class="qty-value">{{quantity}}</text>
+          <view class="qty-btn" bindtap="onQtyPlus">+</view>
+        </view>
+      </view>
+      <view class="row">
+        <text class="label">支付方式</text>
+        <text class="value">微信支付</text>
+      </view>
+    </view>
+
+    <view class="card note-card reveal delay-2">
+      <text class="note-title">支付说明</text>
+      <text class="note-text">下单后请在 5 分钟内完成支付，超时订单自动关闭。</text>
+    </view>
+
+    <view class="card safety-card reveal delay-2">
+      <text class="note-title">安全温馨提示</text>
+      <text class="safety-link" bindtap="openSafety">下单前请点击查看安全须知，确认无问题后再下单</text>
+    </view>
+
+    <view class="agree-row reveal delay-2" wx:if="{{requiresPhoneLogin}}">
+      <view class="agree-check {{privacyAgreed ? 'agree-check--active' : ''}}" bindtap="onTogglePrivacyAgree">{{privacyAgreed ? '✓' : ''}}</view>
+      <view class="agree-text">
+        <text>我已阅读并同意</text>
+        <text class="agree-link" catchtap="onOpenUserAgreement">《用户协议》</text>
+        <text>和</text>
+        <text class="agree-link" catchtap="onOpenPrivacyPolicy">《隐私政策》</text>
+      </view>
+    </view>
+
+    <button
+      wx:if="{{requiresPhoneLogin}}"
+      class="btn {{privacyAgreed && !paying ? 'btn-primary' : 'btn-disabled'}}"
+      disabled="{{!privacyAgreed || paying}}"
+      open-type="getPhoneNumber"
+      bindgetphonenumber="onPhoneAuthAndPay"
+    >
+      <text wx:if="{{paying}}">支付中...</text>
+      <text wx:else>手机号授权并支付 ¥{{payAmount}}</text>
+    </button>
+    <button wx:else class="btn {{paying ? 'btn-disabled' : 'btn-primary'}}" disabled="{{paying}}" bindtap="onPay">
+      <text wx:if="{{paying}}">支付中...</text>
+      <text wx:else>确认支付 ¥{{payAmount}}</text>
+    </button>
+  </view>
+
+  <view class="modal-mask" wx:if="{{showSafety}}" bindtap="closeSafety">
+    <view class="modal-panel" bindtap="noop">
+      <view class="modal-header">
+        <text class="modal-title">安全须知</text>
+        <text class="modal-close" bindtap="closeSafety">关闭</text>
+      </view>
+      <scroll-view scroll-y class="modal-body" style="height: 72vh;">
+        <view class="safety-text">
+          <view wx:for="{{safetyLines}}" wx:key="index" class="safety-line">{{item}}</view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

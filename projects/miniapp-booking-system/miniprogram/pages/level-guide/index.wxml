@@ -1,0 +1,20 @@
+<view class="page guide-page">
+  <custom-nav title="价格说明"></custom-nav>
+  <view class="card guide-card reveal">
+    <text class="guide-title">价格说明</text>
+    <text class="guide-text">当前采用统一价格策略，所有用户按同一价格下单。</text>
+    <text class="guide-text">订单创建后会进行价格快照，后续不会追溯变更。</text>
+  </view>
+
+  <view class="card guide-card reveal delay-1">
+    <text class="guide-title">价格口径</text>
+    <text class="guide-text">展示价格与下单价格保持一致。</text>
+    <text class="guide-text">以订单页和支付页展示金额为准。</text>
+  </view>
+
+  <view class="card guide-card reveal delay-2">
+    <text class="guide-title">常见问题</text>
+    <text class="guide-text">为何价格不变：下单时价格已快照，订单不追溯。</text>
+    <text class="guide-text">如需调价，请联系管理员在后台更新商品价格。</text>
+  </view>
+</view>

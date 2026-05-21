@@ -1,0 +1,70 @@
+<view class="page slot-page">
+  <custom-nav title="选择出发时间"></custom-nav>
+  <view wx:if="{{status === 'loading'}}" class="state-block">
+    <skeleton count="3"></skeleton>
+  </view>
+  <view wx:elif="{{status === 'error'}}" class="state-block">
+    <empty-state title="加载失败" description="{{errorMessage}}" showButton buttonText="重新加载" bind:action="onRetry"></empty-state>
+  </view>
+  <view wx:elif="{{status === 'empty'}}" class="state-block">
+    <empty-state title="暂无可出发时段" description="请选择其他日期" showButton buttonText="返回上一页" bind:action="onGoBack"></empty-state>
+  </view>
+  <view wx:else>
+    <view wx:if="{{manualMode}}">
+      <view class="section-title reveal">
+        <text>选择日期</text>
+      </view>
+      <picker mode="date" value="{{manualDate}}" start="{{manualStartDate}}" end="{{manualEndDate}}" bindchange="onPickDate">
+        <view class="picker-card">
+          <text>{{manualDate}}</text>
+        </view>
+      </picker>
+
+      <view class="section-title reveal delay-1">
+        <text>选择时间</text>
+      </view>
+      <picker mode="time" value="{{manualTime}}" bindchange="onPickTime">
+        <view class="picker-card">
+          <text>{{manualTime}}</text>
+        </view>
+      </picker>
+
+      <view class="section-title reveal delay-2">
+        <text>已选</text>
+        <text class="link">{{selectedTip}}</text>
+      </view>
+      <button class="btn btn-primary slot-confirm" bindtap="onConfirm">确认出发时间</button>
+    </view>
+    <view wx:else>
+      <view class="section-title reveal">
+        <text>选择日期</text>
+      </view>
+
+      <scroll-view class="date-scroll" scroll-x>
+        <view class="date-row">
+          <view class="date-item {{index === activeDateIndex ? 'active' : ''}}" wx:for="{{dates}}" wx:key="value" data-index="{{index}}" bindtap="onSelectDate">
+            <text class="date-label">{{item.label}}</text>
+            <text class="date-week">{{item.week}}</text>
+          </view>
+        </view>
+      </scroll-view>
+
+      <view class="section-title reveal delay-1">
+        <text>可出发时段</text>
+        <text class="link">{{selectedTip}}</text>
+      </view>
+
+      <view class="slot-list">
+        <view class="slot-item {{item.available ? '' : 'is-disabled'}} {{index === activeSlotIndex ? 'is-active' : ''}}" wx:for="{{slots}}" wx:key="time" data-index="{{index}}" data-available="{{item.available}}" bindtap="onSelectSlot">
+          <view class="slot-time">{{item.time}}</view>
+          <view class="slot-meta">
+            <text class="slot-left">剩余 {{item.left}} 份</text>
+            <text class="slot-state">{{item.available ? '可预约' : '已满'}}</text>
+          </view>
+        </view>
+      </view>
+
+      <button class="btn {{ctaDisabled ? 'btn-disabled' : 'btn-primary'}} slot-confirm" disabled="{{ctaDisabled}}" bindtap="onConfirm">确认出发时段</button>
+    </view>
+  </view>
+</view>

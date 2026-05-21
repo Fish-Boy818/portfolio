@@ -1,0 +1,46 @@
+<view class="page bounty-detail-page">
+  <custom-nav title="{{pageTitle}}"></custom-nav>
+  <view wx:if="{{status === 'loading'}}" class="state-block">
+    <skeleton count="3"></skeleton>
+  </view>
+  <view wx:elif="{{status === 'review'}}" class="state-block">
+    <empty-state title="任务详情升级中" description="任务详情与提交入口正在升级，暂时不可用。"></empty-state>
+  </view>
+  <view wx:elif="{{status === 'error'}}" class="state-block">
+    <empty-state title="详情加载失败" description="{{errorMessage}}" showButton buttonText="重新加载" bind:action="onRetry"></empty-state>
+  </view>
+  <view wx:else class="bounty-detail">
+    <view class="card bounty-cover-card reveal">
+      <image class="bounty-cover" src="{{bounty.detailImageUrl}}" mode="aspectFill" data-url="{{bounty.detailImageUrl}}" bindtap="onPreviewImage"></image>
+    </view>
+
+    <view class="card bounty-summary-card reveal delay-1">
+      <text class="bounty-summary__location">{{bounty.location}}</text>
+      <text class="bounty-summary__range">{{bounty.commissionRangeText}}</text>
+    </view>
+
+    <view class="card bounty-steps-card reveal delay-2">
+      <view class="step-block" wx:for="{{steps}}" wx:key="index">
+        <view class="step-block__head">
+          <text class="step-block__index">{{item.index}}</text>
+          <text class="step-block__title">任务说明 {{item.index}}</text>
+        </view>
+        <text wx:if="{{item.text}}" class="step-block__text">{{item.text}}</text>
+        <image
+          wx:if="{{item.imageUrl}}"
+          class="step-block__image"
+          src="{{item.imageUrl}}"
+          mode="aspectFill"
+          data-url="{{item.imageUrl}}"
+          bindtap="onPreviewImage"
+        ></image>
+        <text wx:if="{{!item.text && !item.imageUrl}}" class="step-block__empty">宗主暂未补充这一条说明</text>
+      </view>
+    </view>
+  </view>
+  <view class="bounty-detail__footer" wx:if="{{status === 'ready'}}">
+    <button class="btn btn-primary bounty-detail__btn" bindtap="onTakeTask" loading="{{accepting}}" disabled="{{accepting}}">
+      {{bounty.actionText || '提交任务'}}
+    </button>
+  </view>
+</view>

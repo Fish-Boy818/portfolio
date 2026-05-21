@@ -1,0 +1,10 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "custom-nav": "/components/custom-nav/index",
+    "price-tag": "/components/price-tag/index",
+    "empty-state": "/components/empty-state/index",
+    "skeleton": "/components/skeleton/index"
+  }
+}

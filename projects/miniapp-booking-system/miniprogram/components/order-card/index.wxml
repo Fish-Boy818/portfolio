@@ -1,0 +1,32 @@
+<view class="order-card card">
+  <view class="order-head">
+    <text class="order-no">订单号 {{order.no}}</text>
+    <view class="badge {{order.badgeClass}}">{{order.statusText}}</view>
+  </view>
+  <view class="order-body">
+    <view class="thumb {{order.mediaClass}}">
+      <image class="thumb-img" src="{{order.cover}}" mode="aspectFill" wx:if="{{order.cover}}"></image>
+      <text class="thumb-text" wx:elif="{{order.shortTitle}}">{{order.shortTitle}}</text>
+    </view>
+    <view class="order-info">
+      <text class="order-title">{{order.title}}</text>
+      <view class="order-meta">
+        <text class="meta">{{order.store}}</text>
+      </view>
+      <text class="muted">订单时间 {{order.time || '--'}}</text>
+    </view>
+  </view>
+  <view class="order-price-row">
+    <view class="order-price-chip">
+      <view class="order-price-main">
+        <text class="currency">¥</text>
+        <text class="amount">{{order.displayAmount}}</text>
+      </view>
+      <view class="order-price-badge">活动价</view>
+    </view>
+  </view>
+  <view class="order-actions" wx:if="{{order.primaryText || order.secondaryText}}">
+    <button class="btn btn-secondary" wx:if="{{order.secondaryText}}" data-id="{{order.id}}" bindtap="onSecondary">{{order.secondaryText}}</button>
+    <button class="btn btn-primary" wx:if="{{order.primaryText}}" data-id="{{order.id}}" bindtap="onPrimary">{{order.primaryText}}</button>
+  </view>
+</view>

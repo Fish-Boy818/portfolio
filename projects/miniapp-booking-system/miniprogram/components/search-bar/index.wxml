@@ -1,0 +1,6 @@
+<view class="search-bar card">
+  <image class="search-icon" src="/assets/images/icons/search.png" mode="aspectFit"></image>
+  <input class="search-input" value="{{value}}" placeholder="{{placeholder}}" placeholder-class="search-placeholder" bindinput="onInput" bindconfirm="onConfirm" confirm-type="search" />
+  <view class="search-clear" wx:if="{{value}}" bindtap="onClear">清</view>
+  <view class="search-action" wx:if="{{showAction}}" bindtap="onSearch">搜索</view>
+</view>

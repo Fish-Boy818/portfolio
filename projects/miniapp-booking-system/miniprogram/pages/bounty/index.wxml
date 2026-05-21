@@ -1,0 +1,84 @@
+<view class="page page--with-tabbar bounty-page">
+  <custom-nav title="{{pageTitle}}"></custom-nav>
+  <view wx:if="{{status === 'loading'}}" class="state-block">
+    <skeleton count="3"></skeleton>
+  </view>
+  <view wx:elif="{{status === 'review'}}" class="bounty-list">
+    <view class="card bounty-hero reveal">
+      <text class="bounty-hero__title">精选推荐</text>
+      <text class="bounty-hero__desc">本页展示平台当前可预订的海上体验活动与出行提示，可直接进入活动详情查看项目说明、适用人群和价格信息。</text>
+    </view>
+
+    <view class="card review-guide-card reveal delay-1">
+      <view class="section-title">
+        <text>出行提示</text>
+      </view>
+      <view class="review-guide-list">
+        <view class="review-guide-item" wx:for="{{reviewGuides}}" wx:key="title">
+          <text class="review-guide-item__title">{{item.title}}</text>
+          <text class="review-guide-item__desc">{{item.desc}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card review-activity-card reveal delay-2">
+      <view class="section-title">
+        <text>热门活动推荐</text>
+        <text class="link" bindtap="onGoCategory">查看全部</text>
+      </view>
+      <view wx:if="{{reviewActivities.length}}" class="review-activity-list">
+        <view
+          class="review-activity-item"
+          wx:for="{{reviewActivities}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          bindtap="onOpenReviewActivity"
+        >
+          <image class="review-activity-item__image" src="{{item.cover}}" mode="aspectFill"></image>
+          <view class="review-activity-item__body">
+            <text class="review-activity-item__title">{{item.title}}</text>
+            <text class="review-activity-item__subtitle">{{item.subtitle}}</text>
+            <view class="review-activity-item__foot">
+              <text class="review-activity-item__location">{{item.location}}</text>
+              <text class="review-activity-item__price">{{item.priceText}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view wx:else class="review-empty">
+        <text class="review-empty__desc">当前推荐活动正在更新中，你也可以前往分类页浏览全部正式活动。</text>
+        <button class="btn btn-secondary review-empty__btn" bindtap="onGoCategory">前往分类页</button>
+      </view>
+    </view>
+  </view>
+  <view wx:elif="{{status === 'error'}}" class="state-block">
+    <empty-state title="悬赏加载失败" description="{{errorMessage}}" showButton buttonText="重新加载" bind:action="onRetry"></empty-state>
+  </view>
+  <view wx:elif="{{status === 'empty'}}" class="state-block">
+    <empty-state title="暂无悬赏" description="宗门暂时还没发布新的悬赏任务，稍后再来看看。"></empty-state>
+  </view>
+  <view wx:else class="bounty-list">
+    <view class="card bounty-hero reveal">
+      <text class="bounty-hero__title">悬赏任务</text>
+      <text class="bounty-hero__desc">从上往下查看宗门最新悬赏，选中任务后即可接取并跳转到悬赏任务提交内容。</text>
+    </view>
+    <view
+      class="card bounty-card reveal"
+      wx:for="{{items}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onOpenDetail"
+    >
+      <image class="bounty-card__image" src="{{item.coverImageUrl}}" mode="aspectFill"></image>
+      <view class="bounty-card__body">
+        <text class="bounty-card__location">{{item.location}}</text>
+        <text class="bounty-card__range">{{item.commissionRangeText}}</text>
+        <view class="bounty-card__action">
+          <text>{{item.actionText}}</text>
+          <text class="bounty-card__arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="page-bottom-spacer"></view>
+</view>
