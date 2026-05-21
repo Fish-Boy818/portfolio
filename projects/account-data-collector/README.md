@@ -1,6 +1,6 @@
-# 抖音来客账号管理与数据采集工具
+# 账号管理与数据采集工具
 
-通过 Selenium 登录抖音来客后台，按账号列表采集数据并生成报表，可选推送到企业微信机器人。
+通过 Selenium 登录业务后台，按账号列表采集数据并生成报表，可选推送到企业微信机器人。
 
 公开版本不包含真实账号、密码、Webhook 和业务数据。
 
@@ -31,8 +31,9 @@ Copy-Item account_names.example.txt account_names.txt
 编辑 `.env`：
 
 ```text
-DOUYIN_PHONE=your_phone_number
-DOUYIN_PASSWORD=your_password
+ACCOUNT_LOGIN_URL=https://example.com/login
+ACCOUNT_LOGIN_PHONE=your_phone_number
+ACCOUNT_LOGIN_PASSWORD=your_password
 WECHAT_WEBHOOK_URL=https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=your_webhook_key
 ENABLE_WECHAT_PUSH=false
 MAX_ACCOUNTS=

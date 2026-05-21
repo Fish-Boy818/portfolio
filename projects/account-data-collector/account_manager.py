@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-账户管理器模块，自动读取和处理抖音账户ID
+账户管理器模块，自动读取和处理账户 ID
 """
 
 import os
@@ -11,7 +11,7 @@ import json
 from datetime import datetime
 
 class AccountManager:
-    """账户管理器类，用于自动读取和管理抖音账户ID"""
+    """账户管理器类，用于自动读取和管理账户 ID"""
     
     def __init__(self):
         """初始化账户管理器"""
@@ -112,7 +112,7 @@ class AccountManager:
         return list(self.accounts_data.keys())
     
     def extract_account_id_from_text(self, text):
-        """从文本中提取可能的抖音账户ID（通常是13位数字）"""
+        """从文本中提取可能的账户 ID（通常是13位数字）"""
         if not text:
             return None
         
@@ -232,7 +232,7 @@ class AccountManager:
     
     def generate_report(self):
         """生成账户报告"""
-        report = "抖音账户列表报告\n"
+        report = "账户列表报告\n"
         report += f"生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
         report += f"账户总数: {len(self.accounts_data)}\n\n"
         

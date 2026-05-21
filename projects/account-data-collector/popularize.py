@@ -12,8 +12,9 @@ import os
 
 load_dotenv()
 
-DOUYIN_PHONE = os.environ.get("DOUYIN_PHONE", "").strip()
-DOUYIN_PASSWORD = os.environ.get("DOUYIN_PASSWORD", "").strip()
+ACCOUNT_LOGIN_URL = os.environ.get("ACCOUNT_LOGIN_URL", "").strip()
+ACCOUNT_LOGIN_PHONE = os.environ.get("ACCOUNT_LOGIN_PHONE", "").strip()
+ACCOUNT_LOGIN_PASSWORD = os.environ.get("ACCOUNT_LOGIN_PASSWORD", "").strip()
 WECHAT_WEBHOOK_URL = os.environ.get("WECHAT_WEBHOOK_URL", "").strip()
 ENABLE_WECHAT_PUSH = os.environ.get("ENABLE_WECHAT_PUSH", "false").strip().lower() in {"1", "true", "yes", "on"}
 
@@ -1439,9 +1440,9 @@ def process_all_accounts(driver, max_accounts=None):
     
     return processed_count
 
-def login_douyin_laike(max_accounts=None, max_retries=3):
+def login_account_console(max_accounts=None, max_retries=3):
     """
-    登录抖音来客并处理账户数据
+    登录业务后台并处理账户数据
     
     Args:
         max_accounts: 最大处理账户数量，如果为None则处理所有可用账户
@@ -1458,10 +1459,10 @@ def login_douyin_laike(max_accounts=None, max_retries=3):
     driver = webdriver.Chrome(options=options)
     
     try:
-        # 打开抖音来客
-        driver.get("https://life.douyin.com/p/login")
+        # 打开业务后台
+        driver.get(require_env("ACCOUNT_LOGIN_URL", ACCOUNT_LOGIN_URL))
         driver.maximize_window()
-        print("已打开抖音来客页面")
+        print("已打开业务后台页面")
         
         # 等待并点击"立即登录"按钮
         login_button = WebDriverWait(driver, 10).until(
@@ -1482,7 +1483,7 @@ def login_douyin_laike(max_accounts=None, max_retries=3):
             EC.presence_of_element_located((By.CSS_SELECTOR, "input.life-core-input.life-core-input-size-md[placeholder='手机号码']"))
         )
         phone_input.clear()
-        phone_input.send_keys(require_env("DOUYIN_PHONE", DOUYIN_PHONE))
+        phone_input.send_keys(require_env("ACCOUNT_LOGIN_PHONE", ACCOUNT_LOGIN_PHONE))
         print("已输入手机号")
         
         # 输入密码
@@ -1490,7 +1491,7 @@ def login_douyin_laike(max_accounts=None, max_retries=3):
             EC.presence_of_element_located((By.CSS_SELECTOR, "input.life-core-input.life-core-input-size-md[placeholder='密码']"))
         )
         password_input.clear()
-        password_input.send_keys(require_env("DOUYIN_PASSWORD", DOUYIN_PASSWORD))
+        password_input.send_keys(require_env("ACCOUNT_LOGIN_PASSWORD", ACCOUNT_LOGIN_PASSWORD))
         print("已输入密码")
         
         # 勾选同意协议复选框
@@ -1540,7 +1541,7 @@ def login_douyin_laike(max_accounts=None, max_retries=3):
         time.sleep(3)  # 减少等待时间
         
         # 检查是否登录成功
-        if "life.douyin.com" in driver.current_url:
+        if driver.current_url:
             print("登录成功！")
             
             # 使用用户提供的具体类名定位"营销推广"菜单
@@ -1804,5 +1805,5 @@ def click_account_in_list(driver, account_index):
 
 if __name__ == "__main__":
     # 可以在这里指定要处理的账户数量，如果不指定则处理所有可用账户
-    login_douyin_laike()
+    login_account_console()
 

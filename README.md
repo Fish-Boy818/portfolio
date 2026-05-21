@@ -9,7 +9,7 @@
 | 项目 | 说明 |
 | --- | --- |
 | [`index.html`](index.html) | 在线作品集页面，展示个人概览、技术架构、项目 Demo 和脱敏源码片段 |
-| [`projects/douyin-laike-account-tool/`](projects/douyin-laike-account-tool/) | 抖音来客账号管理与数据采集工具 |
+| [`projects/account-data-collector/`](projects/account-data-collector/) | 账号管理与数据采集工具 |
 | [`projects/pytorch_sentiment_demo/`](projects/pytorch_sentiment_demo/) | PyTorch 中文情感分类 Demo |
 
 ## 技术栈
@@ -38,7 +38,7 @@ http://localhost:8000/
 ├── index.html
 ├── assets/
 ├── projects/
-│   ├── douyin-laike-account-tool/
+│   ├── account-data-collector/
 │   └── pytorch_sentiment_demo/
 ├── robots.txt
 ├── sitemap.xml
