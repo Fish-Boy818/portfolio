@@ -1,30 +1,75 @@
 # 个人技术主页
 
-用于记录系统开发、Java 后端、小程序、自动化工具和模型应用项目。内容以项目结构、实现思路、运行说明和脱敏源码为主。
+用于记录系统开发、Java 后端、小程序、自动化工具和模型应用相关实践。仓库内容以公开主页、项目结构、实现思路、运行说明和脱敏源码为主。
 
-在线访问：<https://fish-boy818.github.io/portfolio/>
+[在线访问](https://fish-boy818.github.io/portfolio/) · [GitHub 仓库](https://github.com/Fish-Boy818/portfolio)
 
-## 项目入口
+## 快速入口
 
-| 项目 | 说明 |
+| 入口 | 说明 |
 | --- | --- |
-| [`index.html`](index.html) | 在线主页，展示项目概览、技术架构、交互 Demo 和脱敏源码片段 |
-| [`projects/account-data-collector/`](projects/account-data-collector/) | 账号管理与数据采集工具 |
-| [`projects/miniapp-booking-system/`](projects/miniapp-booking-system/) | 小程序预约与运营后台系统 |
+| [`index.html`](index.html) | 个人技术主页，展示项目概览、技术架构、交互 Demo 和源码片段 |
+| [`projects/miniapp-booking-system/`](projects/miniapp-booking-system/) | 小程序预约与运营后台系统公开版 |
+| [`projects/account-data-collector/`](projects/account-data-collector/) | 账号管理与数据采集工具公开版 |
 | [`projects/pytorch_sentiment_demo/`](projects/pytorch_sentiment_demo/) | PyTorch 中文情感分类 Demo |
+
+## 内容地图
+
+这个仓库主要展示四类内容：
+
+- **系统开发**：Spring Boot、MyBatis、MySQL、RESTful API、业务状态流转。
+- **小程序与后台**：微信小程序、Vue 3 管理后台、登录、支付回调、文件上传。
+- **自动化工具**：Python、Selenium、Pandas、图表生成、Excel 输出。
+- **模型应用**：PyTorch、TextCNN、FastAPI 推理接口。
+
+## 代表作品
+
+### 小程序预约与运营后台系统
+
+Spring Boot 后端、微信小程序端和静态管理后台示例项目。公开版本保留系统结构、接口分层、数据表设计和运行说明，移除真实 AppID、商户号、域名、证书路径、上传文件和部署脚本。
+
+适合查看：
+
+- Controller / Service / Mapper 分层
+- MySQL `schema.sql` 与演示初始化数据
+- 微信登录、支付参数、支付回调相关服务
+- 小程序页面结构与后台管理页面
+
+### 账号管理与数据采集工具
+
+Python 自动化数据工具公开版，展示从页面采集、字段清洗、统计汇总到图表和 Excel 输出的流程。真实登录地址、账号、密码、Webhook、账号列表和导出结果均未提交。
+
+适合查看：
+
+- Selenium 自动化流程
+- Pandas 数据清洗和统计
+- 图片报表与 Excel 导出
+- 环境变量配置方式
+
+### PyTorch 中文情感分类 Demo
+
+中文文本情感分类示例，包含训练数据、模型训练、推理逻辑和 FastAPI 服务封装。
+
+适合查看：
+
+- TextCNN 模型结构
+- PyTorch 训练与推理流程
+- FastAPI 推理接口
+- 小型机器学习 Demo 的工程组织
 
 ## 技术栈
 
-- Java、Spring Boot、MyBatis、MySQL
-- Vue 3、微信小程序、微信登录 / 支付回调
-- Python、Selenium、Pandas、Matplotlib、Requests
-- PyTorch、TextCNN、FastAPI
-
-## 阅读方式
-
-可以先从 `index.html` 了解整体项目和技术路线，再进入 `projects/` 查看具体源码、运行说明和示例配置。
+```text
+Backend      Java, Spring Boot, Spring MVC, MyBatis, MySQL, Maven
+Frontend     Vue 3, HTML, CSS, JavaScript, WeChat Mini Program
+Automation   Python, Selenium, Pandas, Matplotlib, Requests
+ML Demo      PyTorch, TextCNN, FastAPI
+Workflow     Git, GitHub Pages, Markdown, RESTful API
+```
 
 ## 本地预览
+
+仓库主页是静态页面，可以直接用本地 HTTP 服务预览：
 
 ```powershell
 python -m http.server 8000
@@ -35,6 +80,8 @@ python -m http.server 8000
 ```text
 http://localhost:8000/
 ```
+
+后端、小程序和 Python 项目的运行方式见各项目目录下的 README。
 
 ## 仓库结构
 
@@ -54,4 +101,12 @@ http://localhost:8000/
 
 ## 公开边界
 
-仓库只保留脱敏后的展示内容和示例配置，不提交真实姓名、账号、密码、Webhook、后台地址、业务数据、导出文件、`.env`、`.venv/` 和 IDE 配置。
+公开仓库只保留脱敏后的展示内容和示例配置，不提交：
+
+- 真实姓名、账号、密码、Webhook
+- 后台地址、服务器 IP、生产域名
+- 真实业务数据、导出文件、日志和截图
+- `.env`、`.venv/`、`uploads/`、`target/`
+- 小程序私有配置、支付证书、私钥和部署脚本
+
+README、配置文件和代码中的 `localhost`、`example.com`、`touristappid`、`your_password` 等均为示例值。
