@@ -1,0 +1,29 @@
+[Unit]
+Description=Business Spring Boot Service instance %i
+After=network-online.target redis-server.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=business
+Group=business
+WorkingDirectory=/opt/business-service
+EnvironmentFile=-/etc/business-service/business-service-%i.env
+Environment="JAVA_OPTS=-Xms256m -Xmx512m -XX:+UseG1GC"
+ExecStart=/usr/bin/java $JAVA_OPTS -jar /opt/business-service/business-service.jar
+SuccessExitStatus=143
+Restart=always
+RestartSec=5
+TimeoutStopSec=30
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=business-service-%i
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/var/log/business-service
+
+[Install]
+WantedBy=multi-user.target

@@ -24,7 +24,7 @@
     <meta name="twitter:title" content="个人技术主页" />
     <meta
       name="twitter:description"
-      content="Java 后端、Spring Boot、MySQL、Vue 3、微信小程序与 Python 自动化项目展示。"
+      content="Java 后端、Spring Boot、MySQL、Vue 3、微信小程序、Python 自动化与监控部署项目展示。"
     />
     <meta name="twitter:image" content="https://fish-boy818.github.io/portfolio/assets/python/data-overview.png" />
     <title>个人技术主页</title>
@@ -2112,9 +2112,9 @@
           <div class="eyebrow"><span class="dot"></span>Java 后端 / 小程序系统 / 自动化工具</div>
           <h1>把技术实践整理成可阅读的主页。</h1>
           <p class="hero-lead">
-            这里整理了系统开发、Java 后端、小程序、自动化工具和模型应用相关实践。内容覆盖
+            这里整理了系统开发、Java 后端、小程序、自动化工具、监控部署和模型应用相关实践。内容覆盖
             Spring Boot / MyBatis / MySQL 业务系统、Vue 3 管理后台、微信登录与支付集成、
-            Python 自动化采集与数据处理，以及从需求拆解、接口设计、联调排错到发布维护的过程。
+            Python 自动化采集与数据处理、Nginx / Redis / Prometheus 监控链路，以及从需求拆解、接口设计、联调排错到发布维护的过程。
           </p>
 
           <div class="tech-ribbon" aria-label="核心技术栈">
@@ -2126,6 +2126,9 @@
             <span>Python</span>
             <span>Selenium</span>
             <span>Pandas</span>
+            <span>Nginx</span>
+            <span>Redis</span>
+            <span>Prometheus</span>
           </div>
 
           <div class="hero-actions">
@@ -2453,7 +2456,7 @@
               <h2>代表作品</h2>
             </div>
             <p class="section-note">
-              公开展示的项目入口，覆盖业务系统、自动化工具和模型应用 Demo。
+              公开展示的项目入口，覆盖业务系统、自动化工具、部署监控和模型应用 Demo。
             </p>
           </div>
 
@@ -2721,6 +2724,78 @@
                 </div>
               </div>
             </article>
+
+            <article class="project dark reveal">
+              <div class="eyebrow"><span class="dot"></span>Spring Boot / Nginx / Redis / Prometheus</div>
+              <h3>Spring Boot 多实例部署与监控示例</h3>
+              <p>
+                围绕一个订单查询服务，整理本地运行、Redis 缓存、Nginx 负载均衡、systemd 多实例托管、
+                Prometheus 指标采集、Grafana 看板和 Python 巡检脚本。
+              </p>
+
+              <div class="tags">
+                <span class="tag">Java 17</span>
+                <span class="tag">Spring Boot 3</span>
+                <span class="tag">Redis</span>
+                <span class="tag">Nginx</span>
+                <span class="tag">systemd</span>
+                <span class="tag">Prometheus / Grafana</span>
+              </div>
+
+              <ul class="feature">
+                <li>服务端通过 Actuator 暴露 health、metrics、prometheus 等监控端点。</li>
+                <li>Nginx upstream 转发到 8081 / 8082 两个后端实例，systemd 模板负责进程托管。</li>
+                <li>Prometheus/Grafana 与 Python health_check.py 覆盖服务、Redis 和监控目标状态。</li>
+              </ul>
+
+              <div class="project-facts">
+                <div class="project-fact">
+                  <strong>2</strong>
+                  <span>后端实例</span>
+                </div>
+                <div class="project-fact">
+                  <strong>Redis</strong>
+                  <span>缓存层</span>
+                </div>
+                <div class="project-fact">
+                  <strong>Nginx</strong>
+                  <span>负载均衡</span>
+                </div>
+                <div class="project-fact">
+                  <strong>Grafana</strong>
+                  <span>监控看板</span>
+                </div>
+              </div>
+
+              <div class="project-tech">
+                <div class="project-tech-item">
+                  <strong>服务层</strong>
+                  <span>Spring Boot 3 提供订单查询接口、缓存注解和 Actuator 指标端点。</span>
+                </div>
+                <div class="project-tech-item">
+                  <strong>缓存层</strong>
+                  <span>Redis 承接订单摘要缓存，并预留 redis-exporter 监控目标。</span>
+                </div>
+                <div class="project-tech-item">
+                  <strong>网关层</strong>
+                  <span>Nginx upstream 管理双实例转发，方便观察负载均衡效果。</span>
+                </div>
+                <div class="project-tech-item">
+                  <strong>监控层</strong>
+                  <span>Prometheus 采集指标，Grafana 自动加载服务概览看板。</span>
+                </div>
+              </div>
+
+              <div class="mini-journal">
+                <h4>公开仓库内容</h4>
+                <p>保留源码、部署模板、监控配置、示例环境文件和巡检脚本；不包含本机 JDK、构建产物、运行日志和真实环境变量。</p>
+                <ul>
+                  <li>deploy/nginx：负载均衡配置</li>
+                  <li>deploy/systemd：多实例服务模板</li>
+                  <li>deploy/monitoring：Prometheus / Grafana compose 配置</li>
+                </ul>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -2790,7 +2865,7 @@
           <div class="stack-matrix">
             <div class="stack-card reveal">
               <h3>后端栈</h3>
-              <p>Java 8、Spring Boot 2.7、Spring MVC、MyBatis、Maven、RESTful API、统一异常处理。</p>
+              <p>Java 8 / 17、Spring Boot 2.7 / 3、Spring MVC、MyBatis、Maven、RESTful API、统一异常处理。</p>
             </div>
             <div class="stack-card reveal delay-1">
               <h3>数据栈</h3>
@@ -2803,6 +2878,10 @@
             <div class="stack-card reveal delay-2">
               <h3>工具栈</h3>
               <p>Python、Selenium、Pandas、Matplotlib、OpenPyXL、Requests、内部消息推送。</p>
+            </div>
+            <div class="stack-card reveal delay-2">
+              <h3>部署监控栈</h3>
+              <p>Nginx、Redis、systemd、Prometheus、Grafana、Docker Compose、Actuator 指标。</p>
             </div>
           </div>
 

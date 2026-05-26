@@ -12,15 +12,17 @@
 | [`projects/miniapp-booking-system/`](projects/miniapp-booking-system/) | 小程序预约与运营后台系统公开版 |
 | [`projects/account-data-collector/`](projects/account-data-collector/) | 账号管理与数据采集工具公开版 |
 | [`projects/pytorch_sentiment_demo/`](projects/pytorch_sentiment_demo/) | PyTorch 中文情感分类 Demo |
+| [`projects/springboot-nginx-redis-monitor/`](projects/springboot-nginx-redis-monitor/) | Spring Boot 多实例部署与监控示例 |
 
 ## 内容地图
 
-这个仓库主要展示四类内容：
+这个仓库主要展示五类内容：
 
 - **系统开发**：Spring Boot、MyBatis、MySQL、RESTful API、业务状态流转。
 - **小程序与后台**：微信小程序、Vue 3 管理后台、登录、支付回调、文件上传。
 - **自动化工具**：Python、Selenium、Pandas、图表生成、Excel 输出。
 - **模型应用**：PyTorch、TextCNN、FastAPI 推理接口。
+- **部署与监控**：Nginx 负载均衡、Redis 缓存、systemd 多实例、Prometheus/Grafana。
 
 ## 代表作品
 
@@ -57,6 +59,17 @@ Python 自动化数据工具公开版，展示从页面采集、字段清洗、�
 - FastAPI 推理接口
 - 小型机器学习 Demo 的工程组织
 
+### Spring Boot 多实例部署与监控示例
+
+围绕一个订单查询服务，整理从本地运行到 Linux 部署的完整链路：Spring Boot 3、Redis 缓存、Nginx 负载均衡、systemd 多实例托管、Prometheus/Grafana 监控和 Python 巡检脚本。
+
+适合查看：
+
+- Actuator health、metrics、prometheus 监控端点
+- Nginx upstream 与 systemd 服务模板
+- Redis 缓存配置和 exporter 监控配置
+- Python 健康检查脚本与 Docker Compose 监控环境
+
 ## 技术栈
 
 ```text
@@ -64,6 +77,7 @@ Backend      Java, Spring Boot, Spring MVC, MyBatis, MySQL, Maven
 Frontend     Vue 3, HTML, CSS, JavaScript, WeChat Mini Program
 Automation   Python, Selenium, Pandas, Matplotlib, Requests
 ML Demo      PyTorch, TextCNN, FastAPI
+DevOps       Nginx, Redis, systemd, Prometheus, Grafana, Docker Compose
 Workflow     Git, GitHub Pages, Markdown, RESTful API
 ```
 
@@ -92,7 +106,8 @@ http://localhost:8000/
 ├── projects/
 │   ├── account-data-collector/
 │   ├── miniapp-booking-system/
-│   └── pytorch_sentiment_demo/
+│   ├── pytorch_sentiment_demo/
+│   └── springboot-nginx-redis-monitor/
 ├── robots.txt
 ├── sitemap.xml
 ├── DEPLOY_GITHUB.md
