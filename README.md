@@ -99,14 +99,3 @@ http://localhost:8000/
 └── README.md
 ```
 
-## 公开边界
-
-公开仓库只保留脱敏后的展示内容和示例配置，不提交：
-
-- 真实姓名、账号、密码、Webhook
-- 后台地址、服务器 IP、生产域名
-- 真实业务数据、导出文件、日志和截图
-- `.env`、`.venv/`、`uploads/`、`target/`
-- 小程序私有配置、支付证书、私钥和部署脚本
-
-README、配置文件和代码中的 `localhost`、`example.com`、`touristappid`、`your_password` 等均为示例值。
